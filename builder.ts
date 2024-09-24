@@ -9,11 +9,81 @@ import {
   Expr_Ident,
   Expr_Select,
   SourceInfo,
-} from "CEL";
+} from "./generated/proto/cel/expr/syntax_pb.ts";
 
 const encoder = new TextEncoder();
 
-export default class ExprBuilder {
+export type Eventual<T> = () => T;
+
+export class LazyBuilder {
+  builder: ExprBuilder;
+
+  constructor() {
+    this.builder = new ExprBuilder();
+  }
+
+  public newCallExpr(offset: number, functionName: string, args: Eventual<Expr>[]): Eventual<Expr> {
+    return () => this.builder.newCallExpr(offset, functionName, args.map(a => a()));
+  }
+
+  public newSelectExpr(offset: number, operand: Eventual<Expr>, field: string): Eventual<Expr> {
+    return () => this.builder.newSelectExpr(offset, operand(), field);
+  }
+
+  public newMemberCallExpr(offset: number, target: Eventual<Expr>, functionName: string, args: Eventual<Expr>[]): Eventual<Expr> {
+    return () => this.builder.newMemberCallExpr(offset, target(), functionName, args.map(a => a()));
+  }
+
+  public newIdentExpr(offset: number, name: string): Eventual<Expr> {
+    return () => this.builder.newIdentExpr(offset, name);
+  }
+
+  public newStructExpr(offset: number, entries: Eventual<Expr_CreateStruct_Entry>[], messageName?: string): Eventual<Expr> {
+    return () => this.builder.newStructExpr(offset, entries.map(a => a()), messageName);
+  }
+
+  public newListExpr(offset: number, elements: Eventual<Expr>[]): Eventual<Expr> {
+    return () => this.builder.newListExpr(offset, elements.map(a => a()))
+  }
+
+  public newStructEntry(offset: number, field: string, value: Eventual<Expr>): Eventual<Expr_CreateStruct_Entry> {
+    return () => this.builder.newStructEntry(offset, field, value());
+  }
+
+  public newMapEntry(offset: number, key: Eventual<Expr>, value: Eventual<Expr>): Eventual<Expr_CreateStruct_Entry> {
+    return () => this.builder.newMapEntry(offset, key(), value());
+  }
+
+  public newInt64Expr(offset: number, digits: string): Eventual<Expr> {
+    return () => this.builder.newInt64Expr(offset, digits);
+  }
+
+  public newUnsignedInt64Expr(offset: number, digits: string): Eventual<Expr> {
+    return () => this.builder.newUnsignedInt64Expr(offset, digits);
+  }
+
+  public newDoubleExpr(offset: number, digits: string): Eventual<Expr> {
+    return () => this.builder.newDoubleExpr(offset, digits);
+  }
+
+  public newStringExpr(offset: number, sequence: (string | number[])[]): Eventual<Expr> {
+    return () => this.builder.newStringExpr(offset, sequence);
+  }
+
+  public newBytesExpr(offset: number, sequence: (string | number[])[]): Eventual<Expr> {
+    return () => this.builder.newBytesExpr(offset, sequence);
+  }
+
+  public newBoolExpr(offset: number, keyword: "true" | "false"): Eventual<Expr> {
+    return () => this.builder.newBoolExpr(offset, keyword);
+  }
+
+  public newNullExpr(offset: number): Eventual<Expr> {
+    return () => this.builder.newNullExpr(offset);
+  }
+}
+
+class ExprBuilder {
   private prevId = 0n;
   public sourceInfo: SourceInfo = new SourceInfo();
 
@@ -76,21 +146,24 @@ export default class ExprBuilder {
   public newStringExpr(offset: number, sequence: (string | number[])[]): Expr {
     return this.newConstExpr(offset, {
       case: "stringValue",
-      value: sequence.reduce((string: string, chunk: string | number[]) => {
-        if (typeof chunk !== "string") {
-          return string + String.fromCodePoint(...chunk);
-        }
+      value: sequence.reduce<string>(
+        (string: string, chunk: string | number[]) => {
+          if (typeof chunk !== "string") {
+            return string + String.fromCodePoint(...chunk);
+          }
 
-        return string + chunk;
-      }, ""),
+          return string + chunk;
+        },
+        "",
+      ),
     });
   }
 
   public newBytesExpr(offset: number, sequence: (string | number[])[]): Expr {
     return this.newConstExpr(offset, {
       case: "bytesValue",
-      value: new Uint8Array(
-        sequence.reduce((bytes: number[], chunk: string | number[]) => {
+      value: new Buffer(
+        sequence.reduce<number[]>((bytes: number[], chunk: string | number[]) => {
           if (typeof chunk === "string") {
             return [...bytes, ...encoder.encode(chunk)];
           }
