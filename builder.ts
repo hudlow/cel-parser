@@ -186,16 +186,16 @@ class Builder {
       args[0].exprKind?.case === "selectExpr"
     ) {
       return this.expandHasMacro(offset, args[0]);
+    } else {
+      return this.nextExpr(offset, {
+        case: "callExpr",
+        value: {
+          $typeName: "cel.expr.Expr.Call",
+          function: functionName,
+          args,
+        },
+      });
     }
-    const expr = this.nextExpr(offset, {
-      case: "callExpr",
-      value: {
-        $typeName: "cel.expr.Expr.Call",
-        function: functionName,
-        args,
-      },
-    });
-    return expr;
   }
 
   public newMemberCallExpr(
@@ -204,16 +204,18 @@ class Builder {
     functionName: string,
     args: Expr[],
   ): Expr {
-    const expr = this.nextExpr(offset, {
-      case: "callExpr",
-      value: {
-        $typeName: "cel.expr.Expr.Call",
-        function: functionName,
-        target: target,
-        args: args,
-      },
-    });
-    return this.maybeExpand(offset, expr);
+    return this.maybeExpand(
+      offset,
+      this.nextExpr(offset, {
+        case: "callExpr",
+        value: {
+          $typeName: "cel.expr.Expr.Call",
+          function: functionName,
+          target,
+          args,
+        },
+      }),
+    );
   }
 
   public newStringExpr(offset: number, sequence: (string | number[])[]): Expr {
@@ -294,16 +296,11 @@ class Builder {
   }
 
   public newInfixExpr(offset: number, op: string, args: Expr[]): Expr {
-    if (op === "in") {
-      op = "@in";
-    } else {
-      op = "_" + op + "_";
-    }
-    return this.newCallExpr(offset, op, args);
+    return this.newCallExpr(offset, op === "in" ? "@in" : `_${op}_`, args);
   }
 
   public newSelectExpr(offset: number, operand: Expr, field: string): Expr {
-    const expr = this.nextExpr(offset, {
+    return this.nextExpr(offset, {
       case: "selectExpr",
       value: {
         $typeName: "cel.expr.Expr.Select",
@@ -312,7 +309,6 @@ class Builder {
         testOnly: false,
       },
     });
-    return expr;
   }
 
   public newIndexExpr(offset: number, operand: Expr, index: Expr): Expr {
@@ -329,7 +325,7 @@ class Builder {
   }
 
   public newListExpr(offset: number, elements: Expr[]): Expr {
-    const expr = this.nextExpr(offset, {
+    return this.nextExpr(offset, {
       case: "listExpr",
       value: {
         $typeName: "cel.expr.Expr.CreateList",
@@ -337,18 +333,17 @@ class Builder {
         optionalIndices: [],
       },
     });
-    return expr;
   }
 
   newBoolMacro(
     offset: number,
-    target: Expr,
-    x: string,
+    iterRange: Expr,
+    iterVar: string,
     init: boolean,
-    step: Expr,
-    cond: Expr,
+    loopStep: Expr,
+    loopCondition: Expr,
   ) {
-    const expr = this.nextExpr(offset, {
+    return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
         $typeName: "cel.expr.Expr.Comprehension",
@@ -357,36 +352,39 @@ class Builder {
           case: "boolValue",
           value: init,
         }),
-        iterVar: x,
+        iterVar,
         iterVar2: "",
-        iterRange: target,
-        loopStep: step,
-        loopCondition: cond,
+        iterRange,
+        loopStep,
+        loopCondition,
         result: this.newIdentExpr(offset, "__result__"),
       },
     });
-    return expr;
   }
 
-  newListMacro(offset: number, target: Expr, x: string, step: Expr): Expr {
-    const expr = this.nextExpr(offset, {
+  newListMacro(
+    offset: number,
+    iterRange: Expr,
+    iterVar: string,
+    loopStep: Expr,
+  ): Expr {
+    return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
         $typeName: "cel.expr.Expr.Comprehension",
         accuVar: "__result__",
         accuInit: this.newListExpr(offset, []),
-        iterVar: x,
+        iterVar,
         iterVar2: "",
-        iterRange: target,
+        iterRange,
         loopCondition: this.newConstExpr(offset, {
           case: "boolValue",
           value: true,
         }),
-        loopStep: step,
+        loopStep,
         result: this.newIdentExpr(offset, "__result__"),
       },
     });
-    return expr;
   }
 
   expandExistsMacro(offset: number, target: Expr, x: string, test: Expr): Expr {
@@ -451,8 +449,13 @@ class Builder {
     );
   }
 
-  expandExistsOne(offset: number, target: Expr, x: string, step: Expr): Expr {
-    const expr = this.nextExpr(offset, {
+  expandExistsOne(
+    offset: number,
+    iterRange: Expr,
+    iterVar: string,
+    step: Expr,
+  ): Expr {
+    return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
         $typeName: "cel.expr.Expr.Comprehension",
@@ -461,9 +464,9 @@ class Builder {
           case: "int64Value",
           value: BigInt(0),
         }),
-        iterVar: x,
+        iterVar,
         iterVar2: "",
-        iterRange: target,
+        iterRange,
         loopCondition: this.newConstExpr(offset, {
           case: "boolValue",
           value: true,
@@ -488,7 +491,6 @@ class Builder {
         ]),
       },
     });
-    return expr;
   }
 
   public maybeExpand(offset: number, call: Expr): Expr {
@@ -562,7 +564,7 @@ class Builder {
     entries: Expr_CreateStruct_Entry[],
     messageName: string = "",
   ): Expr {
-    const expr = this.nextExpr(offset, {
+    return this.nextExpr(offset, {
       case: "structExpr",
       value: {
         $typeName: "cel.expr.Expr.CreateStruct",
@@ -570,8 +572,6 @@ class Builder {
         messageName,
       },
     });
-
-    return expr;
   }
 
   public newStructEntry(
