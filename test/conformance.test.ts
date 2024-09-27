@@ -1,10 +1,13 @@
 import * as fs from "fs";
 
 import { parse } from "../index.ts";
-import { Expr, Expr_Call } from "../generated/proto/cel/expr/syntax_pb.ts";
+import { fromBinary } from "@bufbuild/protobuf";
+import { ExprSchema } from "../generated/proto/cel/expr/syntax_pb.ts";
+import type { Expr, Expr_Call } from "../generated/proto/cel/expr/syntax_pb.ts";
 
-class ParseTestCase {
-  constructor(public input: string, public expected: Expr) {}
+interface ParseTestCase {
+  input: string;
+  expected: Expr;
 }
 
 function loadTestCases(path: string): ParseTestCase[] {
@@ -21,14 +24,14 @@ function loadTestCases(path: string): ParseTestCase[] {
       continue;
     }
     // Base64 decode the input string
-    const inputBytes = Buffer.from(testCase[0], 'base64');
+    const inputBytes = Buffer.from(testCase[0], "base64");
     const input = new TextDecoder("utf-8").decode(inputBytes);
-    const expected = testCase[1];
+    const binaryExpected = testCase[1];
     // base64 decode the input
-    const bytes = Buffer.from(expected, 'base64');
+    const bytes = Buffer.from(binaryExpected, "base64");
 
-    const expectedExpr = Expr.fromBinary(bytes);
-    result.push(new ParseTestCase(input, expectedExpr));
+    const expected = fromBinary(ExprSchema, bytes);
+    result.push({ input, expected });
   }
   return result;
 }

@@ -1,18 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>CEL Parser Demo</title>
     <style>
-      body, textarea {
+      body,
+      textarea {
         margin: 0;
         font-family: "IBM Plex Mono", ui-monospace, monospace;
         font-size: 18px;
       }
 
-      textarea, div {
+      textarea,
+      div {
         width: calc(100% - 20px);
         border: 2px solid #ccc;
         padding: 8px;
@@ -41,7 +43,9 @@
           document.getElementById("result").innerHTML = "";
         } else {
           try {
-            document.getElementById("result").innerHTML = print(CEL.parse(expression));
+            document.getElementById("result").innerHTML = print(
+              CEL.parse(expression),
+            );
             document.getElementById("result").classList.remove("error");
           } catch (e) {
             document.getElementById("result").classList.add("error");
@@ -58,7 +62,16 @@
         if (Array.isArray(thing)) {
           return "[\n" + indent(thing.map(print).join("\n")) + "\n]";
         } else if (typeof thing === "object") {
-          return thing.constructor.name + " {\n" + indent(Object.keys(thing).map(k => k + ": " + print(thing[k])).join("\n")) + "\n}"
+          return (
+            thing.constructor.name +
+            " {\n" +
+            indent(
+              Object.keys(thing)
+                .map((k) => k + ": " + print(thing[k]))
+                .join("\n"),
+            ) +
+            "\n}"
+          );
         } else if (typeof thing === "undefined") {
           return "undefined";
         } else if (typeof thing === "bigint") {
@@ -68,7 +81,11 @@
         }
       }
     </script>
-    <textarea placeholder="CEL expression" rows="3" oninput="execute(this.value)"></textarea>
+    <textarea
+      placeholder="CEL expression"
+      rows="3"
+      oninput="execute(this.value)"
+    ></textarea>
     <div id="result"></div>
   </body>
 </html>

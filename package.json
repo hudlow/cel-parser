@@ -1,30 +1,62 @@
 {
-  "name": "cel-parse",
-  "module": "index.ts",
-  "devDependencies": {
-    "@bufbuild/protobuf": "^1.10.0",
-    "@types/jest": "^29.5.12",
-    "esbuild": "^0.23.0",
-    "peggy": "^4.0.3",
-    "peggy-ts": "github:hudlow/peggy-ts",
-    "prettier": "^3.3.3",
-    "ts-jest": "^29.2.4",
-    "tsx": "^4.16.2"
+  "name": "@hudlow/cel-parser",
+  "version": "0.0.1",
+  "description": "TypeScript parser for the Common Expression Language that parses expressions to a Protobuf-based abstract syntax tree, but does not execute them.",
+  "author": "Dan Hudlow",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/hudlow/cel-parser/issues"
   },
+  "homepage": "https://github.com/hudlow/cel-parser#readme",
+  "keywords": [
+    "Common",
+    "Expression",
+    "Language",
+    "CEL",
+    "parser",
+    "Protobuf",
+    "abstract",
+    "syntax",
+    "tree",
+    "AST"
+  ],
   "type": "module",
+  "module": "index.ts",
+  "main": "dist/index.cjs",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hudlow/cel-parser.git"
+  },
   "scripts": {
     "check": "tsc --noEmit -p ./tsconfig.json --strict",
     "clean": "rm -rf index.ts dist/ generated/ node_modules/ &> /dev/null",
     "generate-proto": "buf generate https://github.com/google/cel-spec.git --path proto/cel/expr/syntax.proto",
-    "generate-parser": "peggy cel.peggy --format bare --extra-options '{\"typescript\":true}' --plugin peggy-ts -o ./index.ts",
+    "generate-parser": "peggy cel.peggy --format bare --extra-options '{\"typescript\":true}' --plugin peggy-ts -o ./index.ts && prettier index.ts --write",
     "generate-control-parser": "peggy cel.peggy --format es -o ./index.ts",
     "generate-parser-ast": "peggy cel.peggy --ast --plugin peggy-ts -o ./index.ast",
     "bundle-init": "rm -rf dist/ &> /dev/null; mkdir dist",
-    "bundle-cjs": "esbuild index.ts --bundle --format=cjs --outfile=dist/index.cjs",
-    "bundle-browser": "echo 'import * as CEL from \"./\"; module.exports = CEL;' | esbuild --bundle --global-name=CEL --outfile=dist/index.js",
+    "bundle-cjs": "esbuild index.ts --bundle --format=cjs --outfile=dist/index.cjs && prettier dist/index.cjs --write",
+    "bundle-browser": "echo 'import * as CEL from \"./\"; module.exports = CEL;' | esbuild --bundle --global-name=CEL --outfile=dist/index.js && prettier dist/index.js --write",
     "bundle": "npm run bundle-init; npm run bundle-cjs; npm run bundle-browser",
     "prepare": "npm run generate-proto; npm run generate-parser; npm run bundle",
-    "test": "jest ."
+    "lint": "prettier . --check",
+    "format": "prettier . --write",
+    "check": "tsc --noEmit -p ./tsconfig.json --strict",
+    "test": "jest",
+    "verify": "npm run lint; npm run check; npm test"
+  },
+  "devDependencies": {
+    "@bufbuild/protobuf": "^2.1.0",
+    "@types/jest": "^29.5.13",
+    "esbuild": "^0.24.0",
+    "peggy": "^4.0.3",
+    "peggy-ts": "github:hudlow/peggy-ts",
+    "prettier": "^3.3.3",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.1"
   },
   "jest": {
     "testEnvironment": "node",

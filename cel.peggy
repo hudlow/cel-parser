@@ -13,7 +13,7 @@
 // limitations under the License.
 
 {{
-  import * as Cel from "./generated/proto/cel/expr/syntax_pb.ts";
+  import type { Expr, Expr_CreateStruct_Entry } from "./generated/proto/cel/expr/syntax_pb.ts";
   import { LazyBuilder } from "./builder.ts";
   import type { Eventual } from "./builder.ts";
   const builder = new LazyBuilder();
@@ -24,7 +24,7 @@ Entry               = expr:Expr { return expr(); }
 Expr                = or:ConditionalOr S
                       tail:TernaryTail?
                       {
-                        /* : Eventual<Cel.Expr> */
+                        /* : Eventual<Expr> */
                         if (tail === null) {
                           return or;
                         } else {
@@ -34,13 +34,13 @@ Expr                = or:ConditionalOr S
 
 TernaryTail         = "?" t:ConditionalOr S ":" f:Expr S
                       {
-                        /* : [Eventual<Cel.Expr>, Eventual<Cel.Expr>] */
+                        /* : [Eventual<Expr>, Eventual<Expr>] */
                         return [t, f];
                       }
 
 ConditionalOr       = and:ConditionalAnd|1.., S "||"|
                       {
-                        /* : Eventual<Cel.Expr> */
+                        /* : Eventual<Expr> */
                         if (and.length === 1) {
                           return and[0];
                         } else {
@@ -50,7 +50,7 @@ ConditionalOr       = and:ConditionalAnd|1.., S "||"|
 
 ConditionalAnd      = relation:Relation|1.., S "&&"|
                       {
-                        /* : Eventual<Cel.Expr> */
+                        /* : Eventual<Expr> */
                         if (relation.length === 1) {
                           return relation[0];
                         } else {
@@ -60,7 +60,7 @@ ConditionalAnd      = relation:Relation|1.., S "&&"|
 
 Relation            = addition:Addition tail:RelationTail?
                       {
-                        /* : Eventual<Cel.Expr> */
+                        /* : Eventual<Expr> */
                         if (tail === null) {
                           return addition;
                         } else {
@@ -70,7 +70,7 @@ Relation            = addition:Addition tail:RelationTail?
 
 RelationTail        = (
                         S operator:Relop nextExpr:Addition
-                        { return ((prevExpr: Eventual<Cel.Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+                        { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
                       )+
 
 Relop               = (
@@ -81,7 +81,7 @@ Relop               = (
 
 Addition            = multiplication:Multiplication tail:AdditionTail?
                       {
-                        /* : Eventual<Cel.Expr> */
+                        /* : Eventual<Expr> */
                         if (tail === null) {
                           return multiplication;
                         } else {
@@ -91,12 +91,12 @@ Addition            = multiplication:Multiplication tail:AdditionTail?
 
 AdditionTail        = (
                         S operator:( o:[+-] { return `_${o}_` } ) nextExpr:Multiplication
-                        { return ((prevExpr: Eventual<Cel.Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+                        { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
                       )+
 
 Multiplication      = unary:Unary tail:MultiplicationTail?
                       {
-                        /* : Eventual<Cel.Expr> */
+                        /* : Eventual<Expr> */
                         if (tail === null) {
                           return unary;
                         } else {
@@ -106,13 +106,13 @@ Multiplication      = unary:Unary tail:MultiplicationTail?
 
 MultiplicationTail  = (
                         S operator:( o:[*/%] { return `_${o}_` } ) nextExpr:Unary
-                        { return ((prevExpr: Eventual<Cel.Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+                        { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
                       )+
 
 Unary               = Member
                     / S ops:( "!"+ / "-"+ ) expr:Member
                       {
-                        /* : Eventual<Cel.Expr> */
+                        /* : Eventual<Expr> */
                         if (ops.length % 2 === 0) {
                           return expr;
                         } else {
@@ -122,7 +122,7 @@ Unary               = Member
 
 Member              = S primary:Primary tail:MemberTail?
                       {
-                        /* : Eventual<Cel.Expr> */
+                        /* : Eventual<Expr> */
                         if (tail === null) {
                           return primary;
                         } else {
@@ -133,11 +133,11 @@ Member              = S primary:Primary tail:MemberTail?
 MemberTail          = (S @Access)+
 
 Access              = "." S field:Identifier S ![([]
-                      { return ((prevExpr: Eventual<Cel.Expr>) => builder.newSelectExpr(offset(), prevExpr, field))}
+                      { return ((prevExpr: Eventual<Expr>) => builder.newSelectExpr(offset(), prevExpr, field))}
                     / "." S Identifier:Identifier S "(" args:ExprList ")"
-                      { return ((prevExpr: Eventual<Cel.Expr>) => builder.newMemberCallExpr(offset(), prevExpr, Identifier, args)) }
+                      { return ((prevExpr: Eventual<Expr>) => builder.newMemberCallExpr(offset(), prevExpr, Identifier, args)) }
                     / "[" index:Expr "]"
-                      { return ((prevExpr: Eventual<Cel.Expr>) => builder.newCallExpr(offset(), "_[_]", [prevExpr, index])) }
+                      { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), "_[_]", [prevExpr, index])) }
 
 Primary             = Literal
                     / "."? S name:Identifier !(S [({]) !("." Identifier|1.., "."| "{")
