@@ -5,7 +5,7 @@
 It's generated with [Peggy], using the [`peggy-ts`][peggy-ts] plugin. It parses a CEL expression
 into a [Protobuf-based][protobuf] abstract syntax tree. It does not evaluate expressions.
 
-It is 100% TypeScript passing strict checks, and without any `any`-typing or `as`-casting, and it
+It is 100% TypeScript, passing strict checks (without any `any`-typing or `as`-casting) and it
 has no runtime dependencies.
 
 It includes a test suite derived from the [`cel-spec` conformance tests][conformance] tests.
