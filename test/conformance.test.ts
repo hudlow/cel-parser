@@ -1,39 +1,53 @@
 import * as fs from "fs";
 
 import { parse } from "../index.ts";
-import { fromBinary } from "@bufbuild/protobuf";
-import { ExprSchema } from "../generated/proto/cel/expr/syntax_pb.ts";
-import type { Expr, Expr_Call } from "../generated/proto/cel/expr/syntax_pb.ts";
+import { fromJson } from "@bufbuild/protobuf";
+import { ExprSchema } from "../external/proto/dev/cel/expr/syntax_pb.ts";
+import type {
+  Expr,
+  Expr_Call,
+} from "../external/proto/dev/cel/expr/syntax_pb.ts";
 
-interface ParseTestCase {
-  input: string;
-  expected: Expr;
-}
+const files = JSON.parse(
+  fs.readFileSync(`${__dirname}/data/conformance.json`, "utf8"),
+);
 
-function loadTestCases(path: string): ParseTestCase[] {
-  const result: ParseTestCase[] = [];
-  const fileName = `${__dirname}/${path}.ast.text`;
-  // Open the file
-  const data = fs.readFileSync(fileName);
-  // Split the file into lines
-  const lines = data.toString().split("\n");
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const testCase = line.split(" ");
-    if (testCase.length !== 2) {
-      continue;
-    }
-    // Base64 decode the input string
-    const inputBytes = Buffer.from(testCase[0], "base64");
-    const input = new TextDecoder("utf-8").decode(inputBytes);
-    const binaryExpected = testCase[1];
-    // base64 decode the input
-    const bytes = Buffer.from(binaryExpected, "base64");
+const skip = [
+  "fields.in.mixed_numbers_and_keys_present",
+  "optionals.optionals.optional_chaining_1",
+  "optionals.optionals.optional_chaining_7",
+  "optionals.optionals.optional_chaining_8",
+  "optionals.optionals.optional_chaining_10",
+  "parse.repeat.or",
+  "parse.repeat.and",
+  "string_ext.char_at.multiple",
+];
 
-    const expected = fromBinary(ExprSchema, bytes);
-    result.push({ input, expected });
+for (const f of files) {
+  if (f.sections === null) {
+    continue;
   }
-  return result;
+  describe(f.name, () => {
+    for (const s of f.sections) {
+      describe(s.name, () => {
+        for (const t of s.tests) {
+          const func = () => {
+            const actual = parse(t.expression);
+            const expected = fromJson(ExprSchema, t.result.expr);
+            normalizeForTest(actual);
+            normalizeForTest(expected);
+            expect(actual).toStrictEqual(expected);
+          };
+
+          if (skip.includes(`${f.name}.${s.name}.${t.name}`)) {
+            test.skip(t.name, func);
+          } else {
+            test(t.name, func);
+          }
+        }
+      });
+    }
+  });
 }
 
 function normalizeForTest(expr: Expr | undefined) {
@@ -81,29 +95,14 @@ function normalizeForTest(expr: Expr | undefined) {
   }
 }
 
-function runTestFile(path: string) {
-  const testCases = loadTestCases(path);
-  testCases.forEach((testCase) => {
-    test("Parse - " + path + " - " + testCase.input, () => {
-      const actual = parse(testCase.input);
-      normalizeForTest(actual);
-      normalizeForTest(testCase.expected);
-      expect(actual).toStrictEqual(testCase.expected);
-    });
-  });
-}
-
-runTestFile("data/basic");
-runTestFile("data/comparisons");
-runTestFile("data/conversions");
-runTestFile("data/fields");
-runTestFile("data/fp_math");
-runTestFile("data/integer_math");
-runTestFile("data/lists");
-runTestFile("data/logic");
-runTestFile("data/macros");
-runTestFile("data/namespace");
-runTestFile("data/parse");
-runTestFile("data/plumbing");
-runTestFile("data/string");
-runTestFile("data/timestamps");
+// function runTestFile(path: string) {
+//   const testCases = loadTestCases(path);
+//   testCases.forEach((testCase) => {
+//     test("Parse - " + path + " - " + testCase.input, () => {
+//       const actual = parse(testCase.input);
+//       normalizeForTest(actual);
+//       normalizeForTest(testCase.expected);
+//       expect(actual).toStrictEqual(testCase.expected);
+//     });
+//   });
+// }

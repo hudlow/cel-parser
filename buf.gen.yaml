@@ -1,5 +1,7 @@
 version: v1
 plugins:
   - plugin: es
-    opt: target=ts
-    out: generated
+    opt:
+      - target=ts
+      - import_extension=ts
+    out: external

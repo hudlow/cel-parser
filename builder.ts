@@ -3,7 +3,7 @@ import type {
   Expr,
   Expr_CreateStruct_Entry,
   SourceInfo,
-} from "./generated/proto/cel/expr/syntax_pb.ts";
+} from "./external/proto/dev/cel/expr/syntax_pb.ts";
 
 const encoder = new TextEncoder();
 
@@ -12,7 +12,7 @@ export type Eventual<T> = () => T;
 export class LazyBuilder {
   builder: Builder = new Builder();
 
-  public newCallExpr(
+  newCallExpr(
     offset: number,
     functionName: string,
     args: Eventual<Expr>[],
@@ -25,7 +25,7 @@ export class LazyBuilder {
       );
   }
 
-  public newSelectExpr(
+  newSelectExpr(
     offset: number,
     operand: Eventual<Expr>,
     field: string,
@@ -33,7 +33,7 @@ export class LazyBuilder {
     return () => this.builder.newSelectExpr(offset, operand(), field);
   }
 
-  public newMemberCallExpr(
+  newMemberCallExpr(
     offset: number,
     target: Eventual<Expr>,
     functionName: string,
@@ -48,11 +48,11 @@ export class LazyBuilder {
       );
   }
 
-  public newIdentExpr(offset: number, name: string): Eventual<Expr> {
+  newIdentExpr(offset: number, name: string): Eventual<Expr> {
     return () => this.builder.newIdentExpr(offset, name);
   }
 
-  public newStructExpr(
+  newStructExpr(
     offset: number,
     entries: Eventual<Expr_CreateStruct_Entry>[],
     messageName?: string,
@@ -65,10 +65,7 @@ export class LazyBuilder {
       );
   }
 
-  public newListExpr(
-    offset: number,
-    elements: Eventual<Expr>[],
-  ): Eventual<Expr> {
+  newListExpr(offset: number, elements: Eventual<Expr>[]): Eventual<Expr> {
     return () =>
       this.builder.newListExpr(
         offset,
@@ -76,7 +73,7 @@ export class LazyBuilder {
       );
   }
 
-  public newStructEntry(
+  newStructEntry(
     offset: number,
     field: string,
     value: Eventual<Expr>,
@@ -84,7 +81,7 @@ export class LazyBuilder {
     return () => this.builder.newStructEntry(offset, field, value());
   }
 
-  public newMapEntry(
+  newMapEntry(
     offset: number,
     key: Eventual<Expr>,
     value: Eventual<Expr>,
@@ -92,40 +89,37 @@ export class LazyBuilder {
     return () => this.builder.newMapEntry(offset, key(), value());
   }
 
-  public newInt64Expr(offset: number, digits: string): Eventual<Expr> {
+  newInt64Expr(offset: number, digits: string): Eventual<Expr> {
     return () => this.builder.newInt64Expr(offset, digits);
   }
 
-  public newUnsignedInt64Expr(offset: number, digits: string): Eventual<Expr> {
+  newUnsignedInt64Expr(offset: number, digits: string): Eventual<Expr> {
     return () => this.builder.newUnsignedInt64Expr(offset, digits);
   }
 
-  public newDoubleExpr(offset: number, digits: string): Eventual<Expr> {
+  newDoubleExpr(offset: number, digits: string): Eventual<Expr> {
     return () => this.builder.newDoubleExpr(offset, digits);
   }
 
-  public newStringExpr(
+  newStringExpr(
     offset: number,
     sequence: (string | number[])[],
   ): Eventual<Expr> {
     return () => this.builder.newStringExpr(offset, sequence);
   }
 
-  public newBytesExpr(
+  newBytesExpr(
     offset: number,
     sequence: (string | number[])[],
   ): Eventual<Expr> {
     return () => this.builder.newBytesExpr(offset, sequence);
   }
 
-  public newBoolExpr(
-    offset: number,
-    keyword: "true" | "false",
-  ): Eventual<Expr> {
+  newBoolExpr(offset: number, keyword: "true" | "false"): Eventual<Expr> {
     return () => this.builder.newBoolExpr(offset, keyword);
   }
 
-  public newNullExpr(offset: number): Eventual<Expr> {
+  newNullExpr(offset: number): Eventual<Expr> {
     return () => this.builder.newNullExpr(offset);
   }
 }
@@ -133,27 +127,26 @@ export class LazyBuilder {
 class Builder {
   #prevId = 0n;
 
-  public sourceInfo: SourceInfo = {
-    $typeName: "cel.expr.SourceInfo",
+  sourceInfo: SourceInfo = {
+    $typeName: "dev.cel.expr.SourceInfo",
     syntaxVersion: "",
     location: "",
     lineOffsets: [],
     positions: {},
     macroCalls: {},
-    extensions: [],
   };
 
-  public nextExpr(offset: number, exprKind: Expr["exprKind"]): Expr {
+  nextExpr(offset: number, exprKind: Expr["exprKind"]): Expr {
     this.sourceInfo.positions[(++this.#prevId).toString()] = offset;
 
     return {
-      $typeName: "cel.expr.Expr",
+      $typeName: "dev.cel.expr.Expr",
       id: this.#prevId,
       exprKind,
     };
   }
 
-  public nextEntry(
+  nextEntry(
     offset: number,
     keyKind: Expr_CreateStruct_Entry["keyKind"],
     value: Expr,
@@ -161,7 +154,7 @@ class Builder {
     this.sourceInfo.positions[(++this.#prevId).toString()] = offset;
 
     return {
-      $typeName: "cel.expr.Expr.CreateStruct.Entry",
+      $typeName: "dev.cel.expr.Expr.CreateStruct.Entry",
       id: this.#prevId,
       keyKind,
       value,
@@ -169,17 +162,14 @@ class Builder {
     };
   }
 
-  public newConstExpr(
-    offset: number,
-    constantKind: Constant["constantKind"],
-  ): Expr {
+  newConstExpr(offset: number, constantKind: Constant["constantKind"]): Expr {
     return this.nextExpr(offset, {
       case: "constExpr",
-      value: { $typeName: "cel.expr.Constant", constantKind },
+      value: { $typeName: "dev.cel.expr.Constant", constantKind },
     });
   }
 
-  public newCallExpr(offset: number, functionName: string, args: Expr[]): Expr {
+  newCallExpr(offset: number, functionName: string, args: Expr[]): Expr {
     if (
       functionName === "has" &&
       args.length === 1 &&
@@ -190,7 +180,7 @@ class Builder {
       return this.nextExpr(offset, {
         case: "callExpr",
         value: {
-          $typeName: "cel.expr.Expr.Call",
+          $typeName: "dev.cel.expr.Expr.Call",
           function: functionName,
           args,
         },
@@ -198,7 +188,7 @@ class Builder {
     }
   }
 
-  public newMemberCallExpr(
+  newMemberCallExpr(
     offset: number,
     target: Expr,
     functionName: string,
@@ -209,7 +199,7 @@ class Builder {
       this.nextExpr(offset, {
         case: "callExpr",
         value: {
-          $typeName: "cel.expr.Expr.Call",
+          $typeName: "dev.cel.expr.Expr.Call",
           function: functionName,
           target,
           args,
@@ -218,7 +208,7 @@ class Builder {
     );
   }
 
-  public newStringExpr(offset: number, sequence: (string | number[])[]): Expr {
+  newStringExpr(offset: number, sequence: (string | number[])[]): Expr {
     return this.newConstExpr(offset, {
       case: "stringValue",
       value: sequence.reduce<string>(
@@ -234,10 +224,10 @@ class Builder {
     });
   }
 
-  public newBytesExpr(offset: number, sequence: (string | number[])[]): Expr {
+  newBytesExpr(offset: number, sequence: (string | number[])[]): Expr {
     return this.newConstExpr(offset, {
       case: "bytesValue",
-      value: new Buffer(
+      value: new Uint8Array(
         sequence.reduce<number[]>(
           (bytes: number[], chunk: string | number[]) => {
             if (typeof chunk === "string") {
@@ -252,58 +242,58 @@ class Builder {
     });
   }
 
-  public newBoolExpr(offset: number, keyword: "true" | "false"): Expr {
+  newBoolExpr(offset: number, keyword: "true" | "false"): Expr {
     return this.newConstExpr(offset, {
       case: "boolValue",
       value: keyword === "true",
     });
   }
 
-  public newInt64Expr(offset: number, digits: string) {
+  newInt64Expr(offset: number, digits: string) {
     return this.newConstExpr(offset, {
       case: "int64Value",
       value: digits[0] === "-" ? -BigInt(digits.slice(1)) : BigInt(digits),
     });
   }
 
-  public newUnsignedInt64Expr(offset: number, digits: string) {
+  newUnsignedInt64Expr(offset: number, digits: string) {
     return this.newConstExpr(offset, {
       case: "uint64Value",
       value: BigInt(digits),
     });
   }
 
-  public newDoubleExpr(offset: number, digits: string) {
+  newDoubleExpr(offset: number, digits: string) {
     return this.newConstExpr(offset, {
       case: "doubleValue",
       value: parseFloat(digits),
     });
   }
 
-  public newNullExpr(offset: number) {
+  newNullExpr(offset: number) {
     return this.newConstExpr(offset, {
       case: "nullValue",
       value: 0,
     });
   }
 
-  public newIdentExpr(offset: number, name: string): Expr {
+  newIdentExpr(offset: number, name: string): Expr {
     const expr = this.nextExpr(offset, {
       case: "identExpr",
-      value: { $typeName: "cel.expr.Expr.Ident", name },
+      value: { $typeName: "dev.cel.expr.Expr.Ident", name },
     });
     return expr;
   }
 
-  public newInfixExpr(offset: number, op: string, args: Expr[]): Expr {
+  newInfixExpr(offset: number, op: string, args: Expr[]): Expr {
     return this.newCallExpr(offset, op === "in" ? "@in" : `_${op}_`, args);
   }
 
-  public newSelectExpr(offset: number, operand: Expr, field: string): Expr {
+  newSelectExpr(offset: number, operand: Expr, field: string): Expr {
     return this.nextExpr(offset, {
       case: "selectExpr",
       value: {
-        $typeName: "cel.expr.Expr.Select",
+        $typeName: "dev.cel.expr.Expr.Select",
         operand,
         field,
         testOnly: false,
@@ -311,11 +301,11 @@ class Builder {
     });
   }
 
-  public newIndexExpr(offset: number, operand: Expr, index: Expr): Expr {
+  newIndexExpr(offset: number, operand: Expr, index: Expr): Expr {
     return this.newCallExpr(offset, "_[_]", [operand, index]);
   }
 
-  public expandHasMacro(offset: number, target: Expr): Expr {
+  expandHasMacro(offset: number, target: Expr): Expr {
     if (target.exprKind.case !== "selectExpr") {
       return this.newCallExpr(offset, "has", [target]);
     }
@@ -324,11 +314,11 @@ class Builder {
     return target;
   }
 
-  public newListExpr(offset: number, elements: Expr[]): Expr {
+  newListExpr(offset: number, elements: Expr[]): Expr {
     return this.nextExpr(offset, {
       case: "listExpr",
       value: {
-        $typeName: "cel.expr.Expr.CreateList",
+        $typeName: "dev.cel.expr.Expr.CreateList",
         elements,
         optionalIndices: [],
       },
@@ -346,14 +336,13 @@ class Builder {
     return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
-        $typeName: "cel.expr.Expr.Comprehension",
+        $typeName: "dev.cel.expr.Expr.Comprehension",
         accuVar: "__result__",
         accuInit: this.newConstExpr(offset, {
           case: "boolValue",
           value: init,
         }),
         iterVar,
-        iterVar2: "",
         iterRange,
         loopStep,
         loopCondition,
@@ -371,11 +360,10 @@ class Builder {
     return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
-        $typeName: "cel.expr.Expr.Comprehension",
+        $typeName: "dev.cel.expr.Expr.Comprehension",
         accuVar: "__result__",
         accuInit: this.newListExpr(offset, []),
         iterVar,
-        iterVar2: "",
         iterRange,
         loopCondition: this.newConstExpr(offset, {
           case: "boolValue",
@@ -458,14 +446,13 @@ class Builder {
     return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
-        $typeName: "cel.expr.Expr.Comprehension",
+        $typeName: "dev.cel.expr.Expr.Comprehension",
         accuVar: "__result__",
         accuInit: this.newConstExpr(offset, {
           case: "int64Value",
           value: BigInt(0),
         }),
         iterVar,
-        iterVar2: "",
         iterRange,
         loopCondition: this.newConstExpr(offset, {
           case: "boolValue",
@@ -493,7 +480,7 @@ class Builder {
     });
   }
 
-  public maybeExpand(offset: number, call: Expr): Expr {
+  maybeExpand(offset: number, call: Expr): Expr {
     if (call.exprKind.case === "callExpr") {
       const callExpr = call.exprKind.value;
       const varName = callExpr.args[0];
@@ -544,11 +531,7 @@ class Builder {
     return call;
   }
 
-  public newMapEntry(
-    offset: number,
-    key: Expr,
-    value: Expr,
-  ): Expr_CreateStruct_Entry {
+  newMapEntry(offset: number, key: Expr, value: Expr): Expr_CreateStruct_Entry {
     return this.nextEntry(
       offset,
       {
@@ -559,7 +542,7 @@ class Builder {
     );
   }
 
-  public newStructExpr(
+  newStructExpr(
     offset: number,
     entries: Expr_CreateStruct_Entry[],
     messageName: string = "",
@@ -567,14 +550,14 @@ class Builder {
     return this.nextExpr(offset, {
       case: "structExpr",
       value: {
-        $typeName: "cel.expr.Expr.CreateStruct",
+        $typeName: "dev.cel.expr.Expr.CreateStruct",
         entries,
         messageName,
       },
     });
   }
 
-  public newStructEntry(
+  newStructEntry(
     offset: number,
     field: string,
     value: Expr,

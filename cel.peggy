@@ -13,7 +13,7 @@
 // limitations under the License.
 
 {{
-  import type { Expr, Expr_CreateStruct_Entry } from "./generated/proto/cel/expr/syntax_pb.ts";
+  import type { Expr, Expr_CreateStruct_Entry } from "./external/proto/dev/cel/expr/syntax_pb.ts";
   import { LazyBuilder } from "./builder.ts";
   import type { Eventual } from "./builder.ts";
   const builder = new LazyBuilder();

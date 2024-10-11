@@ -1,5 +1,6 @@
-.DS_Store
-node_modules/
-generated/
 dist/
+external/
+node_modules/
+
 index.ts
+.DS_Store
