@@ -120,20 +120,20 @@ Unary               = Member
                         }
                       }
 
-Member              = S primary:Primary tail:MemberTail?
+Member              = S primary:Primary tail:MemberTail
                       {
                         /* : Eventual<Expr> */
-                        if (tail === null) {
+                        if (tail.length === 0) {
                           return primary;
                         } else {
                           return tail.reduce((expr, op) => op(expr), primary);
                         }
                       }
 
-MemberTail          = (S @Access)+
+MemberTail          = (S @Access)*
 
-Access              = "." S field:Identifier S ![([]
-                      { return ((prevExpr: Eventual<Expr>) => builder.newSelectExpr(offset(), prevExpr, field))}
+Access              = "." S field:Identifier S ![(]
+                      { return ((prevExpr: Eventual<Expr>) => builder.newSelectExpr(offset(), prevExpr, field)) }
                     / "." S Identifier:Identifier S "(" args:ExprList ")"
                       { return ((prevExpr: Eventual<Expr>) => builder.newMemberCallExpr(offset(), prevExpr, Identifier, args)) }
                     / "[" index:Expr "]"

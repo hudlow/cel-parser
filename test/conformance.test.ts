@@ -12,16 +12,7 @@ const files = JSON.parse(
   fs.readFileSync(`${__dirname}/data/conformance.json`, "utf8"),
 );
 
-const skip = [
-  "fields.in.mixed_numbers_and_keys_present",
-  "optionals.optionals.optional_chaining_1",
-  "optionals.optionals.optional_chaining_7",
-  "optionals.optionals.optional_chaining_8",
-  "optionals.optionals.optional_chaining_10",
-  "parse.repeat.or",
-  "parse.repeat.and",
-  "string_ext.char_at.multiple",
-];
+const skip: string[] = [];
 
 for (const f of files) {
   if (f.sections === null) {
@@ -94,15 +85,3 @@ function normalizeForTest(expr: Expr | undefined) {
       break;
   }
 }
-
-// function runTestFile(path: string) {
-//   const testCases = loadTestCases(path);
-//   testCases.forEach((testCase) => {
-//     test("Parse - " + path + " - " + testCase.input, () => {
-//       const actual = parse(testCase.input);
-//       normalizeForTest(actual);
-//       normalizeForTest(testCase.expected);
-//       expect(actual).toStrictEqual(testCase.expected);
-//     });
-//   });
-// }

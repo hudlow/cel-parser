@@ -214,6 +214,7 @@ func newParser(options ...parser.Option) *parser.Parser {
     parser.ErrorRecoveryLimit(4),
     parser.ErrorRecoveryLookaheadTokenLimit(4),
     parser.PopulateMacroCalls(true),
+    parser.EnableVariadicOperatorASTs(true),
   }
   opts := append([]parser.Option{}, defaultOpts...)
   opts = append(opts, options...)
