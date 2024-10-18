@@ -39,13 +39,14 @@
     "bundle-init": "rm -rf dist/ &> /dev/null && mkdir dist",
     "bundle-cjs": "esbuild index.ts --bundle --format=cjs --outfile=dist/index.cjs && prettier dist/index.cjs --write",
     "bundle-browser": "echo 'import * as CEL from \"./\"; module.exports = CEL;' | esbuild --bundle --global-name=CEL --outfile=dist/index.js && prettier dist/index.js --write",
+    "bundle-debugger": "echo 'import toDebugString from \"./utility/debug/to-debug-string.ts\"; module.exports = toDebugString;' | esbuild --bundle --global-name=toDebugString --outfile=dist/to-debug-string.js && prettier dist/to-debug-string.js --write",
     "bundle": "npm run bundle-init && npm run bundle-cjs && npm run bundle-browser",
     "extract-conformance-tests": "./utility/extract-conformance-tests/extract.sh",
     "prepare": "npm run generate-proto && npm run generate-parser && npm run bundle",
     "lint": "prettier . --check",
     "format": "prettier . --write",
     "check": "tsc --noEmit -p ./tsconfig.json --strict",
-    "test": "jest",
+    "test": "jest ./test",
     "verify": "npm run lint && npm run check && npm test"
   },
   "devDependencies": {
@@ -68,6 +69,7 @@
     }
   },
   "utility": {
-    "celSpec": "https://github.com/google/cel-spec/archive/7bcc79c7cb9a101a66dbbe9c88838855dc4b821d.tar.gz"
+    "celSpec": "https://github.com/google/cel-spec/archive/7bcc79c7cb9a101a66dbbe9c88838855dc4b821d.tar.gz",
+    "celGo": "https://github.com/google/cel-go/archive/3545aac7e6d484d3035b1833c4ade036c3f7bacb.tar.gz"
   }
 }

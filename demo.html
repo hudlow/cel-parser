@@ -37,6 +37,7 @@
   </head>
   <body>
     <script src="dist/index.js"></script>
+    <script src="dist/to-debug-string.js"></script>
     <script>
       function execute(expression) {
         if (expression.trim() === "") {
@@ -59,7 +60,9 @@
       }
 
       function print(thing) {
-        if (Array.isArray(thing)) {
+        if (typeof toDebugString === "function") {
+          return toDebugString(thing);
+        } else if (Array.isArray(thing)) {
           return "[\n" + indent(thing.map(print).join("\n")) + "\n]";
         } else if (typeof thing === "object") {
           return (
