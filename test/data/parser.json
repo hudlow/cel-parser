@@ -1,0 +1,2448 @@
+[
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"A\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"A\"^#1:*expr.Constant_StringValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`true`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`true^#1:*expr.Constant_BoolValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`false`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`false^#1:*expr.Constant_BoolValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`0`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`0^#1:*expr.Constant_Int64Value#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`42`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`42^#1:*expr.Constant_Int64Value#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`0xF`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`15^#1:*expr.Constant_Int64Value#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`0u`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`0u^#1:*expr.Constant_Uint64Value#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`23u`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`23u^#1:*expr.Constant_Uint64Value#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`24u`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`24u^#1:*expr.Constant_Uint64Value#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`0xFu`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`15u^#1:*expr.Constant_Uint64Value#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`-1`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`-1^#1:*expr.Constant_Int64Value#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`4--4`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_-_(\n\t\t\t4^#1:*expr.Constant_Int64Value#,\n\t\t\t-4^#3:*expr.Constant_Int64Value#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`4--4.1`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_-_(\n\t\t\t4^#1:*expr.Constant_Int64Value#,\n\t\t\t-4.1^#3:*expr.Constant_DoubleValue#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`b\"abc\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`b\"abc\"^#1:*expr.Constant_BytesValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`23.39`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`23.39^#1:*expr.Constant_DoubleValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`!a`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`!_(\n\t\t\ta^#2:*expr.Expr_IdentExpr#\n\t\t)^#1:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`null`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`null^#1:*expr.Constant_NullValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1:*expr.Expr_IdentExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a?b:c`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_?_:_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#,\n\t\t\tc^#4:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a || b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_||_(\n    \t\t  a^#1:*expr.Expr_IdentExpr#,\n    \t\t  b^#2:*expr.Expr_IdentExpr#\n\t\t\t)^#3:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a || b || c || d || e || f `"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "` _||_(\n\t\t\t_||_(\n\t\t\t  _||_(\n\t\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\t\tb^#2:*expr.Expr_IdentExpr#\n\t\t\t  )^#3:*expr.Expr_CallExpr#,\n\t\t\t  c^#4:*expr.Expr_IdentExpr#\n\t\t\t)^#5:*expr.Expr_CallExpr#,\n\t\t\t_||_(\n\t\t\t  _||_(\n\t\t\t\td^#6:*expr.Expr_IdentExpr#,\n\t\t\t\te^#8:*expr.Expr_IdentExpr#\n\t\t\t  )^#9:*expr.Expr_CallExpr#,\n\t\t\t  f^#10:*expr.Expr_IdentExpr#\n\t\t\t)^#11:*expr.Expr_CallExpr#\n\t\t  )^#7:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a && b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_&&_(\n    \t\t  a^#1:*expr.Expr_IdentExpr#,\n    \t\t  b^#2:*expr.Expr_IdentExpr#\n\t\t\t)^#3:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a && b && c && d && e && f && g`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_&&_(\n\t\t\t_&&_(\n\t\t\t  _&&_(\n\t\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\t\tb^#2:*expr.Expr_IdentExpr#\n\t\t\t  )^#3:*expr.Expr_CallExpr#,\n\t\t\t  _&&_(\n\t\t\t\tc^#4:*expr.Expr_IdentExpr#,\n\t\t\t\td^#6:*expr.Expr_IdentExpr#\n\t\t\t  )^#7:*expr.Expr_CallExpr#\n\t\t\t)^#5:*expr.Expr_CallExpr#,\n\t\t\t_&&_(\n\t\t\t  _&&_(\n\t\t\t\te^#8:*expr.Expr_IdentExpr#,\n\t\t\t\tf^#10:*expr.Expr_IdentExpr#\n\t\t\t  )^#11:*expr.Expr_CallExpr#,\n\t\t\t  g^#12:*expr.Expr_IdentExpr#\n\t\t\t)^#13:*expr.Expr_CallExpr#\n\t\t  )^#9:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a && b && c && d || e && f && g && h`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_||_(\n\t\t\t_&&_(\n\t\t\t  _&&_(\n\t\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\t\tb^#2:*expr.Expr_IdentExpr#\n\t\t\t  )^#3:*expr.Expr_CallExpr#,\n\t\t\t  _&&_(\n\t\t\t\tc^#4:*expr.Expr_IdentExpr#,\n\t\t\t\td^#6:*expr.Expr_IdentExpr#\n\t\t\t  )^#7:*expr.Expr_CallExpr#\n\t\t\t)^#5:*expr.Expr_CallExpr#,\n\t\t\t_&&_(\n\t\t\t  _&&_(\n\t\t\t\te^#8:*expr.Expr_IdentExpr#,\n\t\t\t\tf^#9:*expr.Expr_IdentExpr#\n\t\t\t  )^#10:*expr.Expr_CallExpr#,\n\t\t\t  _&&_(\n\t\t\t\tg^#11:*expr.Expr_IdentExpr#,\n\t\t\t\th^#13:*expr.Expr_IdentExpr#\n\t\t\t  )^#14:*expr.Expr_CallExpr#\n\t\t\t)^#12:*expr.Expr_CallExpr#\n\t\t  )^#15:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a + b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_+_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a - b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_-_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a * b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_*_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a / b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_/_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a % b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_%_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a in b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`@in(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a == b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_==_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a != b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "` _!=_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a > b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_>_(\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a >= b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_>=_(\n    \t\t  a^#1:*expr.Expr_IdentExpr#,\n    \t\t  b^#3:*expr.Expr_IdentExpr#\n\t\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a < b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_<_(\n    \t\t  a^#1:*expr.Expr_IdentExpr#,\n    \t\t  b^#3:*expr.Expr_IdentExpr#\n\t\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a <= b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_<=_(\n    \t\t  a^#1:*expr.Expr_IdentExpr#,\n    \t\t  b^#3:*expr.Expr_IdentExpr#\n\t\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a.b`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1:*expr.Expr_IdentExpr#.b^#2:*expr.Expr_SelectExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a.b.c`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1:*expr.Expr_IdentExpr#.b^#2:*expr.Expr_SelectExpr#.c^#3:*expr.Expr_SelectExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a[b]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_[_](\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`foo{ }`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`foo{}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`foo{ a:b }`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`foo{\n\t\t\ta:b^#3:*expr.Expr_IdentExpr#^#2:*expr.Expr_CreateStruct_Entry#\n\t\t}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`foo{ a:b, c:d }`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`foo{\n\t\t\ta:b^#3:*expr.Expr_IdentExpr#^#2:*expr.Expr_CreateStruct_Entry#,\n\t\t\tc:d^#5:*expr.Expr_IdentExpr#^#4:*expr.Expr_CreateStruct_Entry#\n\t\t}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{}`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{a:b, c:d}`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{\n\t\t\ta^#3:*expr.Expr_IdentExpr#:b^#4:*expr.Expr_IdentExpr#^#2:*expr.Expr_CreateStruct_Entry#,\n\t\t\tc^#6:*expr.Expr_IdentExpr#:d^#7:*expr.Expr_IdentExpr#^#5:*expr.Expr_CreateStruct_Entry#\n\t\t}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[]^#1:*expr.Expr_ListExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[a]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[\n\t\t\ta^#2:*expr.Expr_IdentExpr#\n\t\t]^#1:*expr.Expr_ListExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[a, b, c]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[\n\t\t\ta^#2:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#,\n\t\t\tc^#4:*expr.Expr_IdentExpr#\n\t\t]^#1:*expr.Expr_ListExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`(a)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1:*expr.Expr_IdentExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`((a))`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1:*expr.Expr_IdentExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a()`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a()^#1:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a(b)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a(\n\t\t\tb^#2:*expr.Expr_IdentExpr#\n\t\t)^#1:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a(b, c)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a(\n\t\t\tb^#2:*expr.Expr_IdentExpr#,\n\t\t\tc^#3:*expr.Expr_IdentExpr#\n\t\t)^#1:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a.b()`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1:*expr.Expr_IdentExpr#.b()^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a.b(c)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1:*expr.Expr_IdentExpr#.b(\n\t\t\tc^#3:*expr.Expr_IdentExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    },
+    "L": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1[1,0]#.b(\n    \t\t  c^#3[1,4]#\n    \t\t)^#2[1,3]#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`0xFFFFFFFFFFFFFFFFF`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: invalid int literal\n\t\t| 0xFFFFFFFFFFFFFFFFF\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`0xFFFFFFFFFFFFFFFFFu`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: invalid uint literal\n\t\t| 0xFFFFFFFFFFFFFFFFFu\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`1.99e90000009`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: invalid double literal\n\t\t| 1.99e90000009\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`*@a | b`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: Syntax error: extraneous input '*' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| *@a | b\n\t\t| ^\n\t\tERROR: <input>:1:2: Syntax error: token recognition error at: '@'\n\t\t| *@a | b\n\t\t| .^\n\t\tERROR: <input>:1:5: Syntax error: token recognition error at: '| '\n\t\t| *@a | b\n\t\t| ....^\n\t\tERROR: <input>:1:7: Syntax error: extraneous input 'b' expecting <EOF>\n\t\t| *@a | b\n\t\t| ......^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a | b`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:3: Syntax error: token recognition error at: '| '\n\t\t| a | b\n\t\t| ..^\n\t\tERROR: <input>:1:5: Syntax error: extraneous input 'b' expecting <EOF>\n\t\t| a | b\n\t\t| ....^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`has(m.f)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m^#2:*expr.Expr_IdentExpr#.f~test-only~^#4:*expr.Expr_SelectExpr#`"
+    },
+    "L": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m^#2[1,4]#.f~test-only~^#4[1,3]#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`has(\n\t\t\tm^#2:*expr.Expr_IdentExpr#.f^#3:*expr.Expr_SelectExpr#\n\t\t  )^#4:has#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m.exists(v, f)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\tv,\n\t\t\t// Target\n\t\t\tm^#1:*expr.Expr_IdentExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\tfalse^#5:*expr.Constant_BoolValue#,\n\t\t\t// LoopCondition\n\t\t\t@not_strictly_false(\n                !_(\n                  __result__^#6:*expr.Expr_IdentExpr#\n                )^#7:*expr.Expr_CallExpr#\n\t\t\t)^#8:*expr.Expr_CallExpr#,\n\t\t\t// LoopStep\n\t\t\t_||_(\n                __result__^#9:*expr.Expr_IdentExpr#,\n                f^#4:*expr.Expr_IdentExpr#\n\t\t\t)^#10:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#11:*expr.Expr_IdentExpr#)^#12:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m^#1:*expr.Expr_IdentExpr#.exists(\n\t\t\tv^#3:*expr.Expr_IdentExpr#,\n\t\t\tf^#4:*expr.Expr_IdentExpr#\n\t\t  \t)^#12:exists#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m.all(v, f)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\tv,\n\t\t\t// Target\n\t\t\tm^#1:*expr.Expr_IdentExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\ttrue^#5:*expr.Constant_BoolValue#,\n\t\t\t// LoopCondition\n\t\t\t@not_strictly_false(\n                __result__^#6:*expr.Expr_IdentExpr#\n            )^#7:*expr.Expr_CallExpr#,\n\t\t\t// LoopStep\n\t\t\t_&&_(\n                __result__^#8:*expr.Expr_IdentExpr#,\n                f^#4:*expr.Expr_IdentExpr#\n            )^#9:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#10:*expr.Expr_IdentExpr#)^#11:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m^#1:*expr.Expr_IdentExpr#.all(\n\t\t\tv^#3:*expr.Expr_IdentExpr#,\n\t\t\tf^#4:*expr.Expr_IdentExpr#\n\t\t  \t)^#11:all#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m.exists_one(v, f)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\tv,\n\t\t\t// Target\n\t\t\tm^#1:*expr.Expr_IdentExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\t0^#5:*expr.Constant_Int64Value#,\n\t\t\t// LoopCondition\n\t\t\ttrue^#6:*expr.Constant_BoolValue#,\n\t\t\t// LoopStep\n\t\t\t_?_:_(\n\t\t\t\tf^#4:*expr.Expr_IdentExpr#,\n\t\t\t\t_+_(\n\t\t\t\t\t  __result__^#7:*expr.Expr_IdentExpr#,\n\t\t\t\t  1^#8:*expr.Constant_Int64Value#\n\t\t\t\t)^#9:*expr.Expr_CallExpr#,\n\t\t\t\t__result__^#10:*expr.Expr_IdentExpr#\n\t\t\t)^#11:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t_==_(\n\t\t\t\t__result__^#12:*expr.Expr_IdentExpr#,\n\t\t\t\t1^#13:*expr.Constant_Int64Value#\n\t\t\t)^#14:*expr.Expr_CallExpr#)^#15:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m^#1:*expr.Expr_IdentExpr#.exists_one(\n\t\t\tv^#3:*expr.Expr_IdentExpr#,\n\t\t\tf^#4:*expr.Expr_IdentExpr#\n\t\t  \t)^#15:exists_one#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m.map(v, f)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\tv,\n\t\t\t// Target\n\t\t\tm^#1:*expr.Expr_IdentExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\t[]^#5:*expr.Expr_ListExpr#,\n\t\t\t// LoopCondition\n\t\t\ttrue^#6:*expr.Constant_BoolValue#,\n\t\t\t// LoopStep\n\t\t\t_+_(\n\t\t\t\t__result__^#7:*expr.Expr_IdentExpr#,\n\t\t\t\t[\n\t\t\t\t\tf^#4:*expr.Expr_IdentExpr#\n\t\t\t\t]^#8:*expr.Expr_ListExpr#\n\t\t\t)^#9:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#10:*expr.Expr_IdentExpr#)^#11:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m^#1:*expr.Expr_IdentExpr#.map(\n\t\t\tv^#3:*expr.Expr_IdentExpr#,\n\t\t\tf^#4:*expr.Expr_IdentExpr#\n\t\t  \t)^#11:map#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m.map(v, p, f)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\tv,\n\t\t\t// Target\n\t\t\tm^#1:*expr.Expr_IdentExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\t[]^#6:*expr.Expr_ListExpr#,\n\t\t\t// LoopCondition\n\t\t\ttrue^#7:*expr.Constant_BoolValue#,\n\t\t\t// LoopStep\n\t\t\t_?_:_(\n\t\t\t\tp^#4:*expr.Expr_IdentExpr#,\n\t\t\t\t_+_(\n\t\t\t\t\t__result__^#8:*expr.Expr_IdentExpr#,\n\t\t\t\t\t[\n\t\t\t\t\t\tf^#5:*expr.Expr_IdentExpr#\n\t\t\t\t\t]^#9:*expr.Expr_ListExpr#\n\t\t\t\t)^#10:*expr.Expr_CallExpr#,\n\t\t\t\t__result__^#11:*expr.Expr_IdentExpr#\n\t\t\t)^#12:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#13:*expr.Expr_IdentExpr#)^#14:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m^#1:*expr.Expr_IdentExpr#.map(\n\t\t\tv^#3:*expr.Expr_IdentExpr#,\n\t\t\tp^#4:*expr.Expr_IdentExpr#,\n\t\t\tf^#5:*expr.Expr_IdentExpr#\n\t\t  \t)^#14:map#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m.filter(v, p)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\tv,\n\t\t\t// Target\n\t\t\tm^#1:*expr.Expr_IdentExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\t[]^#5:*expr.Expr_ListExpr#,\n\t\t\t// LoopCondition\n\t\t\ttrue^#6:*expr.Constant_BoolValue#,\n\t\t\t// LoopStep\n\t\t\t_?_:_(\n\t\t\t\tp^#4:*expr.Expr_IdentExpr#,\n\t\t\t\t_+_(\n\t\t\t\t\t__result__^#7:*expr.Expr_IdentExpr#,\n\t\t\t\t\t[\n\t\t\t\t\t\tv^#3:*expr.Expr_IdentExpr#\n\t\t\t\t\t]^#8:*expr.Expr_ListExpr#\n\t\t\t\t)^#9:*expr.Expr_CallExpr#,\n\t\t\t\t__result__^#10:*expr.Expr_IdentExpr#\n\t\t\t)^#11:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#12:*expr.Expr_IdentExpr#)^#13:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`m^#1:*expr.Expr_IdentExpr#.filter(\n\t\t\tv^#3:*expr.Expr_IdentExpr#,\n\t\t\tp^#4:*expr.Expr_IdentExpr#\n\t\t  \t)^#13:filter#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"x * 2\""
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_*_(\n\t\t\tx^#1:*expr.Expr_IdentExpr#,\n\t\t\t2^#3:*expr.Constant_Int64Value#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"x * 2u\""
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_*_(\n\t\t\tx^#1:*expr.Expr_IdentExpr#,\n\t\t\t2u^#3:*expr.Constant_Uint64Value#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"x * 2.0\""
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_*_(\n\t\t\tx^#1:*expr.Expr_IdentExpr#,\n\t\t\t2^#3:*expr.Constant_DoubleValue#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\u2764\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"\\\"\\u2764\\\"^#1:*expr.Constant_StringValue#\""
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"\\\"\\u2764\\\"\""
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"\\\"\\u2764\\\"^#1:*expr.Constant_StringValue#\""
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`! false`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`!_(\n\t\t\tfalse^#2:*expr.Constant_BoolValue#\n\t\t)^#1:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`-a`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`-_(\n\t\t\ta^#2:*expr.Expr_IdentExpr#\n\t\t)^#1:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a.b(5)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a^#1:*expr.Expr_IdentExpr#.b(\n\t\t\t5^#3:*expr.Constant_Int64Value#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a[3]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_[_](\n\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\t3^#3:*expr.Constant_Int64Value#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`SomeMessage{foo: 5, bar: \"xyz\"}`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`SomeMessage{\n\t\t\tfoo:5^#3:*expr.Constant_Int64Value#^#2:*expr.Expr_CreateStruct_Entry#,\n\t\t\tbar:\"xyz\"^#5:*expr.Constant_StringValue#^#4:*expr.Expr_CreateStruct_Entry#\n\t\t}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[3, 4, 5]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[\n\t\t\t3^#2:*expr.Constant_Int64Value#,\n\t\t\t4^#3:*expr.Constant_Int64Value#,\n\t\t\t5^#4:*expr.Constant_Int64Value#\n\t\t]^#1:*expr.Expr_ListExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[3, 4, 5,]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[\n\t\t\t3^#2:*expr.Constant_Int64Value#,\n\t\t\t4^#3:*expr.Constant_Int64Value#,\n\t\t\t5^#4:*expr.Constant_Int64Value#\n\t\t]^#1:*expr.Expr_ListExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{foo: 5, bar: \"xyz\"}`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{\n\t\t\tfoo^#3:*expr.Expr_IdentExpr#:5^#4:*expr.Constant_Int64Value#^#2:*expr.Expr_CreateStruct_Entry#,\n\t\t\tbar^#6:*expr.Expr_IdentExpr#:\"xyz\"^#7:*expr.Constant_StringValue#^#5:*expr.Expr_CreateStruct_Entry#\n\t\t}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{foo: 5, bar: \"xyz\", }`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{\n\t\t\tfoo^#3:*expr.Expr_IdentExpr#:5^#4:*expr.Constant_Int64Value#^#2:*expr.Expr_CreateStruct_Entry#,\n\t\t\tbar^#6:*expr.Expr_IdentExpr#:\"xyz\"^#7:*expr.Constant_StringValue#^#5:*expr.Expr_CreateStruct_Entry#\n\t\t}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a > 5 && a < 10`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_&&_(\n\t\t\t_>_(\n\t\t\t  a^#1:*expr.Expr_IdentExpr#,\n\t\t\t  5^#3:*expr.Constant_Int64Value#\n\t\t\t)^#2:*expr.Expr_CallExpr#,\n\t\t\t_<_(\n\t\t\t  a^#4:*expr.Expr_IdentExpr#,\n\t\t\t  10^#6:*expr.Constant_Int64Value#\n\t\t\t)^#5:*expr.Expr_CallExpr#\n\t\t)^#7:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a < 5 || a > 10`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_||_(\n\t\t\t_<_(\n\t\t\t  a^#1:*expr.Expr_IdentExpr#,\n\t\t\t  5^#3:*expr.Constant_Int64Value#\n\t\t\t)^#2:*expr.Expr_CallExpr#,\n\t\t\t_>_(\n\t\t\t  a^#4:*expr.Expr_IdentExpr#,\n\t\t\t  10^#6:*expr.Constant_Int64Value#\n\t\t\t)^#5:*expr.Expr_CallExpr#\n\t\t)^#7:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:2: Syntax error: mismatched input '<EOF>' expecting {'[', '{', '}', '(', '.', ',', '-', '!', '?', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t | {\n\t\t | .^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[] + [1,2,3,] + [4]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_+_(\n\t\t\t_+_(\n\t\t\t\t[]^#1:*expr.Expr_ListExpr#,\n\t\t\t\t[\n\t\t\t\t\t1^#4:*expr.Constant_Int64Value#,\n\t\t\t\t\t2^#5:*expr.Constant_Int64Value#,\n\t\t\t\t\t3^#6:*expr.Constant_Int64Value#\n\t\t\t\t]^#3:*expr.Expr_ListExpr#\n\t\t\t)^#2:*expr.Expr_CallExpr#,\n\t\t\t[\n\t\t\t\t4^#9:*expr.Constant_Int64Value#\n\t\t\t]^#8:*expr.Expr_ListExpr#\n\t\t)^#7:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{1:2u, 2:3u}`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{\n\t\t\t1^#3:*expr.Constant_Int64Value#:2u^#4:*expr.Constant_Uint64Value#^#2:*expr.Expr_CreateStruct_Entry#,\n\t\t\t2^#6:*expr.Constant_Int64Value#:3u^#7:*expr.Constant_Uint64Value#^#5:*expr.Expr_CreateStruct_Entry#\n\t\t}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`TestAllTypes{single_int32: 1, single_int64: 2}`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`TestAllTypes{\n\t\t\tsingle_int32:1^#3:*expr.Constant_Int64Value#^#2:*expr.Expr_CreateStruct_Entry#,\n\t\t\tsingle_int64:2^#5:*expr.Constant_Int64Value#^#4:*expr.Expr_CreateStruct_Entry#\n\t\t}^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`TestAllTypes(){}`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:15: Syntax error: mismatched input '{' expecting <EOF>\n\t\t| TestAllTypes(){}\n\t\t| ..............^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`TestAllTypes{}()`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:15: Syntax error: mismatched input '(' expecting <EOF>\n\t\t| TestAllTypes{}()\n\t\t| ..............^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`size(x) == x.size()`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_==_(\n\t\t\tsize(\n\t\t\t\tx^#2:*expr.Expr_IdentExpr#\n\t\t\t)^#1:*expr.Expr_CallExpr#,\n\t\t\tx^#4:*expr.Expr_IdentExpr#.size()^#5:*expr.Expr_CallExpr#\n\t\t)^#3:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`1 + $`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:5: Syntax error: token recognition error at: '$'\n\t\t| 1 + $\n\t\t| ....^\n\t\tERROR: <input>:1:6: Syntax error: mismatched input '<EOF>' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| 1 + $\n\t\t| .....^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`1 + 2\n3 +`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:2:1: Syntax error: mismatched input '3' expecting <EOF>\n\t\t| 3 +\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\\"\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\\"\"^#1:*expr.Constant_StringValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[1,3,4][0]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_[_](\n\t\t\t[\n\t\t\t\t1^#2:*expr.Constant_Int64Value#,\n\t\t\t\t3^#3:*expr.Constant_Int64Value#,\n\t\t\t\t4^#4:*expr.Constant_Int64Value#\n\t\t\t]^#1:*expr.Expr_ListExpr#,\n\t\t\t0^#6:*expr.Constant_Int64Value#\n\t\t)^#5:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`1.all(2, 3)`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:7: argument must be a simple name\n\t\t| 1.all(2, 3)\n\t\t| ......^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`x[\"a\"].single_int32 == 23`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_==_(\n\t\t\t_[_](\n\t\t\t\tx^#1:*expr.Expr_IdentExpr#,\n\t\t\t\t\"a\"^#3:*expr.Constant_StringValue#\n\t\t\t)^#2:*expr.Expr_CallExpr#.single_int32^#4:*expr.Expr_SelectExpr#,\n\t\t\t23^#6:*expr.Constant_Int64Value#\n\t\t)^#5:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`x.single_nested_message != null`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_!=_(\n\t\t\tx^#1:*expr.Expr_IdentExpr#.single_nested_message^#2:*expr.Expr_SelectExpr#,\n\t\t\tnull^#4:*expr.Constant_NullValue#\n\t\t)^#3:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`false && !true || false ? 2 : 3`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_?_:_(\n\t\t\t_||_(\n\t\t\t\t_&&_(\n\t\t\t\t\tfalse^#1:*expr.Constant_BoolValue#,\n\t\t\t\t\t!_(\n\t\t\t\t\t\ttrue^#3:*expr.Constant_BoolValue#\n\t\t\t\t\t)^#2:*expr.Expr_CallExpr#\n\t\t\t\t)^#4:*expr.Expr_CallExpr#,\n\t\t\t\tfalse^#5:*expr.Constant_BoolValue#\n\t\t\t)^#6:*expr.Expr_CallExpr#,\n\t\t\t2^#8:*expr.Constant_Int64Value#,\n\t\t\t3^#9:*expr.Constant_Int64Value#\n\t\t)^#7:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`b\"abc\" + B\"def\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_+_(\n\t\t\tb\"abc\"^#1:*expr.Constant_BytesValue#,\n\t\t\tb\"def\"^#3:*expr.Constant_BytesValue#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`1 + 2 * 3 - 1 / 2 == 6 % 1`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_==_(\n\t\t\t_-_(\n\t\t\t\t_+_(\n\t\t\t\t\t1^#1:*expr.Constant_Int64Value#,\n\t\t\t\t\t_*_(\n\t\t\t\t\t\t2^#3:*expr.Constant_Int64Value#,\n\t\t\t\t\t\t3^#5:*expr.Constant_Int64Value#\n\t\t\t\t\t)^#4:*expr.Expr_CallExpr#\n\t\t\t\t)^#2:*expr.Expr_CallExpr#,\n\t\t\t\t_/_(\n\t\t\t\t\t1^#7:*expr.Constant_Int64Value#,\n\t\t\t\t\t2^#9:*expr.Constant_Int64Value#\n\t\t\t\t)^#8:*expr.Expr_CallExpr#\n\t\t\t)^#6:*expr.Expr_CallExpr#,\n\t\t\t_%_(\n\t\t\t\t6^#11:*expr.Constant_Int64Value#,\n\t\t\t\t1^#13:*expr.Constant_Int64Value#\n\t\t\t)^#12:*expr.Expr_CallExpr#\n\t\t)^#10:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`1 + +`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:5: Syntax error: mismatched input '+' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| 1 + +\n\t\t| ....^\n\t\tERROR: <input>:1:6: Syntax error: mismatched input '<EOF>' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| 1 + +\n\t\t| .....^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"abc\" + \"def\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_+_(\n\t\t\t\"abc\"^#1:*expr.Constant_StringValue#,\n\t\t\t\"def\"^#3:*expr.Constant_StringValue#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{\"a\": 1}.\"a\"`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:10: Syntax error: no viable alternative at input '.\"a\"'\n\t\t| {\"a\": 1}.\"a\"\n\t\t| .........^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\xC3\\XBF\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"Ã¿\"^#1:*expr.Constant_StringValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\303\\277\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"Ã¿\"^#1:*expr.Constant_StringValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"hi\\u263A \\u263Athere\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"hi☺ ☺there\"^#1:*expr.Constant_StringValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\U000003A8\\?\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"Ψ?\"^#1:*expr.Constant_StringValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\a\\b\\f\\n\\r\\t\\v'\\\"\\\\\\? Legal escapes\"`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\a\\b\\f\\n\\r\\t\\v'\\\"\\\\? Legal escapes\"^#1:*expr.Constant_StringValue#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\xFh\"`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: Syntax error: token recognition error at: '\"\\xFh'\n\t\t| \"\\xFh\"\n\t\t| ^\n\t\tERROR: <input>:1:6: Syntax error: token recognition error at: '\"'\n\t\t| \"\\xFh\"\n\t\t| .....^\n\t\tERROR: <input>:1:7: Syntax error: mismatched input '<EOF>' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| \"\\xFh\"\n\t\t| ......^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"\\a\\b\\f\\n\\r\\t\\v\\'\\\"\\\\\\? Illegal escape \\>\"`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: Syntax error: token recognition error at: '\"\\a\\b\\f\\n\\r\\t\\v\\'\\\"\\\\\\? Illegal escape \\>'\n\t\t| \"\\a\\b\\f\\n\\r\\t\\v\\'\\\"\\\\\\? Illegal escape \\>\"\n\t\t| ^\n\t\tERROR: <input>:1:42: Syntax error: token recognition error at: '\"'\n\t\t| \"\\a\\b\\f\\n\\r\\t\\v\\'\\\"\\\\\\? Illegal escape \\>\"\n\t\t| .........................................^\n\t\tERROR: <input>:1:43: Syntax error: mismatched input '<EOF>' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| \"\\a\\b\\f\\n\\r\\t\\v\\'\\\"\\\\\\? Illegal escape \\>\"\n\t\t| ..........................................^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\"😁\" in [\"😁\", \"😑\", \"😦\"]`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`@in(\n\t\t\t\"😁\"^#1:*expr.Constant_StringValue#,\n\t\t\t[\n\t\t\t\t\"😁\"^#4:*expr.Constant_StringValue#,\n\t\t\t\t\"😑\"^#5:*expr.Constant_StringValue#,\n\t\t\t\t\"😦\"^#6:*expr.Constant_StringValue#\n\t\t\t]^#3:*expr.Expr_ListExpr#\n\t\t)^#2:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`      '😁' in ['😁', '😑', '😦']\n\t\t\t&& in.😁`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:2:7: Syntax error: extraneous input 'in' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t|    && in.😁\n\t\t| ......^\n\t    ERROR: <input>:2:10: Syntax error: token recognition error at: '😁'\n\t\t|    && in.😁\n\t\t| .........＾\n\t\tERROR: <input>:2:11: Syntax error: no viable alternative at input '.'\n\t\t|    && in.😁\n\t\t| .........．^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"as\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: as\n\t\t| as\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"break\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: break\n\t\t| break\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"const\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: const\n\t\t| const\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"continue\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: continue\n\t\t| continue\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"else\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: else\n\t\t| else\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"for\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: for\n\t\t| for\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"function\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: function\n\t\t| function\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"if\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: if\n\t\t| if\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"import\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: import\n\t\t| import\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"in\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: Syntax error: mismatched input 'in' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| in\n\t\t| ^\n        ERROR: <input>:1:3: Syntax error: mismatched input '<EOF>' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| in\n\t\t| ..^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"let\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: let\n\t\t| let\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"loop\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: loop\n\t\t| loop\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"package\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: package\n\t\t| package\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"namespace\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: namespace\n\t\t| namespace\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"return\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: return\n\t\t| return\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"var\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: var\n\t\t| var\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"void\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: void\n\t\t| void\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"while\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: reserved identifier: while\n\t\t| while\n\t\t| ^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"[1, 2, 3].map(var, var * var)\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:15: reserved identifier: var\n\t\t| [1, 2, 3].map(var, var * var)\n\t\t| ..............^\n\t\tERROR: <input>:1:15: argument is not an identifier\n\t\t| [1, 2, 3].map(var, var * var)\n\t\t| ..............^\n\t\tERROR: <input>:1:20: reserved identifier: var\n\t\t| [1, 2, 3].map(var, var * var)\n\t\t| ...................^\n\t\tERROR: <input>:1:26: reserved identifier: var\n\t\t| [1, 2, 3].map(var, var * var)\n\t\t| .........................^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"func{{a}}\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:6: Syntax error: extraneous input '{' expecting {'}', ',', '?', IDENTIFIER}\n\t\t| func{{a}}\n\t\t| .....^\n\t    ERROR: <input>:1:8: Syntax error: mismatched input '}' expecting ':'\n\t\t| func{{a}}\n\t\t| .......^\n\t    ERROR: <input>:1:9: Syntax error: extraneous input '}' expecting <EOF>\n\t\t| func{{a}}\n\t\t| ........^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"msg{:a}\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:5: Syntax error: extraneous input ':' expecting {'}', ',', '?', IDENTIFIER}\n\t\t| msg{:a}\n\t\t| ....^\n\t    ERROR: <input>:1:7: Syntax error: mismatched input '}' expecting ':'\n\t\t| msg{:a}\n\t\t| ......^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"{a}\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:3: Syntax error: mismatched input '}' expecting ':'\n\t\t| {a}\n\t\t| ..^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"{:a}\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:2: Syntax error: extraneous input ':' expecting {'[', '{', '}', '(', '.', ',', '-', '!', '?', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| {:a}\n\t\t| .^\n\t    ERROR: <input>:1:4: Syntax error: mismatched input '}' expecting ':'\n\t\t| {:a}\n\t\t| ...^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"ind[a{b}]\""
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:8: Syntax error: mismatched input '}' expecting ':'\n\t\t| ind[a{b}]\n\t\t| .......^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`--`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:3: Syntax error: no viable alternative at input '-'\n\t\t| --\n\t\t| ..^\n\t    ERROR: <input>:1:3: Syntax error: mismatched input '<EOF>' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| --\n\t\t| ..^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`?`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:1: Syntax error: mismatched input '?' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| ?\n\t\t| ^\n\t    ERROR: <input>:1:2: Syntax error: mismatched input '<EOF>' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| ?\n\t\t| .^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a ? b ((?))`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:9: Syntax error: mismatched input '?' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| a ? b ((?))\n\t\t| ........^\n\t    ERROR: <input>:1:10: Syntax error: mismatched input ')' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n\t\t| a ? b ((?))\n\t\t| .........^\n\t    ERROR: <input>:1:12: Syntax error: error recovery attempt limit exceeded: 4\n\t\t| a ? b ((?))\n\t\t| ...........^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[\n\t\t\t[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[['too many']]]]]]]]]]]]]]]]]]]]]]]]]]]]\n\t\t\t]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "\"ERROR: <input>:-1:0: expression recursion limit exceeded: 32\""
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`-[-1--1--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1\n\t\t--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--3--1--1--0--1--1--1--1--0--1--1--1\n\t\t--3-[-1--1--1--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1\n\t\t--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1\n\t\t--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1\n\t\t--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1\n\t\t--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--3--1--1--0--1--1--1--1--0--1--1--1\n\t\t--3-[-1--1--1--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1\n\t\t--3-[-1--1--1--1---1-1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1-À1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1--1--0--1--1--1--1--0--3--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n\t\t--1--1---1--1--1--0--1--1--1--1--0--3--1--1--0--1--1--1\n\t\t--1--0--1--1--1--3-[-1--1--1--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1\n\t\t--1--0--1--1--1--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1\n\t\t--1--0--1--1--1--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1\n\t\t--1--0--1--1--1--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1\n\t\t--1--0--1--1--1--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--3--1--1--0--1--1--1\n\t\t--1--0--1--1--1--3-[-1--1--1--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1\n\t\t--1--0--1--1--1--3-[-1--1--1--1---1--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0--1--1--1--1--0--3--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1--1\n\t\t--1---1--1--1--0--1--1--1--1--0--3--1--1--0--1`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: expression recursion limit exceeded: 32\n        ERROR: <input>:3:33: Syntax error: extraneous input '/' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n        |   --3-[-1--1--1--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1\n        | ................................^\n        ERROR: <input>:8:33: Syntax error: extraneous input '/' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n        |   --3-[-1--1--1--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1\n        | ................................^\n        ERROR: <input>:11:17: Syntax error: token recognition error at: 'À'\n        |   --1--1---1--1-À1--0--1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n        | ................＾\n        ERROR: <input>:14:23: Syntax error: extraneous input '/' expecting {'[', '{', '(', '.', '-', '!', 'true', 'false', 'null', NUM_FLOAT, NUM_INT, NUM_UINT, STRING, BYTES, IDENTIFIER}\n        |   --1--1---1--1--1--0-/1--1--1--1--0--2--1--1--0--1--1--1--1--0--1--1--1--3-[-1--1\n        | ......................^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ó ¢\n\t\tó 0 \n\t\t\u007f0\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"!\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: error recovery token lookahead limit exceeded: 4\n\t\tERROR: <input>:1:1: Syntax error: token recognition error at: 'ó'\n\t    | ó ¢\n\t\t| ＾\n\t\tERROR: <input>:1:2: Syntax error: token recognition error at: ' '\n\t\t| ó ¢\n\t\t| ．＾\n\t\tERROR: <input>:1:3: Syntax error: token recognition error at: '¢'\n\t\t| ó ¢\n\t\t| ．．＾\n\t\tERROR: <input>:2:3: Syntax error: token recognition error at: 'ó'\n\t\t|   ó 0 \n\t\t| ..＾\n\t\tERROR: <input>:2:4: Syntax error: token recognition error at: ' '\n\t\t|   ó 0 \n\t\t| ..．＾\n\t\tERROR: <input>:2:6: Syntax error: token recognition error at: ' '\n\t\t|   ó 0 \n\t\t| ..．．.＾\n\t\tERROR: <input>:3:3: Syntax error: token recognition error at: '\u007f'\n\t\t|   \u007f0\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"!\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\n\t\t| ..^\n\t\tERROR: <input>:3:4: Syntax error: mismatched input '0' expecting <EOF>\n\t\t|   \u007f0\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"!\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\n\t\t| ...^\n\t\tERROR: <input>:3:11: Syntax error: token recognition error at: '\\'\n\t\t|   \u007f0\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\"\"\\\"!\\\"\"\"\\\"\"\\\"\"\"\\\"\"\\\"\n\t\t| ..........^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`x.filter(y, y.filter(z, z > 0))`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\ty,\n\t\t\t// Target\n\t\t\tx^#1:*expr.Expr_IdentExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\t[]^#19:*expr.Expr_ListExpr#,\n\t\t\t// LoopCondition\n\t\t\ttrue^#20:*expr.Constant_BoolValue#,\n\t\t\t// LoopStep\n\t\t\t_?_:_(\n\t\t\t  __comprehension__(\n\t\t\t\t// Variable\n\t\t\t\tz,\n\t\t\t\t// Target\n\t\t\t\ty^#4:*expr.Expr_IdentExpr#,\n\t\t\t\t// Accumulator\n\t\t\t\t__result__,\n\t\t\t\t// Init\n\t\t\t\t[]^#10:*expr.Expr_ListExpr#,\n\t\t\t\t// LoopCondition\n\t\t\t\ttrue^#11:*expr.Constant_BoolValue#,\n\t\t\t\t// LoopStep\n\t\t\t\t_?_:_(\n\t\t\t\t  _>_(\n\t\t\t\t\tz^#7:*expr.Expr_IdentExpr#,\n\t\t\t\t\t0^#9:*expr.Constant_Int64Value#\n\t\t\t\t  )^#8:*expr.Expr_CallExpr#,\n\t\t\t\t  _+_(\n\t\t\t\t\t__result__^#12:*expr.Expr_IdentExpr#,\n\t\t\t\t\t[\n\t\t\t\t\t  z^#6:*expr.Expr_IdentExpr#\n\t\t\t\t\t]^#13:*expr.Expr_ListExpr#\n\t\t\t\t  )^#14:*expr.Expr_CallExpr#,\n\t\t\t\t  __result__^#15:*expr.Expr_IdentExpr#\n\t\t\t\t)^#16:*expr.Expr_CallExpr#,\n\t\t\t\t// Result\n\t\t\t\t__result__^#17:*expr.Expr_IdentExpr#)^#18:*expr.Expr_ComprehensionExpr#,\n\t\t\t  _+_(\n\t\t\t\t__result__^#21:*expr.Expr_IdentExpr#,\n\t\t\t\t[\n\t\t\t\t  y^#3:*expr.Expr_IdentExpr#\n\t\t\t\t]^#22:*expr.Expr_ListExpr#\n\t\t\t  )^#23:*expr.Expr_CallExpr#,\n\t\t\t  __result__^#24:*expr.Expr_IdentExpr#\n\t\t\t)^#25:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#26:*expr.Expr_IdentExpr#)^#27:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`x^#1:*expr.Expr_IdentExpr#.filter(\n\t\t\ty^#3:*expr.Expr_IdentExpr#,\n\t\t\t^#18:filter#\n\t\t  )^#27:filter#,\n\t\t  y^#4:*expr.Expr_IdentExpr#.filter(\n\t\t\tz^#6:*expr.Expr_IdentExpr#,\n\t\t\t_>_(\n\t\t\t  z^#7:*expr.Expr_IdentExpr#,\n\t\t\t  0^#9:*expr.Constant_Int64Value#\n\t\t\t)^#8:*expr.Expr_CallExpr#\n\t\t  )^#18:filter#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`has(a.b).filter(c, c)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\tc,\n\t\t\t// Target\n\t\t\ta^#2:*expr.Expr_IdentExpr#.b~test-only~^#4:*expr.Expr_SelectExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\t[]^#8:*expr.Expr_ListExpr#,\n\t\t\t// LoopCondition\n\t\t\ttrue^#9:*expr.Constant_BoolValue#,\n\t\t\t// LoopStep\n\t\t\t_?_:_(\n\t\t\t  c^#7:*expr.Expr_IdentExpr#,\n\t\t\t  _+_(\n\t\t\t\t__result__^#10:*expr.Expr_IdentExpr#,\n\t\t\t\t[\n\t\t\t\t  c^#6:*expr.Expr_IdentExpr#\n\t\t\t\t]^#11:*expr.Expr_ListExpr#\n\t\t\t  )^#12:*expr.Expr_CallExpr#,\n\t\t\t  __result__^#13:*expr.Expr_IdentExpr#\n\t\t\t)^#14:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#15:*expr.Expr_IdentExpr#)^#16:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`^#4:has#.filter(\n\t\t\tc^#6:*expr.Expr_IdentExpr#,\n\t\t\tc^#7:*expr.Expr_IdentExpr#\n\t\t\t)^#16:filter#,\n\t\t\thas(\n\t\t\t\ta^#2:*expr.Expr_IdentExpr#.b^#3:*expr.Expr_SelectExpr#\n\t\t\t)^#4:has#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`x.filter(y, y.exists(z, has(z.a)) && y.exists(z, has(z.b)))`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\ty,\n\t\t\t// Target\n\t\t\tx^#1:*expr.Expr_IdentExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\t[]^#35:*expr.Expr_ListExpr#,\n\t\t\t// LoopCondition\n\t\t\ttrue^#36:*expr.Constant_BoolValue#,\n\t\t\t// LoopStep\n\t\t\t_?_:_(\n\t\t\t  _&&_(\n\t\t\t\t__comprehension__(\n\t\t\t\t  // Variable\n\t\t\t\t  z,\n\t\t\t\t  // Target\n\t\t\t\t  y^#4:*expr.Expr_IdentExpr#,\n\t\t\t\t  // Accumulator\n\t\t\t\t  __result__,\n\t\t\t\t  // Init\n\t\t\t\t  false^#11:*expr.Constant_BoolValue#,\n\t\t\t\t  // LoopCondition\n\t\t\t\t  @not_strictly_false(\n\t\t\t\t\t!_(\n\t\t\t\t\t  __result__^#12:*expr.Expr_IdentExpr#\n\t\t\t\t\t)^#13:*expr.Expr_CallExpr#\n\t\t\t\t  )^#14:*expr.Expr_CallExpr#,\n\t\t\t\t  // LoopStep\n\t\t\t\t  _||_(\n\t\t\t\t\t__result__^#15:*expr.Expr_IdentExpr#,\n\t\t\t\t\tz^#8:*expr.Expr_IdentExpr#.a~test-only~^#10:*expr.Expr_SelectExpr#\n\t\t\t\t  )^#16:*expr.Expr_CallExpr#,\n\t\t\t\t  // Result\n\t\t\t\t  __result__^#17:*expr.Expr_IdentExpr#)^#18:*expr.Expr_ComprehensionExpr#,\n\t\t\t\t__comprehension__(\n\t\t\t\t  // Variable\n\t\t\t\t  z,\n\t\t\t\t  // Target\n\t\t\t\t  y^#19:*expr.Expr_IdentExpr#,\n\t\t\t\t  // Accumulator\n\t\t\t\t  __result__,\n\t\t\t\t  // Init\n\t\t\t\t  false^#26:*expr.Constant_BoolValue#,\n\t\t\t\t  // LoopCondition\n\t\t\t\t  @not_strictly_false(\n\t\t\t\t\t!_(\n\t\t\t\t\t  __result__^#27:*expr.Expr_IdentExpr#\n\t\t\t\t\t)^#28:*expr.Expr_CallExpr#\n\t\t\t\t  )^#29:*expr.Expr_CallExpr#,\n\t\t\t\t  // LoopStep\n\t\t\t\t  _||_(\n\t\t\t\t\t__result__^#30:*expr.Expr_IdentExpr#,\n\t\t\t\t\tz^#23:*expr.Expr_IdentExpr#.b~test-only~^#25:*expr.Expr_SelectExpr#\n\t\t\t\t  )^#31:*expr.Expr_CallExpr#,\n\t\t\t\t  // Result\n\t\t\t\t  __result__^#32:*expr.Expr_IdentExpr#)^#33:*expr.Expr_ComprehensionExpr#\n\t\t\t  )^#34:*expr.Expr_CallExpr#,\n\t\t\t  _+_(\n\t\t\t\t__result__^#37:*expr.Expr_IdentExpr#,\n\t\t\t\t[\n\t\t\t\t  y^#3:*expr.Expr_IdentExpr#\n\t\t\t\t]^#38:*expr.Expr_ListExpr#\n\t\t\t  )^#39:*expr.Expr_CallExpr#,\n\t\t\t  __result__^#40:*expr.Expr_IdentExpr#\n\t\t\t)^#41:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#42:*expr.Expr_IdentExpr#)^#43:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`x^#1:*expr.Expr_IdentExpr#.filter(\n\t\t\ty^#3:*expr.Expr_IdentExpr#,\n\t\t\t_&&_(\n\t\t\t  ^#18:exists#,\n\t\t\t  ^#33:exists#\n\t\t\t)^#34:*expr.Expr_CallExpr#\n\t\t\t)^#43:filter#,\n\t\t\ty^#19:*expr.Expr_IdentExpr#.exists(\n\t\t\t\tz^#21:*expr.Expr_IdentExpr#,\n\t\t\t\t^#25:has#\n\t\t\t)^#33:exists#,\n\t\t\thas(\n\t\t\t\tz^#23:*expr.Expr_IdentExpr#.b^#24:*expr.Expr_SelectExpr#\n\t\t\t)^#25:has#,\n\t\t\ty^#4:*expr.Expr_IdentExpr#.exists(\n\t\t\t\tz^#6:*expr.Expr_IdentExpr#,\n\t\t\t\t^#10:has#\n\t\t\t)^#18:exists#,\n\t\t\thas(\n\t\t\t\tz^#8:*expr.Expr_IdentExpr#.a^#9:*expr.Expr_SelectExpr#\n\t\t\t)^#10:has#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`(has(a.b) || has(c.d)).string()`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_||_(\n\t\t\t  a^#2:*expr.Expr_IdentExpr#.b~test-only~^#4:*expr.Expr_SelectExpr#,\n\t\t\t  c^#6:*expr.Expr_IdentExpr#.d~test-only~^#8:*expr.Expr_SelectExpr#\n\t\t    )^#9:*expr.Expr_CallExpr#.string()^#10:*expr.Expr_CallExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`has(\n\t\t\t  c^#6:*expr.Expr_IdentExpr#.d^#7:*expr.Expr_SelectExpr#\n\t\t\t)^#8:has#,\n\t\t\thas(\n\t\t\t  a^#2:*expr.Expr_IdentExpr#.b^#3:*expr.Expr_SelectExpr#\n\t\t\t)^#4:has#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`has(a.b).asList().exists(c, c)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\tc,\n\t\t\t// Target\n\t\t\ta^#2:*expr.Expr_IdentExpr#.b~test-only~^#4:*expr.Expr_SelectExpr#.asList()^#5:*expr.Expr_CallExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\tfalse^#9:*expr.Constant_BoolValue#,\n\t\t\t// LoopCondition\n\t\t\t@not_strictly_false(\n\t\t\t  !_(\n\t\t\t\t__result__^#10:*expr.Expr_IdentExpr#\n\t\t\t  )^#11:*expr.Expr_CallExpr#\n\t\t\t)^#12:*expr.Expr_CallExpr#,\n\t\t\t// LoopStep\n\t\t\t_||_(\n\t\t\t  __result__^#13:*expr.Expr_IdentExpr#,\n\t\t\t  c^#8:*expr.Expr_IdentExpr#\n\t\t\t)^#14:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#15:*expr.Expr_IdentExpr#)^#16:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`^#4:has#.asList()^#5:*expr.Expr_CallExpr#.exists(\n\t\t\tc^#7:*expr.Expr_IdentExpr#,\n\t\t\tc^#8:*expr.Expr_IdentExpr#\n\t\t  )^#16:exists#,\n\t\t  has(\n\t\t\ta^#2:*expr.Expr_IdentExpr#.b^#3:*expr.Expr_SelectExpr#\n\t\t  )^#4:has#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[has(a.b), has(c.d)].exists(e, e)`"
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`__comprehension__(\n\t\t\t// Variable\n\t\t\te,\n\t\t\t// Target\n\t\t\t[\n\t\t\t  a^#3:*expr.Expr_IdentExpr#.b~test-only~^#5:*expr.Expr_SelectExpr#,\n\t\t\t  c^#7:*expr.Expr_IdentExpr#.d~test-only~^#9:*expr.Expr_SelectExpr#\n\t\t\t]^#1:*expr.Expr_ListExpr#,\n\t\t\t// Accumulator\n\t\t\t__result__,\n\t\t\t// Init\n\t\t\tfalse^#13:*expr.Constant_BoolValue#,\n\t\t\t// LoopCondition\n\t\t\t@not_strictly_false(\n\t\t\t  !_(\n\t\t\t\t__result__^#14:*expr.Expr_IdentExpr#\n\t\t\t  )^#15:*expr.Expr_CallExpr#\n\t\t\t)^#16:*expr.Expr_CallExpr#,\n\t\t\t// LoopStep\n\t\t\t_||_(\n\t\t\t  __result__^#17:*expr.Expr_IdentExpr#,\n\t\t\t  e^#12:*expr.Expr_IdentExpr#\n\t\t\t)^#18:*expr.Expr_CallExpr#,\n\t\t\t// Result\n\t\t\t__result__^#19:*expr.Expr_IdentExpr#)^#20:*expr.Expr_ComprehensionExpr#`"
+    },
+    "M": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[\n\t\t\t^#5:has#,\n\t\t\t^#9:has#\n\t\t  ]^#1:*expr.Expr_ListExpr#.exists(\n\t\t\te^#11:*expr.Expr_IdentExpr#,\n\t\t\te^#12:*expr.Expr_IdentExpr#\n\t\t  )^#20:exists#,\n\t\t  has(\n\t\t\tc^#7:*expr.Expr_IdentExpr#.d^#8:*expr.Expr_SelectExpr#\n\t\t  )^#9:has#,\n\t\t  has(\n\t\t\ta^#3:*expr.Expr_IdentExpr#.b^#4:*expr.Expr_SelectExpr#\n\t\t  )^#5:has#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`y!=y!=y!=y!=y!=y!=y!=y!=y!=-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y\n\t\t!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y\n\t\t!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y\n\t\t!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y\n\t\t!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y\n\t\t!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y!=-y!=-y-y!=-y`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: max recursion depth exceeded`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[['not fine']]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: expression recursion limit exceeded: 32`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10\n\t\t+ 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18 + 19 + 20\n\t\t+ 21 + 22 + 23 + 24 + 25 + 26 + 27 + 28 + 29 + 30\n\t\t+ 31 + 32 + 33 + 34`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: max recursion depth exceeded`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z.A.B.C.D.E.F.G.H`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: max recursion depth exceeded`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20]\n\t\t     [21][22][23][24][25][26][27][28][29][30][31][32][33]`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: max recursion depth exceeded`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a < 1 < 2 < 3 < 4 < 5 < 6 < 7 < 8 < 9 < 10 < 11\n\t\t      < 12 < 13 < 14 < 15 < 16 < 17 < 18 < 19 < 20 < 21\n\t\t\t  < 22 < 23 < 24 < 25 < 26 < 27 < 28 < 29 < 30 < 31\n\t\t\t  < 32 < 33`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: max recursion depth exceeded`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20] !=\n\t\ta[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16][17][18][19][20]`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:-1:0: max recursion depth exceeded`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`self.true == 1`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:6: Syntax error: mismatched input 'true' expecting IDENTIFIER\n\t\t| self.true == 1\n\t\t| .....^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a.?b && a[?b]`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`ERROR: <input>:1:2: unsupported syntax '.?'\n        | a.?b && a[?b]\n        | .^\n        ERROR: <input>:1:10: unsupported syntax '[?'\n        | a.?b && a[?b]\n\t\t| .........^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`a.?b[?0] && a[?c]`"
+    },
+    "Opts": {
+      "NodeType": "CompositeLit",
+      "Type": {
+        "NodeType": "ArrayType",
+        "Len": null,
+        "Elt": {
+          "NodeType": "Ident",
+          "Name": "Option"
+        }
+      },
+      "Elts": [
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "EnableOptionalSyntax"
+          },
+          "Args": [
+            {
+              "NodeType": "Ident",
+              "Name": "true"
+            }
+          ]
+        }
+      ],
+      "Incomplete": false
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`_&&_(\n\t\t\t_[?_](\n\t\t\t  _?._(\n\t\t\t\ta^#1:*expr.Expr_IdentExpr#,\n\t\t\t\t\"b\"^#2:*expr.Constant_StringValue#\n\t\t\t  )^#3:*expr.Expr_CallExpr#,\n\t\t\t  0^#5:*expr.Constant_Int64Value#\n\t\t\t)^#4:*expr.Expr_CallExpr#,\n\t\t\t_[?_](\n\t\t\t  a^#6:*expr.Expr_IdentExpr#,\n\t\t\t  c^#8:*expr.Expr_IdentExpr#\n\t\t\t)^#7:*expr.Expr_CallExpr#\n\t\t  )^#9:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{?'key': value}`"
+    },
+    "Opts": {
+      "NodeType": "CompositeLit",
+      "Type": {
+        "NodeType": "ArrayType",
+        "Len": null,
+        "Elt": {
+          "NodeType": "Ident",
+          "Name": "Option"
+        }
+      },
+      "Elts": [
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "EnableOptionalSyntax"
+          },
+          "Args": [
+            {
+              "NodeType": "Ident",
+              "Name": "true"
+            }
+          ]
+        }
+      ],
+      "Incomplete": false
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`{\n\t\t\t?\"key\"^#3:*expr.Constant_StringValue#:value^#4:*expr.Expr_IdentExpr#^#2:*expr.Expr_CreateStruct_Entry#\n\t\t  }^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[?a, ?b]`"
+    },
+    "Opts": {
+      "NodeType": "CompositeLit",
+      "Type": {
+        "NodeType": "ArrayType",
+        "Len": null,
+        "Elt": {
+          "NodeType": "Ident",
+          "Name": "Option"
+        }
+      },
+      "Elts": [
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "EnableOptionalSyntax"
+          },
+          "Args": [
+            {
+              "NodeType": "Ident",
+              "Name": "true"
+            }
+          ]
+        }
+      ],
+      "Incomplete": false
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[\n\t\t\ta^#2:*expr.Expr_IdentExpr#,\n\t\t\tb^#3:*expr.Expr_IdentExpr#\n\t\t  ]^#1:*expr.Expr_ListExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[?a[?b]]`"
+    },
+    "Opts": {
+      "NodeType": "CompositeLit",
+      "Type": {
+        "NodeType": "ArrayType",
+        "Len": null,
+        "Elt": {
+          "NodeType": "Ident",
+          "Name": "Option"
+        }
+      },
+      "Elts": [
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "EnableOptionalSyntax"
+          },
+          "Args": [
+            {
+              "NodeType": "Ident",
+              "Name": "true"
+            }
+          ]
+        }
+      ],
+      "Incomplete": false
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[\n\t\t\t_[?_](\n\t\t\t  a^#2:*expr.Expr_IdentExpr#,\n\t\t\t  b^#4:*expr.Expr_IdentExpr#\n\t\t\t)^#3:*expr.Expr_CallExpr#\n\t\t  ]^#1:*expr.Expr_ListExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`[?a, ?b]`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\n\t    ERROR: <input>:1:2: unsupported syntax '?'\n\t\t | [?a, ?b]\n\t\t | .^\n\t    ERROR: <input>:1:6: unsupported syntax '?'\n\t\t | [?a, ?b]\n\t\t | .....^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`Msg{?field: value}`"
+    },
+    "Opts": {
+      "NodeType": "CompositeLit",
+      "Type": {
+        "NodeType": "ArrayType",
+        "Len": null,
+        "Elt": {
+          "NodeType": "Ident",
+          "Name": "Option"
+        }
+      },
+      "Elts": [
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "EnableOptionalSyntax"
+          },
+          "Args": [
+            {
+              "NodeType": "Ident",
+              "Name": "true"
+            }
+          ]
+        }
+      ],
+      "Incomplete": false
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`Msg{\n\t\t\t?field:value^#3:*expr.Expr_IdentExpr#^#2:*expr.Expr_CreateStruct_Entry#\n\t\t  }^#1:*expr.Expr_StructExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`Msg{?field: value} && {?'key': value}`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\n\t\tERROR: <input>:1:5: unsupported syntax '?'\n\t \t | Msg{?field: value} && {?'key': value}\n\t\t | ....^\n\t    ERROR: <input>:1:24: unsupported syntax '?'\n\t\t | Msg{?field: value} && {?'key': value}\n\t\t | .......................^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`noop_macro(123)`"
+    },
+    "Opts": {
+      "NodeType": "CompositeLit",
+      "Type": {
+        "NodeType": "ArrayType",
+        "Len": null,
+        "Elt": {
+          "NodeType": "Ident",
+          "Name": "Option"
+        }
+      },
+      "Elts": [
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "Macros"
+          },
+          "Args": [
+            {
+              "NodeType": "CallExpr",
+              "Fun": {
+                "NodeType": "Ident",
+                "Name": "NewGlobalVarArgMacro"
+              },
+              "Args": [
+                {
+                  "NodeType": "BasicLit",
+                  "Kind": "STRING",
+                  "Value": "\"noop_macro\""
+                },
+                {
+                  "NodeType": "FuncLit",
+                  "Type": {
+                    "NodeType": "FuncType",
+                    "TypeParams": null,
+                    "Params": {
+                      "NodeType": "FieldList",
+                      "List": [
+                        {
+                          "NodeType": "Field",
+                          "Names": [
+                            {
+                              "NodeType": "Ident",
+                              "Name": "eh"
+                            }
+                          ],
+                          "Type": {
+                            "NodeType": "Ident",
+                            "Name": "ExprHelper"
+                          }
+                        },
+                        {
+                          "NodeType": "Field",
+                          "Names": [
+                            {
+                              "NodeType": "Ident",
+                              "Name": "target"
+                            }
+                          ],
+                          "Type": {
+                            "NodeType": "SelectorExpr",
+                            "X": {
+                              "NodeType": "Ident",
+                              "Name": "ast"
+                            },
+                            "Sel": {
+                              "NodeType": "Ident",
+                              "Name": "Expr"
+                            }
+                          }
+                        },
+                        {
+                          "NodeType": "Field",
+                          "Names": [
+                            {
+                              "NodeType": "Ident",
+                              "Name": "args"
+                            }
+                          ],
+                          "Type": {
+                            "NodeType": "ArrayType",
+                            "Len": null,
+                            "Elt": {
+                              "NodeType": "SelectorExpr",
+                              "X": {
+                                "NodeType": "Ident",
+                                "Name": "ast"
+                              },
+                              "Sel": {
+                                "NodeType": "Ident",
+                                "Name": "Expr"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "Results": {
+                      "NodeType": "FieldList",
+                      "List": [
+                        {
+                          "NodeType": "Field",
+                          "Names": null,
+                          "Type": {
+                            "NodeType": "SelectorExpr",
+                            "X": {
+                              "NodeType": "Ident",
+                              "Name": "ast"
+                            },
+                            "Sel": {
+                              "NodeType": "Ident",
+                              "Name": "Expr"
+                            }
+                          }
+                        },
+                        {
+                          "NodeType": "Field",
+                          "Names": null,
+                          "Type": {
+                            "NodeType": "StarExpr",
+                            "X": {
+                              "NodeType": "SelectorExpr",
+                              "X": {
+                                "NodeType": "Ident",
+                                "Name": "common"
+                              },
+                              "Sel": {
+                                "NodeType": "Ident",
+                                "Name": "Error"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "Body": {
+                    "NodeType": "BlockStmt",
+                    "List": [
+                      {
+                        "NodeType": "ReturnStmt",
+                        "Results": [
+                          {
+                            "NodeType": "Ident",
+                            "Name": "nil"
+                          },
+                          {
+                            "NodeType": "Ident",
+                            "Name": "nil"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "Incomplete": false
+    },
+    "P": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`noop_macro(\n\t\t\t123^#2:*expr.Constant_Int64Value#\n\t\t  )^#1:*expr.Expr_CallExpr#`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`x{?.`"
+    },
+    "Opts": {
+      "NodeType": "CompositeLit",
+      "Type": {
+        "NodeType": "ArrayType",
+        "Len": null,
+        "Elt": {
+          "NodeType": "Ident",
+          "Name": "Option"
+        }
+      },
+      "Elts": [
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "ErrorRecoveryLookaheadTokenLimit"
+          },
+          "Args": [
+            {
+              "NodeType": "BasicLit",
+              "Kind": "INT",
+              "Value": "10"
+            }
+          ]
+        },
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "ErrorRecoveryLimit"
+          },
+          "Args": [
+            {
+              "NodeType": "BasicLit",
+              "Kind": "INT",
+              "Value": "10"
+            }
+          ]
+        }
+      ],
+      "Incomplete": false
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\n\t\tERROR: <input>:1:3: unsupported syntax '?'\n\t\t | x{?.\n\t\t | ..^\n\t    ERROR: <input>:1:4: Syntax error: mismatched input '.' expecting IDENTIFIER\n\t\t | x{?.\n\t\t | ...^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`x{.`"
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\n\t\tERROR: <input>:1:3: Syntax error: mismatched input '.' expecting {'}', ',', '?', IDENTIFIER}\n\t\t | x{.\n\t\t | ..^`"
+    }
+  },
+  {
+    "I": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`'3# < 10\" '& tru ^^`"
+    },
+    "Opts": {
+      "NodeType": "CompositeLit",
+      "Type": {
+        "NodeType": "ArrayType",
+        "Len": null,
+        "Elt": {
+          "NodeType": "Ident",
+          "Name": "Option"
+        }
+      },
+      "Elts": [
+        {
+          "NodeType": "CallExpr",
+          "Fun": {
+            "NodeType": "Ident",
+            "Name": "ErrorReportingLimit"
+          },
+          "Args": [
+            {
+              "NodeType": "BasicLit",
+              "Kind": "INT",
+              "Value": "2"
+            }
+          ]
+        }
+      ],
+      "Incomplete": false
+    },
+    "E": {
+      "NodeType": "BasicLit",
+      "Kind": "STRING",
+      "Value": "`\n\t\tERROR: <input>:1:12: Syntax error: token recognition error at: '& '\n\t\t | '3# < 10\" '& tru ^^\n\t\t | ...........^\n\t\tERROR: <input>:1:18: Syntax error: token recognition error at: '^'\n\t\t | '3# < 10\" '& tru ^^\n\t\t | .................^\n\t\tERROR: <input>:1:19: Syntax error: More than 2 syntax errors\n\t\t | '3# < 10\" '& tru ^^\n\t\t | ..................^\n\t\t`"
+    }
+  }
+]

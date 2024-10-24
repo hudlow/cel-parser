@@ -1,4 +1,4 @@
-module github.com/hudlow/cel-parser/utility/extract-test-data
+module github.com/hudlow/cel-parser/utility/cel-go-parse
 
 go 1.23.2
 

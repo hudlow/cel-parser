@@ -19,231 +19,273 @@
   const builder = new LazyBuilder();
 }}
 
-Entry               = expr:Expr { return expr(); }
+Entry
+  = expr:Expr { return expr(); }
 
-Expr                = or:ConditionalOr S
-                      tail:TernaryTail?
-                      {
-                        /* : Eventual<Expr> */
-                        if (tail === null) {
-                          return or;
-                        } else {
-                          return builder.newCallExpr(offset(), "_?_:_", [or, ...tail]);
-                        }
-                      }
+Expr
+  = or:ConditionalOr S
+    tail:TernaryTail?
+    {
+      /* : Eventual<Expr> */
+      if (tail === null) {
+        return or;
+      } else {
+        return builder.newCallExpr(offset(), "_?_:_", [or, ...tail]);
+      }
+    }
 
-TernaryTail         = "?" t:ConditionalOr S ":" f:Expr S
-                      {
-                        /* : [Eventual<Expr>, Eventual<Expr>] */
-                        return [t, f];
-                      }
+TernaryTail
+  = "?" t:ConditionalOr S ":" f:Expr S
+    {
+      /* : [Eventual<Expr>, Eventual<Expr>] */
+      return [t, f];
+    }
 
-ConditionalOr       = and:ConditionalAnd|1.., S "||"|
-                      {
-                        /* : Eventual<Expr> */
-                        if (and.length === 1) {
-                          return and[0];
-                        } else {
-                          return builder.newCallExpr(offset(), "_||_", and);
-                        }
-                      }
+ConditionalOr
+  = and:ConditionalAnd|1.., S "||"|
+    {
+      /* : Eventual<Expr> */
+      if (and.length === 1) {
+        return and[0];
+      } else {
+        return builder.newCallExpr(offset(), "_||_", and);
+      }
+    }
 
-ConditionalAnd      = relation:Relation|1.., S "&&"|
-                      {
-                        /* : Eventual<Expr> */
-                        if (relation.length === 1) {
-                          return relation[0];
-                        } else {
-                          return builder.newCallExpr(offset(), "_&&_", relation);
-                        }
-                      }
+ConditionalAnd
+  = relation:Relation|1.., S "&&"|
+    {
+      /* : Eventual<Expr> */
+      if (relation.length === 1) {
+        return relation[0];
+      } else {
+        return builder.newCallExpr(offset(), "_&&_", relation);
+      }
+    }
 
-Relation            = addition:Addition tail:RelationTail?
-                      {
-                        /* : Eventual<Expr> */
-                        if (tail === null) {
-                          return addition;
-                        } else {
-                          return tail.reduce((expr, op) => op(expr), addition);
-                        }
-                      }
+Relation
+  = addition:Addition tail:RelationTail?
+    {
+      /* : Eventual<Expr> */
+      if (tail === null) {
+        return addition;
+      } else {
+        return tail.reduce((expr, op) => op(expr), addition);
+      }
+    }
 
-RelationTail        = (
-                        S operator:Relop nextExpr:Addition
-                        { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
-                      )+
+RelationTail        
+  = (
+      S operator:Relop nextExpr:Addition
+      { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+    )+
 
-Relop               = (
-                        operator:("<=" / "<" / ">=" / ">" / "==" / "!=")
-                        { return `_${operator}_` }
-                      )
-                      / "in" { return "@in" }
+Relop "relational operator"
+  = (
+      operator:("<=" / "<" / ">=" / ">" / "==" / "!=")
+      { return `_${operator}_` }
+    )
+    / "in" { return "@in" }
 
-Addition            = multiplication:Multiplication tail:AdditionTail?
-                      {
-                        /* : Eventual<Expr> */
-                        if (tail === null) {
-                          return multiplication;
-                        } else {
-                          return tail.reduce((expr, op) => op(expr), multiplication);
-                        }
-                      }
+Addition
+  = multiplication:Multiplication tail:AdditionTail?
+    {
+      /* : Eventual<Expr> */
+      if (tail === null) {
+        return multiplication;
+      } else {
+        return tail.reduce((expr, op) => op(expr), multiplication);
+      }
+    }
 
-AdditionTail        = (
-                        S operator:( o:[+-] { return `_${o}_` } ) nextExpr:Multiplication
-                        { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
-                      )+
+AdditionTail
+  = (
+      S operator:( o:[+-] { return `_${o}_` } ) nextExpr:Multiplication
+      { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+    )+
 
-Multiplication      = unary:Unary tail:MultiplicationTail?
-                      {
-                        /* : Eventual<Expr> */
-                        if (tail === null) {
-                          return unary;
-                        } else {
-                          return tail.reduce((expr, op) => op(expr), unary);
-                        }
-                      }
+Multiplication
+  = unary:Unary tail:MultiplicationTail?
+    {
+      /* : Eventual<Expr> */
+      if (tail === null) {
+        return unary;
+      } else {
+        return tail.reduce((expr, op) => op(expr), unary);
+      }
+    }
 
-MultiplicationTail  = (
-                        S operator:( o:[*/%] { return `_${o}_` } ) nextExpr:Unary
-                        { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
-                      )+
+MultiplicationTail
+  = (
+      S operator:( o:[*/%] { return `_${o}_` } ) nextExpr:Unary
+      { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+    )+
 
-Unary               = Member
-                    / S ops:( "!"+ / "-"+ ) expr:Member
-                      {
-                        /* : Eventual<Expr> */
-                        if (ops.length % 2 === 0) {
-                          return expr;
-                        } else {
-                          return builder.newCallExpr(offset(), `${ops[0]}_`, [expr]);
-                        }
-                      }
+Unary
+  = Member
+  / S ops:( "!"+ / "-"+ ) expr:Member
+    {
+      /* : Eventual<Expr> */
+      if (ops.length % 2 === 0) {
+        return expr;
+      } else {
+        return builder.newCallExpr(offset(), `${ops[0]}_`, [expr]);
+      }
+    }
 
-Member              = S primary:Primary tail:MemberTail
-                      {
-                        /* : Eventual<Expr> */
-                        if (tail.length === 0) {
-                          return primary;
-                        } else {
-                          return tail.reduce((expr, op) => op(expr), primary);
-                        }
-                      }
+Member
+  = S primary:Primary tail:MemberTail
+    {
+      /* : Eventual<Expr> */
+      if (tail.length === 0) {
+        return primary;
+      } else {
+        return tail.reduce((expr, op) => op(expr), primary);
+      }
+    }
 
-MemberTail          = (S @Access)*
+MemberTail
+  = (S @Access)*
 
-Access              = "." S field:Identifier S ![(]
-                      { return ((prevExpr: Eventual<Expr>) => builder.newSelectExpr(offset(), prevExpr, field)) }
-                    / "." S Identifier:Identifier S "(" args:ExprList ")"
-                      { return ((prevExpr: Eventual<Expr>) => builder.newMemberCallExpr(offset(), prevExpr, Identifier, args)) }
-                    / "[" index:Expr "]"
-                      { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), "_[_]", [prevExpr, index])) }
+Access
+  = "." S field:Identifier S ![(]
+    { return ((prevExpr: Eventual<Expr>) => builder.newSelectExpr(offset(), prevExpr, field)) }
+  / "." S Identifier:Identifier S "(" args:ExprList ")"
+    { return ((prevExpr: Eventual<Expr>) => builder.newMemberCallExpr(offset(), prevExpr, Identifier, args)) }
+  / "[" index:Expr "]"
+    { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), "_[_]", [prevExpr, index])) }
 
-Primary             = Literal
-                    / "."? S name:Identifier !(S [({]) !("." Identifier|1.., "."| "{")
-                      { return builder.newIdentExpr(offset(), name) }
-                    / "."? S Identifier:Identifier S "(" args:ExprList ")"
-                      { return builder.newCallExpr(offset(), Identifier, args) }
-                    / "."? name:$Identifier|1.., "."| S "{" entries:FieldInits (",")? "}"
-                      { return builder.newStructExpr(offset(), entries, name) }
-                    / "(" @Expr ")"
-                    / elements:("[" @ExprList (",")? "]")
-                      { return builder.newListExpr(offset(), elements) }
-                    / entries:("{" @MapInits (",")? "}")
-                      { return builder.newStructExpr(offset(), entries) }
+Primary
+  = Literal
+  / "."? S name:Identifier !(S [({]) !("." Identifier|1.., "."| "{")
+    { return builder.newIdentExpr(offset(), name) }
+  / "."? S Identifier:Identifier S "(" args:ExprList ")"
+    { return builder.newCallExpr(offset(), Identifier, args) }
+  / "."? name:$Identifier|1.., "."| S "{" entries:FieldInits (",")? S "}"
+    { return builder.newStructExpr(offset(), entries, name) }
+  / "(" @Expr ")"
+  / elements:("[" @ExprList (",")? S "]")
+    { return builder.newListExpr(offset(), elements) }
+  / entries:("{" @MapInits (",")? S "}")
+    { return builder.newStructExpr(offset(), entries) }
 
-ExprList            = Expr|0.., ","|
+ExprList
+  = Expr|0.., ","|
 
-FieldInits          = (
-                        S Identifier:Identifier S ":" value:Expr
-                        { return builder.newStructEntry(offset(), Identifier, value) }
-                      )|0.., ","|
+FieldInits
+  = (
+      S key:Identifier S ":" value:Expr
+      { return builder.newStructEntry(offset(), key, value) }
+    )|0.., ","|
 
-MapInits            = (
-                        key:Expr ":" value:Expr
-                        { return builder.newMapEntry(offset(), key, value) }
-                      )|0.., ","|
+MapInits
+  = (
+      key:Expr ":" value:Expr
+      { return builder.newMapEntry(offset(), key, value) }
+    )|0.., ","|
 
-Identifier               = !Reserved
-                      @$([_a-zA-Z][_a-zA-Z0-9]*)
+Identifier "identifier"
+  = id:$([_a-zA-Z][_a-zA-Z0-9]*)
+    {
+      if ([
+        "true", "false", "null", "in", "as", "break", "const", "continue", "else",
+        "for", "function", "if", "import", "let", "loop", "package", "namespace",
+        "return", "var", "void", "while"
+      ].includes(id)) {
+        error("reserved identifier");
+      }
+      
+      return id;
+    }
 
-Literal             = FloatLiteral / UnsignedIntLiteral / IntLiteral / StringLiteral / BytesLiteral / BooleanLiteral / NullLiteral
+Literal
+  = FloatLiteral / UnsignedIntLiteral / IntLiteral / StringLiteral / BytesLiteral / BooleanLiteral / NullLiteral
 
-IntLiteral          = digits:$("-"? ("0x" HexDigit+ / Digit+))
-                    { return builder.newInt64Expr(offset(), digits) }
+IntLiteral "integer literal"
+  = digits:$("-"? ("0x" HexDigit+ / Digit+))
+  { return builder.newInt64Expr(offset(), digits) }
 
-UnsignedIntLiteral  = digits:$("0x" HexDigit+ / Digit+) [uU]
-                    { return builder.newUnsignedInt64Expr(offset(), digits) }
+UnsignedIntLiteral "unsigned integer literal"
+  = digits:$("0x" HexDigit+ / Digit+) [uU]
+  { return builder.newUnsignedInt64Expr(offset(), digits) }
 
-FloatLiteral        = digits: $("-"? Digit* "." Digit+ Exponent? / "-"? Digit+ Exponent)
-                    { return builder.newDoubleExpr(offset(), digits) }
+FloatLiteral "float literal"
+  = digits: $("-"? Digit* "." Digit+ Exponent? / "-"? Digit+ Exponent)
+  { return builder.newDoubleExpr(offset(), digits) }
 
-Digit               = [0-9]
+Digit "digit"
+  = [0-9]
 
-HexDigit            = [0-9abcdefABCDEF]
+HexDigit "hex digit"
+  = [0-9abcdefABCDEF]
 
-Exponent            = [eE] [+-]? Digit+
+Exponent "exponent"
+  = [eE] [+-]? Digit+
 
-StringLiteral       = bytes:CharacterSequence
-                    { return builder.newStringExpr(offset(), bytes) }
+StringLiteral "string literal"
+  = bytes:CharacterSequence
+    { return builder.newStringExpr(offset(), bytes) }
 
-BytesLiteral        = [bB] bytes:CharacterSequence
-                    { return builder.newBytesExpr(offset(), bytes) }
+BytesLiteral "bytes literal"
+  = [bB] bytes:CharacterSequence
+    { return builder.newBytesExpr(offset(), bytes) }
 
-CharacterSequence   = [rR] @( '"""'  @(!'"""' @.)*                  '"""'
-                    / "'''"  @(!"'''" @.)*                          "'''"
-                    / '"'    @(!( '"' / NewLine ) @.)*              '"'
-                    / "'"    @(!( "'" / NewLine ) @.)*              "'")
-                    /       ( '"""'  @(Escape / $(!'"""' @.))*      '"""'
-                    / "'''"  @(Escape / $(!"'''" @.))*              "'''"
-                    / '"'    @(Escape / $(!( '"' / NewLine ) @.))*  '"'
-                    / "'"    @(Escape / $(!( "'" / NewLine ) @.))*  "'")
+CharacterSequence "quoted character sequence"
+  = [rR] @( '"""'  @(!'"""' @.)*                  '"""'
+  / "'''"  @(!"'''" @.)*                          "'''"
+  / '"'    @(!( '"' / NewLine ) @.)*              '"'
+  / "'"    @(!( "'" / NewLine ) @.)*              "'")
+  /       ( '"""'  @(Escape / $(!'"""' @.))*      '"""'
+  / "'''"  @(Escape / $(!"'''" @.))*              "'''"
+  / '"'    @(Escape / $(!( '"' / NewLine ) @.))*  '"'
+  / "'"    @(Escape / $(!( "'" / NewLine ) @.))*  "'")
 
-Escape              = ByteSequence
-                    / "\\" value:[abfnrtv]
-                    {
-                      switch(value) {
-                        case 'a': return "\x07";
-                        case 'b': return "\b";
-                        case 'f': return "\f";
-                        case 'n': return "\n";
-                        case 'r': return "\r";
-                        case 't': return "\t";
-                        case 'v': return "\v";
-                      }
+Escape "escaped character"
+  = ByteSequence
+  / "\\" value:[abfnrtv]
+    {
+      switch(value) {
+        case 'a': return "\x07";
+        case 'b': return "\b";
+        case 'f': return "\f";
+        case 'n': return "\n";
+        case 'r': return "\r";
+        case 't': return "\t";
+        case 'v': return "\v";
+      }
+  
+      throw new Error();
+    }
+  / "\\" @$[\"\'\`\\?]
 
-                      throw new Error();
-                      }
-                      / "\\" @$[\"\'\`\\?]
+ByteSequence "byte sequence"
+  = Bytes+
 
-ByteSequence        = Bytes+
+Bytes "escaped bytes"
+  = "\\" [xX] value:$Byte|1|        { return parseInt(value, 16) }
+  / "\\u" value:$Byte|2|            { return parseInt(value, 16) }
+  / "\\U" value:$Byte|4|            { return parseInt(value, 16) }
+  / "\\" value:$([0-3] [0-7] [0-7]) { return parseInt(value, 8) }
 
-Bytes               = "\\x" value:$Byte|1|            { return parseInt(value, 16) }
-                    / "\\u" value:$Byte|2|            { return parseInt(value, 16) }
-                    / "\\U" value:$Byte|4|            { return parseInt(value, 16) }
-                    / "\\" value:$([0-3] [0-7] [0-7]) { return parseInt(value, 8) }
+Byte "byte value"
+  = $(HexDigit HexDigit)
 
-Byte                = $(HexDigit HexDigit)
+NewLine "new line"
+  = "\r\n" / "\r" / "\n"
 
-NewLine             = "\r\n" / "\r" / "\n"
+BooleanLiteral "boolean literal"
+  = keyword:("true" / "false")
+    { return builder.newBoolExpr(offset(), keyword) }
 
-BooleanLiteral      = keyword:("true" / "false")
-                    { return builder.newBoolExpr(offset(), keyword) }
+NullLiteral "null literal"
+  = "null" ![_a-zA-Z0-9]
+    { return builder.newNullExpr(offset()) }
 
-NullLiteral         = "null" ![_a-zA-Z0-9]
-                    { return builder.newNullExpr(offset()) }
+S
+  = WhiteSpace?
 
-                    // Note we don't use BooleanLiteral or NullLiteral below
-                    // Because they include actions, and we want this code path
-                    // to be highly optimized.
-Reserved            = ("true" / "false" / "null" / "in"
-                    / "as" / "break" / "const" / "continue" / "else"
-                    / "for" / "function" / "if" / "import" / "let"
-                    / "loop" / "package" / "namespace" / "return"
-                    / "var" / "void" / "while") ![_a-zA-Z0-9]
+WhiteSpace "whitespace"
+  = [\t\n\f\r ]+
 
-S                   = WhiteSpace?
-
-WhiteSpace          = [\t\n\f\r ]+
-
-Comment             = '//' !NewLine* NewLine
+Comment "comment"
+  = '//' !NewLine* NewLine

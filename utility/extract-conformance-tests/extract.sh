@@ -8,6 +8,6 @@ curl $url -L | tar -xzv --strip-components 1 -C external/cel-spec
 
 cd utility/extract-conformance-tests
 
-go run extract.go ../../external/cel-spec/tests/simple/testdata | jq . > ../../test/data/conformance.json
+go run extract.go ../../external/cel-spec/tests/simple/testdata > ../../test/data/conformance.json
 
 prettier --write ../../test/data/conformance.json

@@ -1,6 +1,6 @@
 {
   "name": "@hudlow/cel-parser",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TypeScript parser for the Common Expression Language that parses expressions to a Protobuf-based abstract syntax tree, but does not execute them.",
   "author": "Dan Hudlow",
   "license": "Apache-2.0",
@@ -41,7 +41,9 @@
     "bundle-browser": "echo 'import * as CEL from \"./\"; module.exports = CEL;' | esbuild --bundle --global-name=CEL --outfile=dist/index.js && prettier dist/index.js --write",
     "bundle-debugger": "echo 'import toDebugString from \"./utility/debug/to-debug-string.ts\"; module.exports = toDebugString;' | esbuild --bundle --global-name=toDebugString --outfile=dist/to-debug-string.js && prettier dist/to-debug-string.js --write",
     "bundle": "npm run bundle-init && npm run bundle-cjs && npm run bundle-browser",
+    "extract-tests": "npm run extract-conformance-tests && npm run extract-parser-tests",
     "extract-conformance-tests": "./utility/extract-conformance-tests/extract.sh",
+    "extract-parser-tests": "./utility/extract-parser-tests/extract.sh",
     "prepare": "npm run generate-proto && npm run generate-parser && npm run bundle",
     "lint": "prettier . --check",
     "format": "prettier . --write",

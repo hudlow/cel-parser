@@ -199,7 +199,7 @@ class Writer {
   doIndent() {
     if (this.lineStart) {
       this.lineStart = false;
-      this.content += " ".repeat(this.indent);
+      this.content += "  ".repeat(this.indent);
     }
   }
 
@@ -228,7 +228,7 @@ class Writer {
   }
 }
 
-interface Adorner {
+export interface Adorner {
   GetMetadata(context: Message): string;
 }
 
@@ -236,7 +236,7 @@ class EmptyAdorner implements Adorner {
   static readonly singleton = new EmptyAdorner();
   private constructor() {}
 
-  GetMetadata(): string {
+  GetMetadata(context: Message): string {
     return "";
   }
 }
@@ -248,22 +248,37 @@ function formatLiteral(c: Constant): string {
     case "boolValue":
       return kind.value ? "true" : "false";
     case "bytesValue":
-      return `b${JSON.stringify(decoder.decode(kind.value))}`;
+      return `b${encode(decoder.decode(kind.value))}`;
     case "doubleValue":
-      if (Math.floor(kind.value) == kind.value) {
-        return `{value.toString()}.0`;
-      } else {
-        return kind.value.toString();
-      }
     case "int64Value":
       return kind.value.toString();
     case "stringValue":
-      return JSON.stringify(kind.value);
+      return encode(kind.value);
     case "uint64Value":
-      return kind.value.toString();
+      return `${kind.value.toString()}u`;
     case "nullValue":
       return "null";
     default:
       throw new Error(`Unknown constant type: ${kind.case}`);
   }
+}
+
+function encode(s: string): string {
+  const entropyToken = "(fvo47fu3AwHrHsLEMNa7uUXYUF4rQgdm)";
+
+  return (
+    '"' +
+    s
+      .replaceAll("\\", entropyToken)
+      .replaceAll("\x07", "\\a")
+      .replaceAll("\b", "\\b")
+      .replaceAll("\f", "\\f")
+      .replaceAll("\n", "\\n")
+      .replaceAll("\r", "\\r")
+      .replaceAll("\t", "\\t")
+      .replaceAll("\v", "\\v")
+      .replaceAll('"', '\\"')
+      .replaceAll(entropyToken, "\\\\") +
+    '"'
+  );
 }

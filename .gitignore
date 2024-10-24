@@ -3,4 +3,5 @@ external/
 node_modules/
 
 index.ts
+index.ast
 .DS_Store

@@ -421,6 +421,28 @@ class Builder {
     );
   }
 
+  expandMapFilterMacro(
+    offset: number,
+    target: Expr,
+    x: string,
+    test: Expr,
+    step: Expr,
+  ): Expr {
+    return this.newListMacro(
+      offset,
+      target,
+      x,
+      this.newCallExpr(offset, "_?_:_", [
+        test,
+        this.newCallExpr(offset, "_+_", [
+          this.newIdentExpr(offset, "__result__"),
+          this.newListExpr(offset, [step]),
+        ]),
+        this.newIdentExpr(offset, "__result__"),
+      ]),
+    );
+  }
+
   expandFilterMacro(offset: number, target: Expr, x: string, step: Expr): Expr {
     return this.newListMacro(
       offset,
@@ -485,46 +507,56 @@ class Builder {
       const callExpr = call.exprKind.value;
       const varName = callExpr.args[0];
       if (
+        varName !== undefined &&
         call.exprKind.value.target !== undefined &&
-        callExpr.args.length === 2 &&
-        varName.exprKind.case === "identExpr"
+        varName.exprKind?.case === "identExpr"
       ) {
-        switch (callExpr.function) {
-          case "exists":
-            return this.expandExistsMacro(
-              offset,
-              call.exprKind.value.target,
-              varName.exprKind.value.name,
-              call.exprKind.value.args[1],
-            );
-          case "all":
-            return this.expandAllMacro(
-              offset,
-              call.exprKind.value.target,
-              varName.exprKind.value.name,
-              call.exprKind.value.args[1],
-            );
-          case "map":
-            return this.expandMapMacro(
-              offset,
-              call.exprKind.value.target,
-              varName.exprKind.value.name,
-              call.exprKind.value.args[1],
-            );
-          case "filter":
-            return this.expandFilterMacro(
-              offset,
-              call.exprKind.value.target,
-              varName.exprKind.value.name,
-              call.exprKind.value.args[1],
-            );
-          case "exists_one":
-            return this.expandExistsOne(
-              offset,
-              call.exprKind.value.target,
-              varName.exprKind.value.name,
-              call.exprKind.value.args[1],
-            );
+        if (callExpr.args.length === 2) {
+          switch (callExpr.function) {
+            case "exists":
+              return this.expandExistsMacro(
+                offset,
+                call.exprKind.value.target,
+                varName.exprKind.value.name,
+                call.exprKind.value.args[1],
+              );
+            case "all":
+              return this.expandAllMacro(
+                offset,
+                call.exprKind.value.target,
+                varName.exprKind.value.name,
+                call.exprKind.value.args[1],
+              );
+            case "map":
+              return this.expandMapMacro(
+                offset,
+                call.exprKind.value.target,
+                varName.exprKind.value.name,
+                call.exprKind.value.args[1],
+              );
+            case "filter":
+              return this.expandFilterMacro(
+                offset,
+                call.exprKind.value.target,
+                varName.exprKind.value.name,
+                call.exprKind.value.args[1],
+              );
+            case "exists_one":
+              return this.expandExistsOne(
+                offset,
+                call.exprKind.value.target,
+                varName.exprKind.value.name,
+                call.exprKind.value.args[1],
+              );
+          }
+        } else if (callExpr.args.length === 3 && callExpr.function == "map") {
+          return this.expandMapFilterMacro(
+            offset,
+            call.exprKind.value.target,
+            varName.exprKind.value.name,
+            call.exprKind.value.args[1],
+            call.exprKind.value.args[2],
+          );
         }
       }
     }
