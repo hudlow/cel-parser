@@ -13,7 +13,7 @@ However, because these tests are also for evaluation, the derived tests use the 
 [`cel-go`][cel-go] parser as the expected output. This extraction can be re-run by with
 `npm run extract-conformance-tests` but does require an environment with `go`.
 
-It is currently passing all of the 1,916 derived conformance tests and most of [`cel-go`'s parser 
+It is currently passing all of the 1,916 derived conformance tests and most of [`cel-go`'s parser
 tests][cel-go-parser-tests].
 
 To generate the parser after cloning the repo, simply run `npm ci`. To compile to JavaScript
