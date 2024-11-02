@@ -1,6 +1,6 @@
 {
   "name": "@hudlow/cel-parser",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "TypeScript parser for the Common Expression Language that parses expressions to a Protobuf-based abstract syntax tree, but does not execute them.",
   "author": "Dan Hudlow",
   "license": "Apache-2.0",
@@ -31,7 +31,7 @@
     "url": "git+ssh://git@github.com/hudlow/cel-parser.git"
   },
   "scripts": {
-    "clean": "rm -rf index.ts dist/ external/ node_modules/ &> /dev/null",
+    "clean": "rm -rf index.ts index.ast utility/extract-parser-tests/bin dist/ external/ node_modules/ &> /dev/null",
     "generate-control-parser": "peggy cel.peggy --format es -o ./index.ts",
     "generate-parser": "peggy cel.peggy --format bare --extra-options '{\"typescript\":true}' --plugin peggy-ts -o ./index.ts && prettier index.ts --write",
     "generate-proto": "buf generate --include-imports buf.build/cel/spec",

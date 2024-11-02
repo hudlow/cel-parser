@@ -42,7 +42,7 @@ TernaryTail
     }
 
 ConditionalOr
-  = and:ConditionalAnd|1.., S "||"|
+  = and:ConditionalAnd|1.., $(S "||")|
     {
       /* : Eventual<Expr> */
       if (and.length === 1) {
@@ -53,7 +53,7 @@ ConditionalOr
     }
 
 ConditionalAnd
-  = relation:Relation|1.., S "&&"|
+  = relation:Relation|1.., $(S "&&")|
     {
       /* : Eventual<Expr> */
       if (relation.length === 1) {
@@ -82,7 +82,7 @@ RelationTail
 
 Relop "relational operator"
   = (
-      operator:("<=" / "<" / ">=" / ">" / "==" / "!=")
+      operator:$("<=" / "<" / ">=" / ">" / "==" / "!=")
       { return `_${operator}_` }
     )
     / "in" { return "@in" }
@@ -123,7 +123,7 @@ MultiplicationTail
 
 Unary
   = Member
-  / S ops:( "!"+ / "-"+ ) expr:Member
+  / S ops:$( "!"+ / "-"+ ) expr:Member
     {
       /* : Eventual<Expr> */
       if (ops.length % 2 === 0) {
@@ -150,8 +150,8 @@ MemberTail
 Access
   = "." S field:Identifier S ![(]
     { return ((prevExpr: Eventual<Expr>) => builder.newSelectExpr(offset(), prevExpr, field)) }
-  / "." S Identifier:Identifier S "(" args:ExprList ")"
-    { return ((prevExpr: Eventual<Expr>) => builder.newMemberCallExpr(offset(), prevExpr, Identifier, args)) }
+  / "." S identifier:Identifier S "(" args:ExprList ")"
+    { return ((prevExpr: Eventual<Expr>) => builder.newMemberCallExpr(offset(), prevExpr, identifier, args)) }
   / "[" index:Expr "]"
     { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), "_[_]", [prevExpr, index])) }
 
@@ -159,14 +159,14 @@ Primary
   = Literal
   / "."? S name:Identifier !(S [({]) !("." Identifier|1.., "."| "{")
     { return builder.newIdentExpr(offset(), name) }
-  / "."? S Identifier:Identifier S "(" args:ExprList ")"
-    { return builder.newCallExpr(offset(), Identifier, args) }
+  / "."? S identifier:Identifier S "(" args:ExprList ")"
+    { return builder.newCallExpr(offset(), identifier, args) }
   / "."? name:$Identifier|1.., "."| S "{" entries:FieldInits (",")? S "}"
     { return builder.newStructExpr(offset(), entries, name) }
   / "(" @Expr ")"
   / elements:("[" @ExprList (",")? S "]")
     { return builder.newListExpr(offset(), elements) }
-  / entries:("{" @MapInits (",")? S "}")
+  / entries:("{" @MapInits $((",")? S "}"))
     { return builder.newStructExpr(offset(), entries) }
 
 ExprList
@@ -174,7 +174,7 @@ ExprList
 
 FieldInits
   = (
-      S key:Identifier S ":" value:Expr
+      S key:Identifier $(S ":") value:Expr
       { return builder.newStructEntry(offset(), key, value) }
     )|0.., ","|
 
@@ -210,7 +210,7 @@ UnsignedIntLiteral "unsigned integer literal"
   { return builder.newUnsignedInt64Expr(offset(), digits) }
 
 FloatLiteral "float literal"
-  = digits: $("-"? Digit* "." Digit+ Exponent? / "-"? Digit+ Exponent)
+  = digits:$("-"? Digit* "." Digit+ Exponent? / "-"? Digit+ Exponent)
   { return builder.newDoubleExpr(offset(), digits) }
 
 Digit "digit"
@@ -285,7 +285,7 @@ S
   = WhiteSpace?
 
 WhiteSpace "whitespace"
-  = [\t\n\f\r ]+
+  = $([\t\n\f\r ]+)
 
 Comment "comment"
   = '//' !NewLine* NewLine
