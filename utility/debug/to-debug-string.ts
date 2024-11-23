@@ -7,7 +7,7 @@ import type {
   Expr_CreateList,
   Expr_CreateStruct,
   Expr_Comprehension,
-} from "../../external/proto/dev/cel/expr/syntax_pb.ts";
+} from "../../external/cel/expr/syntax_pb.ts";
 
 import type { Message } from "@bufbuild/protobuf";
 

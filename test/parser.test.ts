@@ -9,7 +9,7 @@ import type {
   Constant,
   Expr,
   Expr_CreateStruct_Entry as Entry,
-} from "../external/proto/dev/cel/expr/syntax_pb.ts";
+} from "../external/cel/expr/syntax_pb.ts";
 
 import type { Message } from "@bufbuild/protobuf";
 
@@ -120,7 +120,7 @@ class KindAndIDAdorner implements Adorner {
     } else if (isEntry(context)) {
       valueType = "*expr.Expr_CreateStruct_Entry";
     } else {
-      throw new Error("unexpected message type");
+      throw new Error("unexpected message type: " + context.$typeName);
     }
 
     return `^#0:${valueType}#`;
@@ -170,9 +170,9 @@ function getConstantType(c: Constant): string {
 }
 
 function isExpr(m: Message): m is Expr {
-  return m.$typeName === "dev.cel.expr.Expr";
+  return m.$typeName === "cel.expr.Expr";
 }
 
 function isEntry(m: Message): m is Expr {
-  return m.$typeName === "dev.cel.expr.Expr.CreateStruct.Entry";
+  return m.$typeName === "cel.expr.Expr.CreateStruct.Entry";
 }

@@ -34,7 +34,7 @@
     "clean": "rm -rf index.ts index.ast utility/extract-parser-tests/bin dist/ external/ node_modules/ &> /dev/null",
     "generate-control-parser": "peggy cel.peggy --format es -o ./index.ts",
     "generate-parser": "peggy cel.peggy --format bare --extra-options '{\"typescript\":true}' --plugin peggy-ts -o ./index.ts && prettier index.ts --write",
-    "generate-proto": "buf generate --include-imports buf.build/cel/spec",
+    "generate-proto": "buf generate --include-imports buf.build/google/cel-spec:v0.18.0",
     "generate-parser-ast": "peggy cel.peggy --ast --plugin peggy-ts -o ./index.ast",
     "bundle-init": "rm -rf dist/ &> /dev/null && mkdir dist",
     "bundle-cjs": "esbuild index.ts --bundle --format=cjs --outfile=dist/index.cjs && prettier dist/index.cjs --write",
@@ -71,7 +71,7 @@
     }
   },
   "utility": {
-    "celSpec": "https://github.com/google/cel-spec/archive/7bcc79c7cb9a101a66dbbe9c88838855dc4b821d.tar.gz",
-    "celGo": "https://github.com/google/cel-go/archive/3545aac7e6d484d3035b1833c4ade036c3f7bacb.tar.gz"
+    "celSpec": "https://github.com/google/cel-spec/archive/373994d7e20e582fce56767b01ac5039524cddab.tar.gz",
+    "celGo": "https://github.com/google/cel-go/archive/8ad600b649be1b9ef5a003e8c5632d89b9aaf790.tar.gz"
   }
 }
