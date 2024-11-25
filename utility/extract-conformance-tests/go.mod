@@ -1,11 +1,11 @@
-module github.com/hudlow/cel-parser/utility/cel-go-parse
+module github.com/hudlow/cel-parser/utility/extract-conformance-tests
 
 go 1.23.2
 
 require (
-	cel.dev/expr v0.16.2
-	github.com/google/cel-go v0.21.0
-	google.golang.org/protobuf v1.35.1
+	cel.dev/expr v0.18.0
+	github.com/google/cel-go v0.22.1
+	google.golang.org/protobuf v1.35.2
 )
 
 require (

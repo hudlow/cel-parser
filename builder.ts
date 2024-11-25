@@ -3,7 +3,7 @@ import type {
   Expr,
   Expr_CreateStruct_Entry,
   SourceInfo,
-} from "./external/proto/dev/cel/expr/syntax_pb.ts";
+} from "./external/cel/expr/syntax_pb.ts";
 
 const encoder = new TextEncoder();
 
@@ -128,19 +128,20 @@ class Builder {
   #prevId = 0n;
 
   sourceInfo: SourceInfo = {
-    $typeName: "dev.cel.expr.SourceInfo",
+    $typeName: "cel.expr.SourceInfo",
     syntaxVersion: "",
     location: "",
     lineOffsets: [],
     positions: {},
     macroCalls: {},
+    extensions: [],
   };
 
   nextExpr(offset: number, exprKind: Expr["exprKind"]): Expr {
     this.sourceInfo.positions[(++this.#prevId).toString()] = offset;
 
     return {
-      $typeName: "dev.cel.expr.Expr",
+      $typeName: "cel.expr.Expr",
       id: this.#prevId,
       exprKind,
     };
@@ -154,7 +155,7 @@ class Builder {
     this.sourceInfo.positions[(++this.#prevId).toString()] = offset;
 
     return {
-      $typeName: "dev.cel.expr.Expr.CreateStruct.Entry",
+      $typeName: "cel.expr.Expr.CreateStruct.Entry",
       id: this.#prevId,
       keyKind,
       value,
@@ -165,7 +166,7 @@ class Builder {
   newConstExpr(offset: number, constantKind: Constant["constantKind"]): Expr {
     return this.nextExpr(offset, {
       case: "constExpr",
-      value: { $typeName: "dev.cel.expr.Constant", constantKind },
+      value: { $typeName: "cel.expr.Constant", constantKind },
     });
   }
 
@@ -180,7 +181,7 @@ class Builder {
       return this.nextExpr(offset, {
         case: "callExpr",
         value: {
-          $typeName: "dev.cel.expr.Expr.Call",
+          $typeName: "cel.expr.Expr.Call",
           function: functionName,
           args,
         },
@@ -199,7 +200,7 @@ class Builder {
       this.nextExpr(offset, {
         case: "callExpr",
         value: {
-          $typeName: "dev.cel.expr.Expr.Call",
+          $typeName: "cel.expr.Expr.Call",
           function: functionName,
           target,
           args,
@@ -280,7 +281,7 @@ class Builder {
   newIdentExpr(offset: number, name: string): Expr {
     const expr = this.nextExpr(offset, {
       case: "identExpr",
-      value: { $typeName: "dev.cel.expr.Expr.Ident", name },
+      value: { $typeName: "cel.expr.Expr.Ident", name },
     });
     return expr;
   }
@@ -293,7 +294,7 @@ class Builder {
     return this.nextExpr(offset, {
       case: "selectExpr",
       value: {
-        $typeName: "dev.cel.expr.Expr.Select",
+        $typeName: "cel.expr.Expr.Select",
         operand,
         field,
         testOnly: false,
@@ -318,7 +319,7 @@ class Builder {
     return this.nextExpr(offset, {
       case: "listExpr",
       value: {
-        $typeName: "dev.cel.expr.Expr.CreateList",
+        $typeName: "cel.expr.Expr.CreateList",
         elements,
         optionalIndices: [],
       },
@@ -336,13 +337,14 @@ class Builder {
     return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
-        $typeName: "dev.cel.expr.Expr.Comprehension",
+        $typeName: "cel.expr.Expr.Comprehension",
         accuVar: "__result__",
         accuInit: this.newConstExpr(offset, {
           case: "boolValue",
           value: init,
         }),
         iterVar,
+        iterVar2: "", // not yet supported
         iterRange,
         loopStep,
         loopCondition,
@@ -360,10 +362,11 @@ class Builder {
     return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
-        $typeName: "dev.cel.expr.Expr.Comprehension",
+        $typeName: "cel.expr.Expr.Comprehension",
         accuVar: "__result__",
         accuInit: this.newListExpr(offset, []),
         iterVar,
+        iterVar2: "", // not yet supported
         iterRange,
         loopCondition: this.newConstExpr(offset, {
           case: "boolValue",
@@ -468,13 +471,14 @@ class Builder {
     return this.nextExpr(offset, {
       case: "comprehensionExpr",
       value: {
-        $typeName: "dev.cel.expr.Expr.Comprehension",
+        $typeName: "cel.expr.Expr.Comprehension",
         accuVar: "__result__",
         accuInit: this.newConstExpr(offset, {
           case: "int64Value",
           value: BigInt(0),
         }),
         iterVar,
+        iterVar2: "", // not yet supported
         iterRange,
         loopCondition: this.newConstExpr(offset, {
           case: "boolValue",
@@ -506,6 +510,7 @@ class Builder {
     if (call.exprKind.case === "callExpr") {
       const callExpr = call.exprKind.value;
       const varName = callExpr.args[0];
+      const varIndex = callExpr.args.length > 1 ? callExpr.args[1] : "";
       if (
         varName !== undefined &&
         call.exprKind.value.target !== undefined &&
@@ -582,7 +587,7 @@ class Builder {
     return this.nextExpr(offset, {
       case: "structExpr",
       value: {
-        $typeName: "dev.cel.expr.Expr.CreateStruct",
+        $typeName: "cel.expr.Expr.CreateStruct",
         entries,
         messageName,
       },

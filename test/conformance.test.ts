@@ -2,11 +2,8 @@ import * as fs from "fs";
 
 import { parse } from "../index.ts";
 import { fromJson } from "@bufbuild/protobuf";
-import { ExprSchema } from "../external/proto/dev/cel/expr/syntax_pb.ts";
-import type {
-  Expr,
-  Expr_Call,
-} from "../external/proto/dev/cel/expr/syntax_pb.ts";
+import { ExprSchema } from "../external/cel/expr/syntax_pb.ts";
+import type { Expr, Expr_Call } from "../external/cel/expr/syntax_pb.ts";
 
 const files = JSON.parse(
   fs.readFileSync(`${__dirname}/data/conformance.json`, "utf8"),

@@ -11,14 +11,14 @@ import (
   "google.golang.org/protobuf/encoding/protojson"
   "google.golang.org/protobuf/encoding/prototext"
   
-  "cel.dev/expr/proto/test/v1/testpb"
   
   "github.com/google/cel-go/common"
   "github.com/google/cel-go/common/ast"
   "github.com/google/cel-go/parser"
-
-	_ "cel.dev/expr/proto/test/v1/proto2/test_all_types"
-	_ "cel.dev/expr/proto/test/v1/proto3/test_all_types"
+  
+  "cel.dev/expr/conformance/test"
+	_ "cel.dev/expr/conformance/proto2"
+	_ "cel.dev/expr/conformance/proto3"
 )
 
 func main() {
@@ -121,7 +121,7 @@ func extractConformanceTests(directoryPath string) []*ParserTestFile {
     log.Fatalf("failed to read directory %q: %v", directoryPath, err)
   }
   
-  var files []*testpb.SimpleTestFile
+  var files []*test.SimpleTestFile
   for _, entry := range filePaths {
     name := entry.Name()
     if (strings.HasSuffix(name, ".textproto")) {
@@ -130,7 +130,7 @@ func extractConformanceTests(directoryPath string) []*ParserTestFile {
       if err != nil {
         log.Fatalf("failed to read file %q: %v", filePath, err)
       }
-      file := &testpb.SimpleTestFile{}
+      file := &test.SimpleTestFile{}
       err = prototext.Unmarshal(b, file)
       if err != nil {
         log.Fatalf("failed to parse file %q: %v", filePath, err)
