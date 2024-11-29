@@ -14,19 +14,16 @@
 
 {{
   import type { Expr, Expr_CreateStruct_Entry } from "./external/cel/expr/syntax_pb.ts";
-  import { LazyBuilder } from "./builder.ts";
+  import Builder from "./builder.ts";
   import type { Eventual } from "./builder.ts";
-  const builder = new LazyBuilder();
+  const builder = new Builder();
 }}
-
-Entry
-  = expr:Expr { return expr(); }
 
 Expr
   = or:ConditionalOr S
     tail:TernaryTail?
     {
-      /* : Eventual<Expr> */
+      /* : Expr */
       if (tail === null) {
         return or;
       } else {
@@ -37,14 +34,14 @@ Expr
 TernaryTail
   = "?" t:ConditionalOr S ":" f:Expr S
     {
-      /* : [Eventual<Expr>, Eventual<Expr>] */
+      /* : [Expr, Expr] */
       return [t, f];
     }
 
 ConditionalOr
   = and:ConditionalAnd|1.., $(S "||")|
     {
-      /* : Eventual<Expr> */
+      /* : Expr */
       if (and.length === 1) {
         return and[0];
       } else {
@@ -55,7 +52,7 @@ ConditionalOr
 ConditionalAnd
   = relation:Relation|1.., $(S "&&")|
     {
-      /* : Eventual<Expr> */
+      /* : Expr */
       if (relation.length === 1) {
         return relation[0];
       } else {
@@ -66,7 +63,7 @@ ConditionalAnd
 Relation
   = addition:Addition tail:RelationTail?
     {
-      /* : Eventual<Expr> */
+      /* : Expr */
       if (tail === null) {
         return addition;
       } else {
@@ -77,7 +74,7 @@ Relation
 RelationTail        
   = (
       S operator:Relop nextExpr:Addition
-      { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+      { return ((prevExpr: Expr) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
     )+
 
 Relop "relational operator"
@@ -90,7 +87,7 @@ Relop "relational operator"
 Addition
   = multiplication:Multiplication tail:AdditionTail?
     {
-      /* : Eventual<Expr> */
+      /* : Expr */
       if (tail === null) {
         return multiplication;
       } else {
@@ -101,13 +98,13 @@ Addition
 AdditionTail
   = (
       S operator:( o:[+-] { return `_${o}_` } ) nextExpr:Multiplication
-      { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+      { return ((prevExpr: Expr) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
     )+
 
 Multiplication
   = unary:Unary tail:MultiplicationTail?
     {
-      /* : Eventual<Expr> */
+      /* : Expr */
       if (tail === null) {
         return unary;
       } else {
@@ -118,16 +115,18 @@ Multiplication
 MultiplicationTail
   = (
       S operator:( o:[*/%] { return `_${o}_` } ) nextExpr:Unary
-      { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
+      { return ((prevExpr: Expr) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
     )+
 
 Unary
   = Member
   / S ops:$( "!"+ / "-"+ ) expr:Member
     {
-      /* : Eventual<Expr> */
+      /* : Expr */
       if (ops.length % 2 === 0) {
         return expr;
+      } else if (expr.exprKind.case === "callExpr" && expr.exprKind.value.function === `${ops[0]}_`) {
+        return expr.exprKind.value.args[0];
       } else {
         return builder.newCallExpr(offset(), `${ops[0]}_`, [expr]);
       }
@@ -136,7 +135,7 @@ Unary
 Member
   = S primary:Primary tail:MemberTail
     {
-      /* : Eventual<Expr> */
+      /* : Expr */
       if (tail.length === 0) {
         return primary;
       } else {
@@ -149,11 +148,11 @@ MemberTail
 
 Access
   = "." S field:Identifier S ![(]
-    { return ((prevExpr: Eventual<Expr>) => builder.newSelectExpr(offset(), prevExpr, field)) }
+    { return ((prevExpr: Expr) => builder.newSelectExpr(offset(), prevExpr, field)) }
   / "." S identifier:Identifier S "(" args:ExprList ")"
-    { return ((prevExpr: Eventual<Expr>) => builder.newMemberCallExpr(offset(), prevExpr, identifier, args)) }
+    { return ((prevExpr: Expr) => builder.newMemberCallExpr(offset(), prevExpr, identifier, args)) }
   / "[" index:Expr "]"
-    { return ((prevExpr: Eventual<Expr>) => builder.newCallExpr(offset(), "_[_]", [prevExpr, index])) }
+    { return ((prevExpr: Expr) => builder.newCallExpr(offset(), "_[_]", [prevExpr, index])) }
 
 Primary
   = Literal

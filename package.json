@@ -1,6 +1,6 @@
 {
   "name": "@hudlow/cel-parser",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "TypeScript parser for the Common Expression Language that parses expressions to a Protobuf-based abstract syntax tree, but does not execute them.",
   "author": "Dan Hudlow",
   "license": "Apache-2.0",
