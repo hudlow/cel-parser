@@ -31,19 +31,17 @@
     "url": "git+ssh://git@github.com/hudlow/cel-parser.git"
   },
   "scripts": {
-    "clean": "rm -rf index.ts index.ast utility/extract-parser-tests/bin dist/ external/ node_modules/ &> /dev/null",
+    "clean": "rm -rf index.ts index.ast utility/generate-tests/bin dist/ external/ node_modules/ &> /dev/null",
     "generate-control-parser": "peggy cel.peggy --format es -o ./index.ts",
     "generate-parser": "peggy cel.peggy --format bare --extra-options '{\"typescript\":true}' --plugin peggy-ts -o ./index.ts && prettier index.ts --write",
     "generate-proto": "buf generate --include-imports buf.build/google/cel-spec:v0.18.0",
     "generate-parser-ast": "peggy cel.peggy --ast --plugin peggy-ts -o ./index.ast",
+    "generate-tests": "utility/generate-tests/extract.sh",
     "bundle-init": "rm -rf dist/ &> /dev/null && mkdir dist",
     "bundle-cjs": "esbuild index.ts --bundle --format=cjs --outfile=dist/index.cjs && prettier dist/index.cjs --write",
     "bundle-browser": "echo 'import * as CEL from \"./\"; module.exports = CEL;' | esbuild --bundle --global-name=CEL --outfile=dist/index.js && prettier dist/index.js --write",
     "bundle-debugger": "echo 'import toDebugString from \"./utility/debug/to-debug-string.ts\"; module.exports = toDebugString;' | esbuild --bundle --global-name=toDebugString --outfile=dist/to-debug-string.js && prettier dist/to-debug-string.js --write",
     "bundle": "npm run bundle-init && npm run bundle-cjs && npm run bundle-browser",
-    "extract-tests": "npm run extract-conformance-tests && npm run extract-parser-tests",
-    "extract-conformance-tests": "./utility/extract-conformance-tests/extract.sh",
-    "extract-parser-tests": "./utility/extract-parser-tests/extract.sh",
     "prepare": "npm run generate-proto && npm run generate-parser && npm run bundle",
     "lint": "prettier . --check",
     "format": "prettier . --write",
@@ -72,6 +70,6 @@
   },
   "utility": {
     "celSpec": "https://github.com/google/cel-spec/archive/373994d7e20e582fce56767b01ac5039524cddab.tar.gz",
-    "celGo": "https://github.com/google/cel-go/archive/8ad600b649be1b9ef5a003e8c5632d89b9aaf790.tar.gz"
+    "celGo": "https://github.com/google/cel-go/archive/aacca17884923e4ec06489321f22cd7bd4ce7226.tar.gz"
   }
 }
