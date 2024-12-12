@@ -13,7 +13,7 @@ import type { Message } from "@bufbuild/protobuf";
 
 const decoder = new TextDecoder();
 
-export default function toDebugString(
+export function toDebugString(
   expr: Expr,
   adorner: Adorner = EmptyAdorner.singleton,
 ): string {
@@ -241,6 +241,25 @@ class EmptyAdorner implements Adorner {
   }
 }
 
+export class KindAdorner implements Adorner {
+  static readonly singleton = new KindAdorner();
+  private constructor() {}
+
+  GetMetadata(context: Message): string {
+    let valueType;
+
+    if (isExpr(context)) {
+      valueType = getExprType(context);
+    } else if (isEntry(context)) {
+      valueType = "*expr.Expr_CreateStruct_Entry";
+    } else {
+      throw new Error("unexpected message type: " + context.$typeName);
+    }
+
+    return `^#${valueType}#`;
+  }
+}
+
 function formatLiteral(c: Constant): string {
   const kind = c.constantKind;
 
@@ -248,12 +267,17 @@ function formatLiteral(c: Constant): string {
     case "boolValue":
       return kind.value ? "true" : "false";
     case "bytesValue":
-      return `b${encode(decoder.decode(kind.value))}`;
+      return quoteBytes(kind.value);
     case "doubleValue":
+      if (kind.value < 1e6 && kind.value > -1e6) {
+        return kind.value.toString();
+      } else {
+        return kind.value.toExponential(); 
+      }
     case "int64Value":
       return kind.value.toString();
     case "stringValue":
-      return encode(kind.value);
+      return quoteString(kind.value);
     case "uint64Value":
       return `${kind.value.toString()}u`;
     case "nullValue":
@@ -263,22 +287,173 @@ function formatLiteral(c: Constant): string {
   }
 }
 
-function encode(s: string): string {
-  const entropyToken = "(fvo47fu3AwHrHsLEMNa7uUXYUF4rQgdm)";
+const unprintableExp = /[^\p{L}\p{N}\p{S}\p{P}\p{Cs} ]/v;
+const unprintableExpGlobal = /[^\p{L}\p{N}\p{S}\p{P}\p{Cs} ]/gv;
 
+function isPrintable(c: string) {
+  return !unprintableExp.test(c);
+}
+
+function quoteBytes(bytes: Uint8Array) {
+  let replacement = String.fromCharCode(0xfffd);
+  let byteString = "";
+  let i = 0;
+  while (i < bytes.length) {
+    let length = 1;
+    const character = 
+      bytes[i] < 0x80 ? String.fromCharCode(bytes[i]) :
+      bytes[i] < 0xc0 ? "" : // continuation
+      bytes[i] < 0xe0 ? decoder.decode(bytes.slice(i, i + (length = 2))) :
+      bytes[i] < 0xf0 ? decoder.decode(bytes.slice(i, i + (length = 3))) :
+      bytes[i] < 0xf5 ? decoder.decode(bytes.slice(i, i + (length = 4))) :
+      ""; // unused
+    
+    // this is a bit subtle; either
+    // - we got an unexpected continuation byte, in which case this is an empty string
+    // - we got an unexpected unused byte, in which case this is an empty string
+    // - we got the first byte of a multibyte code point, but the subsequent bytes weren't valid and
+    //   decoding failed, and the decoder returned the replacement character for one or more bytes
+    //   in the byte sequence
+    // - we got a literal replacement byte UTF-8 sequence (0xef, 0xbf, 0xbd), which we treat the
+    //   treat the same as if it were a failure because we're just going to encode the escaped bytes
+    //   in either case
+    // - we successfully decoded a single character but it isn't printable
+    // 
+    // only if none of these things is true can we return the unescaped decoded character
+    if (character.length !== 1 || character === replacement || unprintableExp.test(character)) {
+      byteString += formatSpecial("\\x" + bytes[i].toString(16).padStart(2, "0"));
+      i++;
+    } else {
+      byteString += formatSpecial(character);
+      i += length;
+    }
+  }
+  
+  return 'b"' + byteString + '"';
+}
+
+function quoteString(text: string): string {
   return (
     '"' +
-    s
-      .replaceAll("\\", entropyToken)
-      .replaceAll("\x07", "\\a")
-      .replaceAll("\b", "\\b")
-      .replaceAll("\f", "\\f")
-      .replaceAll("\n", "\\n")
-      .replaceAll("\r", "\\r")
-      .replaceAll("\t", "\\t")
-      .replaceAll("\v", "\\v")
-      .replaceAll('"', '\\"')
-      .replaceAll(entropyToken, "\\\\") +
+    escapeString(text) +
     '"'
   );
+}
+
+function formatSpecial(c: string) {
+  if (c === "\\x07" || c === "\\u0007") {
+    return "\\a"; 
+  } else if (c === "\\x08" || c === "\\u0008") {
+    return "\\b"; 
+  } else if (c === "\\x0c" || c === "\\u000c") {
+    return "\\f"; 
+  } else if (c === "\\x0a" || c === "\\u000a") {
+    return "\\n"; 
+  } else if (c === "\\x0d" || c === "\\u000d") {
+    return "\\r"; 
+  } else if (c === "\\x09" || c === "\\u0009") {
+    return "\\t"; 
+  } else if (c === "\\x0b" || c === "\\u000b") {
+    return "\\v"; 
+  } else if (c === "\\") {
+    return "\\\\"; 
+  } else if (c === '"') {
+    return '\\"'; 
+  } else {
+    return c; 
+  }
+}
+
+function escapeString(text: string): string {
+  const n = [...text.normalize()];
+  const t = [...text];
+  
+  let escaped = "";
+  
+  let ni = 0, ti = 0;
+  while (ni < n.length && ti < t.length) {
+    if (n[ni] === t[ti]) {
+      switch(n[ni]) {
+        default:
+          if (isPrintable(n[ni])) {
+            escaped += formatSpecial(n[ni]); 
+          } else {
+            escaped += formatSpecial("\\u" + n[ni].charCodeAt(0).toString(16).padStart(4, "0"));
+          }
+      }
+      
+      ni++;
+      ti++;
+    } else {
+      let originalCharacters = t[ti++];
+      
+      while (originalCharacters.normalize() !== n[ni]) {
+        originalCharacters += t[ti++];
+      }
+      
+      if (isPrintable(n[ni])) {
+        escaped += originalCharacters;
+      } else {
+        escaped += originalCharacters.replaceAll(unprintableExpGlobal, c => "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0")) 
+      }
+      
+      ni++;
+    }
+  }
+  
+  if (ni !== n.length || ti !== t.length) {
+    throw new Error("miscounted code points"); 
+  }
+  
+  return escaped;
+}
+
+function getExprType(e: Expr): string {
+  switch (e.exprKind.case) {
+    case "constExpr":
+      return getConstantType(e.exprKind.value);
+    case "identExpr":
+      return "*expr.Expr_IdentExpr";
+    case "selectExpr":
+      return "*expr.Expr_SelectExpr";
+    case "callExpr":
+      return "*expr.Expr_CallExpr";
+    case "listExpr":
+      return "*expr.Expr_ListExpr";
+    case "structExpr":
+      return "*expr.Expr_StructExpr";
+    case "comprehensionExpr":
+      return "*expr.Expr_ComprehensionExpr";
+    default:
+      throw new Error("unexpected expression type: " + e.exprKind);
+  }
+}
+
+function getConstantType(c: Constant): string {
+  switch (c.constantKind.case) {
+    case "nullValue":
+      return "*expr.Constant_NullValue";
+    case "boolValue":
+      return "*expr.Constant_BoolValue";
+    case "int64Value":
+      return "*expr.Constant_Int64Value";
+    case "uint64Value":
+      return "*expr.Constant_Uint64Value";
+    case "doubleValue":
+      return "*expr.Constant_DoubleValue";
+    case "stringValue":
+      return "*expr.Constant_StringValue";
+    case "bytesValue":
+      return "*expr.Constant_BytesValue";
+    default:
+      throw new Error("unexpected constant type: " + c.constantKind.case);
+  }
+}
+
+function isExpr(m: Message): m is Expr {
+  return m.$typeName === "cel.expr.Expr";
+}
+
+function isEntry(m: Message): m is Expr {
+  return m.$typeName === "cel.expr.Expr.CreateStruct.Entry";
 }
