@@ -7,7 +7,7 @@ import type { Expr, Expr_Call } from "../external/cel/expr/syntax_pb.ts";
 import { toDebugString, KindAdorner } from "../utility/debug/to-debug-string.ts";
 
 const tests = JSON.parse(
-  fs.readFileSync(`${__dirname}/data/parser.json`, "utf8"),
+  fs.readFileSync(`${__dirname}/data/comprehensions.json`, "utf8"),
 );
 
 const skip: string[] = [];
