@@ -432,6 +432,7 @@ export default class Builder {
                 call.exprKind.value.args[1],
               );
             case "exists_one":
+            case "existsOne":
               return this.expandExistsOne(
                 offset,
                 call.exprKind.value.target,

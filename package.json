@@ -70,6 +70,6 @@
   },
   "utility": {
     "celSpec": "https://github.com/google/cel-spec/archive/373994d7e20e582fce56767b01ac5039524cddab.tar.gz",
-    "celGo": "https://github.com/google/cel-go/archive/aacca17884923e4ec06489321f22cd7bd4ce7226.tar.gz"
+    "celGo": "https://github.com/google/cel-go/archive/8b07a00f37bd7e23b5ee91b1ece9c2a4240c19ff.tar.gz"
   }
 }

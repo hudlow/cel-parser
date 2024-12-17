@@ -24,11 +24,11 @@ jqexp='[.Decls[] | select(.Tok == "var") | .Specs[] | select(.Names[].Name | con
 
 cat $ast | jq $jqexp | go run unquote.go | go run parse.go | jq > ../../test/data/parser.json
 
-# ast=$(mktemp)
-# bin/asty go2json -input ../../external/cel-go/ext/comprehensions_test.go -output $ast
-# 
-# jqexp='[.Decls[] | select(.NodeType == "FuncDecl" and (.Name.Name | startswith("Test"))).Body.List[0].Rhs[].Elts[].Elts[] | select(.Key.Name == "expr").Value.Value]'
-# 
-# cat $ast | jq $jqexp | go run unquote.go | go run parse.go | jq > ../../test/data/comprehensions.json
+ast=$(mktemp)
+bin/asty go2json -input ../../external/cel-go/ext/comprehensions_test.go -output $ast
+
+jqexp='[.Decls[] | select(.NodeType == "FuncDecl" and (.Name.Name | startswith("Test"))).Body.List[0].Rhs[] | select(.NodeType == "CompositeLit") | .Elts[].Elts[] | select(.Key.Name == "expr").Value.Value]'
+
+cat $ast | jq $jqexp | go run unquote.go | go run parse.go | jq > ../../test/data/comprehensions.json
 
 go run extract-conformance.go ../../external/cel-spec/tests/simple/testdata | go run parse.go | jq > ../../test/data/conformance.json

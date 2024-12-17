@@ -269,10 +269,12 @@ function formatLiteral(c: Constant): string {
     case "bytesValue":
       return quoteBytes(kind.value);
     case "doubleValue":
+      // these are the bounds where Go's default formatting switches to exponential
       if (kind.value < 1e6 && kind.value > -1e6) {
-        return kind.value.toString();
+        return (Object.is(kind.value, -0) ? "-" : "") + kind.value.toString();
       } else {
-        return kind.value.toExponential(); 
+        // workaround for https://github.com/golang/go/issues/70862
+        return kind.value.toExponential().replace(/e\+([0-9])$/, "e+0$1"); 
       }
     case "int64Value":
       return kind.value.toString();
@@ -289,9 +291,10 @@ function formatLiteral(c: Constant): string {
 
 const unprintableExp = /[^\p{L}\p{N}\p{S}\p{P}\p{Cs} ]/v;
 const unprintableExpGlobal = /[^\p{L}\p{N}\p{S}\p{P}\p{Cs} ]/gv;
+const segmenter = new Intl.Segmenter("en");
 
 function isPrintable(c: string) {
-  return !unprintableExp.test(c);
+  return !unprintableExp.test(c.normalize()) || !c.isWellFormed();
 }
 
 function quoteBytes(bytes: Uint8Array) {
@@ -365,47 +368,15 @@ function formatSpecial(c: string) {
 }
 
 function escapeString(text: string): string {
-  const n = [...text.normalize()];
-  const t = [...text];
-  
-  let escaped = "";
-  
-  let ni = 0, ti = 0;
-  while (ni < n.length && ti < t.length) {
-    if (n[ni] === t[ti]) {
-      switch(n[ni]) {
-        default:
-          if (isPrintable(n[ni])) {
-            escaped += formatSpecial(n[ni]); 
-          } else {
-            escaped += formatSpecial("\\u" + n[ni].charCodeAt(0).toString(16).padStart(4, "0"));
-          }
-      }
-      
-      ni++;
-      ti++;
-    } else {
-      let originalCharacters = t[ti++];
-      
-      while (originalCharacters.normalize() !== n[ni]) {
-        originalCharacters += t[ti++];
-      }
-      
-      if (isPrintable(n[ni])) {
-        escaped += originalCharacters;
+  return [...segmenter.segment(text)].map(
+    s => {
+      if (isPrintable(s.segment)) {
+        return formatSpecial(s.segment); 
       } else {
-        escaped += originalCharacters.replaceAll(unprintableExpGlobal, c => "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0")) 
+        return formatSpecial(s.segment.replaceAll(unprintableExpGlobal, c => "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0")));
       }
-      
-      ni++;
     }
-  }
-  
-  if (ni !== n.length || ti !== t.length) {
-    throw new Error("miscounted code points"); 
-  }
-  
-  return escaped;
+  ).join("");
 }
 
 function getExprType(e: Expr): string {

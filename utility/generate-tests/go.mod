@@ -3,7 +3,7 @@ module github.com/hudlow/cel-parser/utility/extract-parser-tests
 go 1.23.2
 
 require (
-	cel.dev/expr v0.19.0
+	cel.dev/expr v0.19.1
 	github.com/google/cel-go v0.22.1
 	google.golang.org/protobuf v1.35.2
 )
@@ -17,4 +17,4 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240826202546-f6391c0de4c7 // indirect
 )
 
-replace github.com/google/cel-go => ../../../../google/cel-go
+replace github.com/google/cel-go => ../../external/cel-go

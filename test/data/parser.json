@@ -689,6 +689,6 @@
   },
   {
     "expr": "'\\udead' == '\\ufffd'",
-    "ast": "_==_(\n  \"�\"^#*expr.Constant_StringValue#,\n  \"�\"^#*expr.Constant_StringValue#\n)^#*expr.Expr_CallExpr#"
+    "error": "ERROR: <input>:1:1: invalid unicode code point\n | '\\udead' == '\\ufffd'\n | ^"
   }
 ]
