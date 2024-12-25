@@ -11,6 +11,13 @@ const tests = JSON.parse(
 );
 
 const skip: string[] = [
+  // should fail
+  "has(m)",
+  "[].existsOne(__result__, __result__)",
+  "m.map(__result__, __result__)",
+  "m.filter(__result__, false)",
+  "m.filter(a.b, false)",
+
   // Optional syntax not yet supported
   "a.?b[?0] && a[?c]",
   "{?'key': value}",

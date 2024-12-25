@@ -7678,6 +7678,102 @@
     "ast": "fn(\n  \"abc\"^#*expr.Constant_StringValue#,\n  123^#*expr.Constant_Int64Value#\n)^#*expr.Expr_CallExpr#"
   },
   {
+    "expr": "[[], [[]], [[[]]], [[[[]]]]]",
+    "ast": "[\n  []^#*expr.Expr_ListExpr#,\n  [\n    []^#*expr.Expr_ListExpr#\n  ]^#*expr.Expr_ListExpr#,\n  [\n    [\n      []^#*expr.Expr_ListExpr#\n    ]^#*expr.Expr_ListExpr#\n  ]^#*expr.Expr_ListExpr#,\n  [\n    [\n      [\n        []^#*expr.Expr_ListExpr#\n      ]^#*expr.Expr_ListExpr#\n    ]^#*expr.Expr_ListExpr#\n  ]^#*expr.Expr_ListExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[[[[[]]]], [], [[[]]]]",
+    "ast": "[\n  [\n    [\n      [\n        []^#*expr.Expr_ListExpr#\n      ]^#*expr.Expr_ListExpr#\n    ]^#*expr.Expr_ListExpr#\n  ]^#*expr.Expr_ListExpr#,\n  []^#*expr.Expr_ListExpr#,\n  [\n    [\n      []^#*expr.Expr_ListExpr#\n    ]^#*expr.Expr_ListExpr#\n  ]^#*expr.Expr_ListExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[msg.single_int64_wrapper, msg.single_string_wrapper]",
+    "ast": "[\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#,\n  msg^#*expr.Expr_IdentExpr#.single_string_wrapper^#*expr.Expr_SelectExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[optional.none(), optional.of(1)]",
+    "ast": "[\n  optional^#*expr.Expr_IdentExpr#.none()^#*expr.Expr_CallExpr#,\n  optional^#*expr.Expr_IdentExpr#.of(\n    1^#*expr.Constant_Int64Value#\n  )^#*expr.Expr_CallExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[optional.of(1), optional.none()]",
+    "ast": "[\n  optional^#*expr.Expr_IdentExpr#.of(\n    1^#*expr.Constant_Int64Value#\n  )^#*expr.Expr_CallExpr#,\n  optional^#*expr.Expr_IdentExpr#.none()^#*expr.Expr_CallExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[optional.of(1), optional.of(dyn(1))]",
+    "ast": "[\n  optional^#*expr.Expr_IdentExpr#.of(\n    1^#*expr.Constant_Int64Value#\n  )^#*expr.Expr_CallExpr#,\n  optional^#*expr.Expr_IdentExpr#.of(\n    dyn(\n      1^#*expr.Constant_Int64Value#\n    )^#*expr.Expr_CallExpr#\n  )^#*expr.Expr_CallExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[optional.of(dyn(1)), optional.of(1)]",
+    "ast": "[\n  optional^#*expr.Expr_IdentExpr#.of(\n    dyn(\n      1^#*expr.Constant_Int64Value#\n    )^#*expr.Expr_CallExpr#\n  )^#*expr.Expr_CallExpr#,\n  optional^#*expr.Expr_IdentExpr#.of(\n    1^#*expr.Constant_Int64Value#\n  )^#*expr.Expr_CallExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "true ? optional.of(dyn(1)) : optional.of(1)",
+    "ast": "_?_:_(\n  true^#*expr.Constant_BoolValue#,\n  optional^#*expr.Expr_IdentExpr#.of(\n    dyn(\n      1^#*expr.Constant_Int64Value#\n    )^#*expr.Expr_CallExpr#\n  )^#*expr.Expr_CallExpr#,\n  optional^#*expr.Expr_IdentExpr#.of(\n    1^#*expr.Constant_Int64Value#\n  )^#*expr.Expr_CallExpr#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "[msg.single_int64_wrapper, msg.single_int64]",
+    "ast": "[\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#,\n  msg^#*expr.Expr_IdentExpr#.single_int64^#*expr.Expr_SelectExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[msg.single_int64, msg.single_int64_wrapper]",
+    "ast": "[\n  msg^#*expr.Expr_IdentExpr#.single_int64^#*expr.Expr_SelectExpr#,\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[msg.single_int64_wrapper, msg.single_int64, dyn(1)]",
+    "ast": "[\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#,\n  msg^#*expr.Expr_IdentExpr#.single_int64^#*expr.Expr_SelectExpr#,\n  dyn(\n    1^#*expr.Constant_Int64Value#\n  )^#*expr.Expr_CallExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "[dyn(1), msg.single_int64_wrapper, msg.single_int64]",
+    "ast": "[\n  dyn(\n    1^#*expr.Constant_Int64Value#\n  )^#*expr.Expr_CallExpr#,\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#,\n  msg^#*expr.Expr_IdentExpr#.single_int64^#*expr.Expr_SelectExpr#\n]^#*expr.Expr_ListExpr#"
+  },
+  {
+    "expr": "msg.single_int64_wrapper + 1",
+    "ast": "_+_(\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#,\n  1^#*expr.Constant_Int64Value#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "msg.single_int64_wrapper == null",
+    "ast": "_==_(\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#,\n  null^#*expr.Constant_NullValue#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "false ? msg.single_int64_wrapper : null",
+    "ast": "_?_:_(\n  false^#*expr.Constant_BoolValue#,\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#,\n  null^#*expr.Constant_NullValue#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "true ? msg.single_int64_wrapper : 42",
+    "ast": "_?_:_(\n  true^#*expr.Constant_BoolValue#,\n  msg^#*expr.Expr_IdentExpr#.single_int64_wrapper^#*expr.Expr_SelectExpr#,\n  42^#*expr.Constant_Int64Value#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "[tuple(1, 2u, 3.0), tuple(dyn(1), dyn(2u), dyn(3.0))][0]",
+    "ast": "_[_](\n  [\n    tuple(\n      1^#*expr.Constant_Int64Value#,\n      2u^#*expr.Constant_Uint64Value#,\n      3^#*expr.Constant_DoubleValue#\n    )^#*expr.Expr_CallExpr#,\n    tuple(\n      dyn(\n        1^#*expr.Constant_Int64Value#\n      )^#*expr.Expr_CallExpr#,\n      dyn(\n        2u^#*expr.Constant_Uint64Value#\n      )^#*expr.Expr_CallExpr#,\n      dyn(\n        3^#*expr.Constant_DoubleValue#\n      )^#*expr.Expr_CallExpr#\n    )^#*expr.Expr_CallExpr#\n  ]^#*expr.Expr_ListExpr#,\n  0^#*expr.Constant_Int64Value#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "sort(tuple(dyn(1), 2u, 3.0))",
+    "ast": "sort(\n  tuple(\n    dyn(\n      1^#*expr.Constant_Int64Value#\n    )^#*expr.Expr_CallExpr#,\n    2u^#*expr.Constant_Uint64Value#,\n    3^#*expr.Constant_DoubleValue#\n  )^#*expr.Expr_CallExpr#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "tuple(1, 2u, 3.0) == tuple(1, dyn(2u), dyn(3.0))",
+    "ast": "_==_(\n  tuple(\n    1^#*expr.Constant_Int64Value#,\n    2u^#*expr.Constant_Uint64Value#,\n    3^#*expr.Constant_DoubleValue#\n  )^#*expr.Expr_CallExpr#,\n  tuple(\n    1^#*expr.Constant_Int64Value#,\n    dyn(\n      2u^#*expr.Constant_Uint64Value#\n    )^#*expr.Expr_CallExpr#,\n    dyn(\n      3^#*expr.Constant_DoubleValue#\n    )^#*expr.Expr_CallExpr#\n  )^#*expr.Expr_CallExpr#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "tuple(dyn(1), dyn(2u), 3.0) == tuple(1, 2u, 3.0)",
+    "ast": "_==_(\n  tuple(\n    dyn(\n      1^#*expr.Constant_Int64Value#\n    )^#*expr.Expr_CallExpr#,\n    dyn(\n      2u^#*expr.Constant_Uint64Value#\n    )^#*expr.Expr_CallExpr#,\n    3^#*expr.Constant_DoubleValue#\n  )^#*expr.Expr_CallExpr#,\n  tuple(\n    1^#*expr.Constant_Int64Value#,\n    2u^#*expr.Constant_Uint64Value#,\n    3^#*expr.Constant_DoubleValue#\n  )^#*expr.Expr_CallExpr#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "[msg, null][0]",
+    "ast": "_[_](\n  [\n    msg^#*expr.Expr_IdentExpr#,\n    null^#*expr.Constant_NullValue#\n  ]^#*expr.Expr_ListExpr#,\n  0^#*expr.Constant_Int64Value#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "[msg.single_duration, null][0]",
+    "ast": "_[_](\n  [\n    msg^#*expr.Expr_IdentExpr#.single_duration^#*expr.Expr_SelectExpr#,\n    null^#*expr.Constant_NullValue#\n  ]^#*expr.Expr_ListExpr#,\n  0^#*expr.Constant_Int64Value#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "[msg.single_timestamp, null][0]",
+    "ast": "_[_](\n  [\n    msg^#*expr.Expr_IdentExpr#.single_timestamp^#*expr.Expr_SelectExpr#,\n    null^#*expr.Constant_NullValue#\n  ]^#*expr.Expr_ListExpr#,\n  0^#*expr.Constant_Int64Value#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
+    "expr": "[optional.of(1), null][0]",
+    "ast": "_[_](\n  [\n    optional^#*expr.Expr_IdentExpr#.of(\n      1^#*expr.Constant_Int64Value#\n    )^#*expr.Expr_CallExpr#,\n    null^#*expr.Constant_NullValue#\n  ]^#*expr.Expr_ListExpr#,\n  0^#*expr.Constant_Int64Value#\n)^#*expr.Expr_CallExpr#"
+  },
+  {
     "expr": "TestAllTypes{single_any: google.protobuf.BoolValue{value: true}}.single_any",
     "ast": "TestAllTypes{\n  single_any:google.protobuf.BoolValue{\n    value:true^#*expr.Constant_BoolValue#^#*expr.Expr_CreateStruct_Entry#\n  }^#*expr.Expr_StructExpr#^#*expr.Expr_CreateStruct_Entry#\n}^#*expr.Expr_StructExpr#.single_any^#*expr.Expr_SelectExpr#"
   },
