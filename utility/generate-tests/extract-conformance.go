@@ -7,9 +7,9 @@ import (
   "strings"
   "path/filepath"
 	"encoding/json"
-  
+
   "google.golang.org/protobuf/encoding/prototext"
-  
+
   "cel.dev/expr/conformance/test"
 	_ "cel.dev/expr/conformance/proto2"
 	_ "cel.dev/expr/conformance/proto3"
@@ -20,7 +20,7 @@ func main() {
     fmt.Printf("Usage: extract <test data directory>\n")
     os.Exit(1)
   }
-  
+
   path := os.Args[1]
   tests := extractConformanceTests(path)
   testsJson, _ := json.Marshal(tests)
@@ -32,7 +32,7 @@ func extractConformanceTests(directoryPath string) []string {
   if err != nil {
     log.Fatalf("failed to read directory %q: %v", directoryPath, err)
   }
-  
+
   var files []*test.SimpleTestFile
   for _, entry := range filePaths {
     name := entry.Name()
@@ -50,7 +50,7 @@ func extractConformanceTests(directoryPath string) []string {
       files = append(files, file)
     }
   }
-  
+
   var tests []string
   for _, file := range files {
     for _, section := range file.GetSection() {
@@ -59,6 +59,6 @@ func extractConformanceTests(directoryPath string) []string {
       }
     }
   }
-  
+
   return tests
 }

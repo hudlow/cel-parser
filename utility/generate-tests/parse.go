@@ -7,7 +7,7 @@ import (
   "io"
 	"reflect"
 	"encoding/json"
-  
+
   "github.com/google/cel-go/common"
   "github.com/google/cel-go/common/ast"
   "github.com/google/cel-go/common/debug"
@@ -20,14 +20,14 @@ func main() {
     fmt.Printf("Usage: <JSON array> | parse")
     os.Exit(1)
   }
-  
+
   input, _ := io.ReadAll(os.Stdin)
-  
+
   var inputArray []string
   _ = json.Unmarshal(input, &inputArray)
-  
+
   outputArray := parseExpressions(inputArray)
-  
+
   output, _ := json.Marshal(outputArray)
   fmt.Println(string(output))
 }
@@ -40,9 +40,9 @@ type ParserTest struct {
 
 func exprToParserTest(p *parser.Parser, expression string) *ParserTest {
   s := common.NewTextSource(expression)
-  
+
   ast, errors := p.Parse(s)
-  
+
   if len(errors.GetErrors()) == 0 {
     return &ParserTest{
       expression,
@@ -51,13 +51,13 @@ func exprToParserTest(p *parser.Parser, expression string) *ParserTest {
         &kindAdorner{},
       ),
       "",
-    } 
+    }
   } else {
     return &ParserTest{
       expression,
       "",
       errors.ToDisplayString(),
-    } 
+    }
   }
 }
 
@@ -80,17 +80,17 @@ func newParser() *parser.Parser {
 
 func parseExpressions(expressions []string) []*ParserTest {
   parser := newParser()
-  
+
   var parserTests []*ParserTest
   for _, test := range expressions {
-    
+
     result := exprToParserTest(parser, test)
-    
+
     if result != nil {
-      parserTests = append(parserTests, result)  
+      parserTests = append(parserTests, result)
     }
   }
-  
+
   return parserTests
 }
 

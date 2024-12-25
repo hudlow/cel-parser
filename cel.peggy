@@ -270,7 +270,7 @@ Byte "byte value"
   = $(HexDigit HexDigit)
 
 NewLine "new line"
-  = "\r\n" / "\r" / "\n"
+  = [\r\n]+
 
 BooleanLiteral "boolean literal"
   = keyword:("true" / "false")
@@ -281,10 +281,10 @@ NullLiteral "null literal"
     { return builder.newNullExpr(offset()) }
 
 S
-  = WhiteSpace?
+  = WhiteSpace? Comment? WhiteSpace?
 
 WhiteSpace "whitespace"
   = $([\t\n\f\r ]+)
 
 Comment "comment"
-  = '//' !NewLine* NewLine
+  = '//' [^\r\n]* NewLine

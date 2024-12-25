@@ -69,7 +69,7 @@
     }
   },
   "utility": {
-    "celSpec": "https://github.com/google/cel-spec/archive/373994d7e20e582fce56767b01ac5039524cddab.tar.gz",
-    "celGo": "https://github.com/google/cel-go/archive/aacca17884923e4ec06489321f22cd7bd4ce7226.tar.gz"
+    "celSpec": "https://github.com/google/cel-spec/archive/7f03cb5d0c005689a4bac8abb6818172b97f1f4b.tar.gz",
+    "celGo": "https://github.com/google/cel-go/archive/98789f34a481044a0ad4b8a77f298d2ec3623bdb.tar.gz"
   }
 }

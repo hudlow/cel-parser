@@ -269,10 +269,12 @@ function formatLiteral(c: Constant): string {
     case "bytesValue":
       return quoteBytes(kind.value);
     case "doubleValue":
+      // these are the bounds where Go's default formatting switches to exponential
       if (kind.value < 1e6 && kind.value > -1e6) {
-        return kind.value.toString();
+        return (Object.is(kind.value, -0) ? "-" : "") + kind.value.toString();
       } else {
-        return kind.value.toExponential(); 
+        // workaround for https://github.com/golang/go/issues/70862
+        return kind.value.toExponential().replace(/e\+([0-9])$/, "e+0$1");
       }
     case "int64Value":
       return kind.value.toString();
@@ -289,9 +291,10 @@ function formatLiteral(c: Constant): string {
 
 const unprintableExp = /[^\p{L}\p{N}\p{S}\p{P}\p{Cs} ]/v;
 const unprintableExpGlobal = /[^\p{L}\p{N}\p{S}\p{P}\p{Cs} ]/gv;
+const segmenter = new Intl.Segmenter("en");
 
 function isPrintable(c: string) {
-  return !unprintableExp.test(c);
+  return !unprintableExp.test(c.normalize()) || !c.isWellFormed();
 }
 
 function quoteBytes(bytes: Uint8Array) {
@@ -300,14 +303,19 @@ function quoteBytes(bytes: Uint8Array) {
   let i = 0;
   while (i < bytes.length) {
     let length = 1;
-    const character = 
-      bytes[i] < 0x80 ? String.fromCharCode(bytes[i]) :
-      bytes[i] < 0xc0 ? "" : // continuation
-      bytes[i] < 0xe0 ? decoder.decode(bytes.slice(i, i + (length = 2))) :
-      bytes[i] < 0xf0 ? decoder.decode(bytes.slice(i, i + (length = 3))) :
-      bytes[i] < 0xf5 ? decoder.decode(bytes.slice(i, i + (length = 4))) :
-      ""; // unused
-    
+    const character =
+      bytes[i] < 0x80
+        ? String.fromCharCode(bytes[i])
+        : bytes[i] < 0xc0
+          ? "" // continuation
+          : bytes[i] < 0xe0
+            ? decoder.decode(bytes.slice(i, i + (length = 2)))
+            : bytes[i] < 0xf0
+              ? decoder.decode(bytes.slice(i, i + (length = 3)))
+              : bytes[i] < 0xf5
+                ? decoder.decode(bytes.slice(i, i + (length = 4)))
+                : ""; // unused
+
     // this is a bit subtle; either
     // - we got an unexpected continuation byte, in which case this is an empty string
     // - we got an unexpected unused byte, in which case this is an empty string
@@ -318,94 +326,69 @@ function quoteBytes(bytes: Uint8Array) {
     //   treat the same as if it were a failure because we're just going to encode the escaped bytes
     //   in either case
     // - we successfully decoded a single character but it isn't printable
-    // 
+    //
     // only if none of these things is true can we return the unescaped decoded character
-    if (character.length !== 1 || character === replacement || unprintableExp.test(character)) {
-      byteString += formatSpecial("\\x" + bytes[i].toString(16).padStart(2, "0"));
+    if (
+      character.length !== 1 ||
+      character === replacement ||
+      unprintableExp.test(character)
+    ) {
+      byteString += formatSpecial(
+        "\\x" + bytes[i].toString(16).padStart(2, "0"),
+      );
       i++;
     } else {
       byteString += formatSpecial(character);
       i += length;
     }
   }
-  
+
   return 'b"' + byteString + '"';
 }
 
 function quoteString(text: string): string {
-  return (
-    '"' +
-    escapeString(text) +
-    '"'
-  );
+  return '"' + escapeString(text) + '"';
 }
 
 function formatSpecial(c: string) {
   if (c === "\\x07" || c === "\\u0007") {
-    return "\\a"; 
+    return "\\a";
   } else if (c === "\\x08" || c === "\\u0008") {
-    return "\\b"; 
+    return "\\b";
   } else if (c === "\\x0c" || c === "\\u000c") {
-    return "\\f"; 
+    return "\\f";
   } else if (c === "\\x0a" || c === "\\u000a") {
-    return "\\n"; 
+    return "\\n";
   } else if (c === "\\x0d" || c === "\\u000d") {
-    return "\\r"; 
+    return "\\r";
   } else if (c === "\\x09" || c === "\\u0009") {
-    return "\\t"; 
+    return "\\t";
   } else if (c === "\\x0b" || c === "\\u000b") {
-    return "\\v"; 
+    return "\\v";
   } else if (c === "\\") {
-    return "\\\\"; 
+    return "\\\\";
   } else if (c === '"') {
-    return '\\"'; 
+    return '\\"';
   } else {
-    return c; 
+    return c;
   }
 }
 
 function escapeString(text: string): string {
-  const n = [...text.normalize()];
-  const t = [...text];
-  
-  let escaped = "";
-  
-  let ni = 0, ti = 0;
-  while (ni < n.length && ti < t.length) {
-    if (n[ni] === t[ti]) {
-      switch(n[ni]) {
-        default:
-          if (isPrintable(n[ni])) {
-            escaped += formatSpecial(n[ni]); 
-          } else {
-            escaped += formatSpecial("\\u" + n[ni].charCodeAt(0).toString(16).padStart(4, "0"));
-          }
-      }
-      
-      ni++;
-      ti++;
-    } else {
-      let originalCharacters = t[ti++];
-      
-      while (originalCharacters.normalize() !== n[ni]) {
-        originalCharacters += t[ti++];
-      }
-      
-      if (isPrintable(n[ni])) {
-        escaped += originalCharacters;
+  return [...segmenter.segment(text)]
+    .map((s) => {
+      if (isPrintable(s.segment)) {
+        return formatSpecial(s.segment);
       } else {
-        escaped += originalCharacters.replaceAll(unprintableExpGlobal, c => "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0")) 
+        return formatSpecial(
+          s.segment.replaceAll(
+            unprintableExpGlobal,
+            (c) => "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0"),
+          ),
+        );
       }
-      
-      ni++;
-    }
-  }
-  
-  if (ni !== n.length || ti !== t.length) {
-    throw new Error("miscounted code points"); 
-  }
-  
-  return escaped;
+    })
+    .join("");
 }
 
 function getExprType(e: Expr): string {

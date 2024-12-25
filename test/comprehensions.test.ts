@@ -7,7 +7,7 @@ import {
 } from "../utility/debug/to-debug-string.ts";
 
 const tests = JSON.parse(
-  fs.readFileSync(`${__dirname}/data/conformance.json`, "utf8"),
+  fs.readFileSync(`${__dirname}/data/comprehensions.json`, "utf8"),
 );
 
 const skip: string[] = [];
