@@ -156,7 +156,7 @@ Access
 
 Primary
   = Literal
-  / "."? S name:Identifier !(S [({]) !("." S Identifier|1.., S "." S| S "{")
+  / "."? S name:Identifier !(S [({]) !(S "." S Identifier|1.., S "." S| S "{")
     { return builder.newIdentExpr(offset(), name) }
   / "."? S identifier:Identifier S "(" args:ExprList ")"
     { return builder.newCallExpr(offset(), identifier, args) }
