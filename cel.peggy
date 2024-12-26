@@ -156,12 +156,12 @@ Access
 
 Primary
   = Literal
-  / "."? S name:Identifier !(S [({]) !(S "." S Identifier|1.., S "." S| S "{")
-    { return builder.newIdentExpr(offset(), name) }
   / "."? S identifier:Identifier S "(" args:ExprList ")"
     { return builder.newCallExpr(offset(), identifier, args) }
   / dot:"."? S name:Identifier|1.., S "." S| S "{" entries:FieldInits (",")? S "}"
     { return builder.newStructExpr(offset(), entries, (dot !== null ? dot : '') + name.join('.')) }
+  / "."? S name:Identifier
+    { return builder.newIdentExpr(offset(), name) }
   / "(" @Expr ")"
   / elements:("[" @ExprList (",")? S "]")
     { return builder.newListExpr(offset(), elements) }
