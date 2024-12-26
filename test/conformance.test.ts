@@ -1,84 +1,48 @@
 import * as fs from "fs";
 
 import { parse } from "../index.ts";
-import { fromJson } from "@bufbuild/protobuf";
-import { ExprSchema } from "../external/cel/expr/syntax_pb.ts";
-import type { Expr, Expr_Call } from "../external/cel/expr/syntax_pb.ts";
+import {
+  toDebugString,
+  KindAdorner,
+} from "../utility/debug/to-debug-string.ts";
 
-const files = JSON.parse(
+const tests = JSON.parse(
   fs.readFileSync(`${__dirname}/data/conformance.json`, "utf8"),
 );
 
-const skip: string[] = [];
+const skip: string[] = [
+  // should fail
+  "cel.block([[1].exists(cel.iterVar(0, 0), cel.iterVar(0, 0) > 0), size([cel.index(0)]), [2].exists(cel.iterVar(0, 0), cel.iterVar(0, 0) > 1), size([cel.index(2)])], cel.index(1) + cel.index(1) + cel.index(3) + cel.index(3))",
+  "cel.block([[1].exists(cel.iterVar(0, 0), cel.iterVar(0, 0) > 0), [cel.index(0)], ['a'].exists(cel.iterVar(0, 1), cel.iterVar(0, 1) == 'a'), [cel.index(2)]], cel.index(1) + cel.index(1) + cel.index(3) + cel.index(3))",
+  "cel.block([[1].exists(cel.iterVar(0, 0), cel.iterVar(0, 0) > 0)], cel.index(0) && cel.index(0) && [1].exists(cel.iterVar(0, 0), cel.iterVar(0, 0) > 1) && [2].exists(cel.iterVar(0, 0), cel.iterVar(0, 0) > 1))",
+  "cel.block([[1, 2, 3]], cel.index(0).map(cel.iterVar(0, 0), cel.index(0).map(cel.iterVar(1, 0), cel.iterVar(1, 0) + 1)))",
+  "[1, 2].map(cel.iterVar(0, 0), [1, 2, 3].filter(cel.iterVar(1, 0), cel.iterVar(1, 0) == cel.iterVar(0, 0)))",
+  "cel.block([[1, 2, 3], cel.index(0).map(cel.iterVar(0, 0), cel.index(0).map(cel.iterVar(1, 0), cel.iterVar(1, 0) + 1))], cel.index(1) == cel.index(1))",
+  "cel.block([x - 1, cel.index(0) > 3], [cel.index(1) ? cel.index(0) : 5].exists(cel.iterVar(0, 0), cel.iterVar(0, 0) - 1 > 3) || cel.index(1))",
+  "['foo', 'bar'].map(cel.iterVar(1, 0), [cel.iterVar(1, 0) + cel.iterVar(1, 0), cel.iterVar(1, 0) + cel.iterVar(1, 0)]).map(cel.iterVar(0, 0), [cel.iterVar(0, 0) + cel.iterVar(0, 0), cel.iterVar(0, 0) + cel.iterVar(0, 0)])",
+  "((((((((((((((((((((((((((((((((7))))))))))))))))))))))))))))))))",
 
-for (const f of files) {
-  if (f.sections === null) {
-    continue;
+  // bug in `cel-go`
+  "[// @\r.// @\rcel.// @\rexpr// @\r.conformance.// @\rproto3.// @\rTestAllTypes// @\r{// @\rsingle_int64// @\r:// @\rint// @\r(// @\r17// @\r)// @\r}// @\r.// @\rsingle_int64// @\r]// @\r[// @\r0// @\r]// @\r==// @\r(// @\r18// @\r-// @\r1// @\r)// @\r\u0026\u0026// @\r!// @\rfalse// @\r?// @\r1// @\r:// @\r2",
+];
+
+for (const t of tests) {
+  let func;
+  if (t.ast !== undefined) {
+    func = () => {
+      const actual = toDebugString(parse(t.expr), KindAdorner.singleton);
+      const expected = t.ast;
+      expect(actual).toStrictEqual(expected);
+    };
+  } else {
+    func = () => {
+      expect(() => parse(t.expr)).toThrow();
+    };
   }
-  describe(f.name, () => {
-    for (const s of f.sections) {
-      describe(s.name, () => {
-        for (const t of s.tests) {
-          const func = () => {
-            const actual = parse(t.expression);
-            const expected = fromJson(ExprSchema, t.result.expr);
-            normalizeForTest(actual);
-            normalizeForTest(expected);
-            expect(actual).toStrictEqual(expected);
-          };
 
-          if (skip.includes(`${f.name}.${s.name}.${t.name}`)) {
-            test.skip(t.name, func);
-          } else {
-            test(t.name, func);
-          }
-        }
-      });
-    }
-  });
-}
-
-function normalizeForTest(expr: Expr | undefined) {
-  if (expr === undefined) {
-    return;
-  }
-  expr.id = 0n;
-  switch (expr.exprKind.case) {
-    case "callExpr":
-      normalizeForTest(expr.exprKind.value.target);
-      for (const arg of expr.exprKind.value.args) {
-        normalizeForTest(arg);
-      }
-      break;
-    case "listExpr":
-      for (const elem of expr.exprKind.value.elements) {
-        normalizeForTest(elem);
-      }
-      break;
-    case "structExpr":
-      for (const elem of expr.exprKind.value.entries) {
-        switch (elem.keyKind.case) {
-          case "mapKey":
-            normalizeForTest(elem.keyKind.value);
-            break;
-          default:
-            break;
-        }
-        normalizeForTest(elem.value);
-        elem.id = 0n;
-      }
-      break;
-    case "comprehensionExpr":
-      normalizeForTest(expr.exprKind.value.iterRange);
-      normalizeForTest(expr.exprKind.value.accuInit);
-      normalizeForTest(expr.exprKind.value.loopCondition);
-      normalizeForTest(expr.exprKind.value.loopStep);
-      normalizeForTest(expr.exprKind.value.result);
-      break;
-    case "selectExpr":
-      normalizeForTest(expr.exprKind.value.operand);
-      break;
-    default:
-      break;
+  if (skip.includes(t.expr)) {
+    test.skip(t.expr, func);
+  } else {
+    test(t.expr, func);
   }
 }

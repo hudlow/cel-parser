@@ -95,11 +95,18 @@ export default class Builder {
   }
 
   newStringExpr(offset: number, sequence: (string | number[])[]): Expr {
+    //console.log(sequence);
     return this.newConstExpr(offset, {
       case: "stringValue",
       value: sequence.reduce<string>(
         (string: string, chunk: string | number[]) => {
           if (typeof chunk !== "string") {
+            // console.log(chunk);
+            if (chunk.some((cp) => cp >= 0xd800 && cp < 0xe000)) {
+              // surrogates, whether paired or not, are not allowed in UTF-8
+              throw new Error("surrogate code points are not allowed");
+            }
+
             return string + String.fromCodePoint(...chunk);
           }
 
@@ -432,6 +439,7 @@ export default class Builder {
                 call.exprKind.value.args[1],
               );
             case "exists_one":
+            case "existsOne":
               return this.expandExistsOne(
                 offset,
                 call.exprKind.value.target,
