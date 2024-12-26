@@ -21,6 +21,9 @@ const skip: string[] = [
   "cel.block([x - 1, cel.index(0) > 3], [cel.index(1) ? cel.index(0) : 5].exists(cel.iterVar(0, 0), cel.iterVar(0, 0) - 1 > 3) || cel.index(1))",
   "['foo', 'bar'].map(cel.iterVar(1, 0), [cel.iterVar(1, 0) + cel.iterVar(1, 0), cel.iterVar(1, 0) + cel.iterVar(1, 0)]).map(cel.iterVar(0, 0), [cel.iterVar(0, 0) + cel.iterVar(0, 0), cel.iterVar(0, 0) + cel.iterVar(0, 0)])",
   "((((((((((((((((((((((((((((((((7))))))))))))))))))))))))))))))))",
+
+  // bug in `cel-go`
+  "[// @\r.// @\rcel.// @\rexpr// @\r.conformance.// @\rproto3.// @\rTestAllTypes// @\r{// @\rsingle_int64// @\r:// @\rint// @\r(// @\r17// @\r)// @\r}// @\r.// @\rsingle_int64// @\r]// @\r[// @\r0// @\r]// @\r==// @\r(// @\r18// @\r-// @\r1// @\r)// @\r\u0026\u0026// @\r!// @\rfalse// @\r?// @\r1// @\r:// @\r2",
 ];
 
 for (const t of tests) {

@@ -71,7 +71,7 @@ Relation
       }
     }
 
-RelationTail        
+RelationTail
   = (
       S operator:Relop nextExpr:Addition
       { return ((prevExpr: Expr) => builder.newCallExpr(offset(), operator, [prevExpr, nextExpr])) }
@@ -156,12 +156,12 @@ Access
 
 Primary
   = Literal
-  / "."? S name:Identifier !(S [({]) !("." Identifier|1.., "."| "{")
+  / "."? S name:Identifier !(S [({]) !("." S Identifier|1.., S "." S| S "{")
     { return builder.newIdentExpr(offset(), name) }
   / "."? S identifier:Identifier S "(" args:ExprList ")"
     { return builder.newCallExpr(offset(), identifier, args) }
-  / "."? name:$Identifier|1.., "."| S "{" entries:FieldInits (",")? S "}"
-    { return builder.newStructExpr(offset(), entries, name) }
+  / dot:"."? S name:Identifier|1.., S "." S| S "{" entries:FieldInits (",")? S "}"
+    { return builder.newStructExpr(offset(), entries, (dot !== null ? dot : '') + name.join('.')) }
   / "(" @Expr ")"
   / elements:("[" @ExprList (",")? S "]")
     { return builder.newListExpr(offset(), elements) }
@@ -193,7 +193,7 @@ Identifier "identifier"
       ].includes(id)) {
         error("reserved identifier");
       }
-      
+
       return id;
     }
 
@@ -252,7 +252,7 @@ Escape "escaped character"
         case 't': return "\t";
         case 'v': return "\v";
       }
-  
+
       throw new Error();
     }
   / "\\" @$[\"\'\`\\?]
