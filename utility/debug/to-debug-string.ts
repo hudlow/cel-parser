@@ -317,14 +317,14 @@ function quoteBytes(bytes: Uint8Array) {
                 : ""; // unused
 
     // this is a bit subtle; either
-    // - we got an unexpected continuation byte, in which case this is an empty string
-    // - we got an unexpected unused byte, in which case this is an empty string
+    // - we got an unexpected continuation byte, in which case `character` is an empty string
+    // - we got an unexpected unused byte, in which case `character` is an empty string
     // - we got the first byte of a multibyte code point, but the subsequent bytes weren't valid and
     //   decoding failed, and the decoder returned the replacement character for one or more bytes
     //   in the byte sequence
     // - we got a literal replacement byte UTF-8 sequence (0xef, 0xbf, 0xbd), which we treat the
-    //   treat the same as if it were a failure because we're just going to encode the escaped bytes
-    //   in either case
+    //   same way as if it were a failure because we're just going to encode the escaped bytes in
+    //   either case
     // - we successfully decoded a single character but it isn't printable
     //
     // only if none of these things is true can we return the unescaped decoded character
