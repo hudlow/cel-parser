@@ -1,5 +1,8 @@
 # cel-parser
 
+> [!CAUTION]
+> This repository is not maintained — see [bufbuild/cel-es](https://github.com/bufbuild/cel-es) for a supported implementation of a parser and evaluator.
+
 `cel-parser` is a parser for the [Common Expression Language (CEL)][cel].
 
 It's generated with [Peggy], using the [`peggy-ts`][peggy-ts] plugin. It parses a CEL expression
